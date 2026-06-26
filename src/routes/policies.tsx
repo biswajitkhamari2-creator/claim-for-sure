@@ -90,7 +90,9 @@ function PoliciesPage() {
       <main>
         <Hero />
         <ComplianceBar />
+        <OffersSection />
         <Catalog />
+        <ValueAddsSection />
         <RebatingNotice />
         <CTA />
       </main>
