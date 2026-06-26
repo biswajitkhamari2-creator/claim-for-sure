@@ -26,6 +26,7 @@ import { Route as AuthResetRouteImport } from './routes/auth.reset'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AdminRewardsRouteImport } from './routes/admin.rewards'
+import { Route as AdminNoticesRouteImport } from './routes/admin.notices'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardRewardsRouteImport } from './routes/_authenticated/dashboard.rewards'
@@ -118,6 +119,11 @@ const AdminRewardsRoute = AdminRewardsRouteImport.update({
   path: '/admin/rewards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminNoticesRoute = AdminNoticesRouteImport.update({
+  id: '/admin/notices',
+  path: '/admin/notices',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
   '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -196,6 +203,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
   '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -223,6 +231,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/notices': typeof AdminNoticesRoute
   '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/notices'
     | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
@@ -275,6 +285,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/notices'
     | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
@@ -301,6 +312,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/notices'
     | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
@@ -328,6 +340,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   TermsRoute: typeof TermsRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminNoticesRoute: typeof AdminNoticesRoute
   AdminRewardsRoute: typeof AdminRewardsRoute
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
@@ -458,6 +471,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRewardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/notices': {
+      id: '/admin/notices'
+      path: '/admin/notices'
+      fullPath: '/admin/notices'
+      preLoaderRoute: typeof AdminNoticesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -544,6 +564,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   TermsRoute: TermsRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminNoticesRoute: AdminNoticesRoute,
   AdminRewardsRoute: AdminRewardsRoute,
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
