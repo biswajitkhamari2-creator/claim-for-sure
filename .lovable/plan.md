@@ -1,41 +1,57 @@
-## What I'll restore from your zip
+# ClaimForSure Auth System
 
-**Pages (18):** Index, HowItWorks, ClaimTypes, Pricing, SuccessStories, About, Contact, Auth, AdminAuth, ForgotPassword, ResetPassword, Dashboard, AdminDashboard, PrivacyPolicy, TermsOfService, Disclaimer, RefundPolicy, NotFound
+Integrates a complete user authentication and claim-submission flow on top of the current Navy/Gold landing page, legal pages, and existing admin panel — without removing anything that already works.
 
-**Components:** Navbar, Footer, NavLink, Hero/HowItWorks/ClaimTypes/WhyChooseUs/Testimonials/CTA sections
+## What's already in place (reuse, do not rebuild)
+- Landing page `/` (Navy/Gold) with logo, contact info, footer links.
+- Legal pages: `/privacy`, `/terms`, `/refund`, `/disclaimer`.
+- Admin panel: `/admin/login`, `/admin` (claims dashboard, status updates).
+- Database: `profiles`, `claims`, `user_roles` (with `has_role` + admin role for `biswajitkhamari2@gmail.com`), `claim-documents` private storage bucket.
 
-**Backend:** Supabase auth + database + 2 edge functions (send-claim-confirmation, send-contact-message) + 12 SQL migrations
+## New public auth routes
+- `/auth/signup` — Full Name, Email, Mobile (10 digits), Password, Confirm Password, Privacy checkbox. Zod validation matching the spec (8+ chars, upper/lower/number/special). Submit button disabled until valid. Creates Supabase user with `emailRedirectTo` → `/auth/verified`, stores name + mobile in `profiles`, shows "Verification email sent" screen with **Resend** button + 60s countdown.
+- `/auth/login` — Email + Password. On `Email not confirmed` error, shows inline notice with Resend Verification link. Links to `/auth/forgot` and `/auth/signup`.
+- `/auth/forgot` — Email input, calls `resetPasswordForEmail` with redirect to `/auth/reset`.
+- `/auth/reset` — New password + Confirm; calls `supabase.auth.updateUser({ password })`, then redirects to `/auth/login`.
+- `/auth/verified` — Landing after email link; shows success then redirects to `/dashboard`.
 
-## Approach — fastest fidelity port
+Apple-inspired card UI on Navy/Gold theme, glassmorphism, smooth transitions, password visibility toggle, sonner toasts, mobile-first.
 
-Your original is **Vite + React Router DOM + Tailwind v3 + Supabase**. This project is **TanStack Start + Tailwind v4 + Lovable Cloud**. Two realistic options:
+## Protected user area (under `_authenticated/`)
+The integration-managed `src/routes/_authenticated/route.tsx` already redirects unauthenticated users to `/auth` — we will add a tiny shim route that forwards `/auth` to `/auth/login` so the gate keeps working.
 
-### Option A — Compatibility shim (recommended, ~fast)
-- Install `react-router-dom` and keep your original `App.tsx` routing intact
-- Mount the whole App inside a single TanStack splat route — no rewriting page-by-page
-- Copy `src/pages/`, `src/components/`, `src/hooks/` **as-is** from the zip
-- Rewrite `src/styles.css` to Tailwind v4 form (your `:root` HSL tokens → v4 `@theme inline`, fonts via `<link>` in `__root.tsx`)
-- Enable Lovable Cloud, apply your 12 migrations, port the 2 edge functions
-- Wire `src/integrations/supabase/client.ts` to the new Cloud credentials
+- `/dashboard` — "Welcome, {name}", quick cards: Submit New Claim, My Claims, Documents, Profile, Logout.
+- `/dashboard/profile` — Edit full name, mobile, optional avatar (uses `profiles` table; email read-only).
+- `/dashboard/claims/new` — Claim submission form (matches existing `claims` schema: full_name, phone, email, city, state, insurance_type, insurance_company, policy_number, claim_amount, rejection_date, rejection_reason). Generates `claim_id` `CFS-{timestamp}`, sets `user_id = auth.uid()`.
+- `/dashboard/claims` — List of user's own claims (RLS already restricts).
+- `/dashboard/claims/$id` — Detail view + document upload to `claim-documents/{user_id}/{claim_id}/...` (private bucket, signed URLs).
 
-Trade-off: no per-route SSR/SEO meta. Acts as a SPA inside the shell. Everything else (UI, auth, DB, edge functions) works identically to the original.
+## Landing page wiring
+- Header: add **Login** / **Sign Up** buttons (keep "Call" CTA).
+- Hero "Start Your Claim" CTA → `/auth/signup` (guests) or `/dashboard/claims/new` (signed-in).
+- Footer: add Login / Sign Up links.
+- No existing copy, contact info, or legal links removed.
 
-### Option B — Full TanStack rewrite
-Convert every page to `src/routes/*.tsx`, replace every `<Link>`/`useNavigate` from react-router-dom with TanStack equivalents, add per-route `head()` metadata. Much more work, higher chance of regressions on the first pass, but gives proper SSR + SEO per page.
+## Database
+Existing schema covers everything. One small migration:
+- Add `avatar_url text` to `public.profiles` (optional photo).
+- Ensure `handle_new_user` trigger inserts `full_name` and `phone` from `raw_user_meta_data` (already does name; add phone).
 
-## My recommendation
+No new tables. RLS already scopes `claims` and `profiles` to `auth.uid()`; admin sees all via `has_role`.
 
-Go with **Option A** first to get your full site back online today. Once verified working, we incrementally migrate hot pages (Index, ClaimTypes, Pricing, Contact) to native TanStack routes for SEO.
+## Auth configuration
+- Email/password enabled, **auto-confirm OFF** (mandatory verification), HIBP password check ON, anonymous sign-ups OFF — applied via `configure_auth`.
+- Default Lovable auth emails are used (no custom templates this round — can be added later if you want branded emails).
 
-## Steps if you approve Option A
+## Security
+Supabase handles password hashing, session JWTs, secure cookies, prepared statements (via PostgREST), and email verification. We add: Zod validation client + server, RLS already enforces per-user data isolation, signed URLs for private documents, rate-limited resend (60s client cooldown), and the public-route rule that protected server fns are never called from public loaders.
 
-1. Enable Lovable Cloud
-2. Copy pages, components, hooks, integrations, public assets from zip
-3. Install `react-router-dom`, `@supabase/supabase-js`, `@hookform/resolvers`, `zod`, `react-hook-form` if missing
-4. Rewrite `src/styles.css` with your Navy/Saffron/Green theme in v4 form
-5. Replace `src/routes/index.tsx` + add `src/routes/$.tsx` splat that mounts your original `App.tsx`
-6. Apply 12 SQL migrations to Cloud DB
-7. Deploy 2 edge functions
-8. Smoke test
+## Out of scope this round
+- Custom-branded auth email templates (default Lovable emails will send).
+- Admin "deactivate user" UI (admin panel already lists claims; user management can be a follow-up).
 
-**Which option — A or B?**
+## Technical notes
+- New files under `src/routes/auth.*.tsx` and `src/routes/_authenticated/dashboard*.tsx`.
+- Shared `AuthCard` component for the glass UI.
+- Use `supabase` browser client for auth flows; `requireSupabaseAuth` server fn only if we need server-side claim insert (client insert is fine — RLS enforces `user_id = auth.uid()`).
+- `/auth` index route redirects to `/auth/login` so the managed gate's redirect target resolves.

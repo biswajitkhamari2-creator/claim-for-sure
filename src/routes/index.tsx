@@ -50,9 +50,13 @@ function Header() {
           <a href="#trust" className="hover:text-foreground">Why us</a>
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
-        <a href="tel:+919438463174" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
-          <Phone className="h-4 w-4" /> Call +91 94384 63174
-        </a>
+        <div className="flex items-center gap-2">
+          <a href="/auth/login" className="hidden sm:inline-flex items-center rounded-md border border-border px-3 py-2 text-sm font-medium text-foreground hover:bg-muted">Login</a>
+          <a href="/auth/signup" className="hidden sm:inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-sm font-medium text-background hover:bg-foreground">Sign up</a>
+          <a href="tel:+919438463174" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+            <Phone className="h-4 w-4" /> Call
+          </a>
+        </div>
       </div>
     </header>
   );
