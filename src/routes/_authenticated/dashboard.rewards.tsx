@@ -91,6 +91,58 @@ function RewardsPage() {
         <h1 className="font-serif text-2xl font-bold">Rewards</h1>
       </div>
 
+      {appreciationEnabled && (
+        <section className="mb-6 rounded-xl border border-[oklch(0.82_0.14_80)]/40 bg-gradient-to-br from-[oklch(0.98_0.02_80)] to-white p-6 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-full bg-[oklch(0.82_0.14_80)]/20 text-[oklch(0.3_0.1_70)]">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="font-serif text-lg font-bold">Customer Appreciation</h2>
+                <span className="rounded-full bg-[oklch(0.82_0.14_80)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[oklch(0.2_0.05_265)]">Surprise Gift</span>
+              </div>
+              {appreciationEntries.length === 0 ? (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  No appreciation gift on record yet. Eligibility, selection, and availability are determined solely by ClaimForSure.
+                </p>
+              ) : (
+                <div className="mt-3 space-y-3">
+                  {appreciationEntries.map((r: any) => {
+                    const s = (r.shipping_status as string) || "under_review";
+                    return (
+                      <div key={r.id} className="rounded-lg border border-border bg-white/80 p-3 text-sm backdrop-blur">
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="font-medium">{r.gift_type || "Appreciation gift"}</div>
+                            {s === "shipped" && (r.courier || r.awb) && (
+                              <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                                <Package className="h-3.5 w-3.5" />
+                                {r.courier || "Courier"}{r.awb ? ` · AWB ${r.awb}` : ""}
+                              </div>
+                            )}
+                            {s === "delivered" && (
+                              <div className="mt-1 flex items-center gap-1 text-xs text-green-700">
+                                <CheckCircle2 className="h-3.5 w-3.5" />
+                                Delivered{r.delivered_at ? ` on ${new Date(r.delivered_at).toLocaleDateString("en-IN")}` : ""} — thank you for being with us!
+                              </div>
+                            )}
+                          </div>
+                          <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${APP_STATUS_STYLES[s]}`}>{APP_STATUS_LABEL[s]}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
+                Any appreciation gift is entirely discretionary, subject to eligibility, availability, applicable laws, and our Terms &amp; Conditions. It is not guaranteed with the purchase of any insurance product.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       {!enabled ? (
         <div className="rounded-xl border border-border bg-card p-8 text-center">
           <p className="font-medium text-foreground">The Rewards Program is currently unavailable.</p>
