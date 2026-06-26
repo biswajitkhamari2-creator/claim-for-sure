@@ -16,6 +16,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as AppreciationRouteImport } from './routes/appreciation'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -68,6 +69,11 @@ const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
 const DisclaimerRoute = DisclaimerRouteImport.update({
   id: '/disclaimer',
   path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppreciationRoute = AppreciationRouteImport.update({
+  id: '/appreciation',
+  path: '/appreciation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -169,6 +175,7 @@ const AuthenticatedDashboardClaimsIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/appreciation': typeof AppreciationRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/policies': typeof PoliciesRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/appreciation': typeof AppreciationRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/policies': typeof PoliciesRoute
@@ -223,6 +231,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/appreciation': typeof AppreciationRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/policies': typeof PoliciesRoute
@@ -251,6 +260,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$'
+    | '/appreciation'
     | '/disclaimer'
     | '/forgot-password'
     | '/policies'
@@ -277,6 +287,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$'
+    | '/appreciation'
     | '/disclaimer'
     | '/forgot-password'
     | '/policies'
@@ -304,6 +315,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/$'
+    | '/appreciation'
     | '/disclaimer'
     | '/forgot-password'
     | '/policies'
@@ -332,6 +344,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
+  AppreciationRoute: typeof AppreciationRoute
   DisclaimerRoute: typeof DisclaimerRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   PoliciesRoute: typeof PoliciesRoute
@@ -399,6 +412,13 @@ declare module '@tanstack/react-router' {
       path: '/disclaimer'
       fullPath: '/disclaimer'
       preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appreciation': {
+      id: '/appreciation'
+      path: '/appreciation'
+      fullPath: '/appreciation'
+      preLoaderRoute: typeof AppreciationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -556,6 +576,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SplatRoute: SplatRoute,
+  AppreciationRoute: AppreciationRoute,
   DisclaimerRoute: DisclaimerRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   PoliciesRoute: PoliciesRoute,

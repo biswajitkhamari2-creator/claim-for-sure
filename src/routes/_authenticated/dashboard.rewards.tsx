@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Gift, Loader2, Send } from "lucide-react";
+import { Gift, Loader2, Send, Sparkles, Package, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardShell } from "@/components/DashboardShell";
 import { toast } from "sonner";
@@ -15,6 +15,22 @@ const STATUS_STYLES: Record<string, string> = {
   approved: "bg-blue-100 text-blue-800",
   rejected: "bg-red-100 text-red-800",
   issued: "bg-green-100 text-green-800",
+};
+
+const APP_STATUS_STYLES: Record<string, string> = {
+  not_eligible: "bg-muted text-muted-foreground",
+  under_review: "bg-yellow-100 text-yellow-800",
+  approved: "bg-blue-100 text-blue-800",
+  shipped: "bg-indigo-100 text-indigo-800",
+  delivered: "bg-green-100 text-green-800",
+};
+
+const APP_STATUS_LABEL: Record<string, string> = {
+  not_eligible: "Not Eligible",
+  under_review: "Under Review",
+  approved: "Approved",
+  shipped: "Shipped",
+  delivered: "Delivered",
 };
 
 function RewardsPage() {
@@ -64,6 +80,9 @@ function RewardsPage() {
   }
 
   const enabled = !!config?.enabled;
+  const appreciationEnabled = !!config?.appreciation_enabled;
+  const appreciationEntries = rewards.filter((r: any) => r.program_type === "appreciation");
+  const rewardRequests = rewards.filter((r: any) => (r.program_type ?? "request") === "request");
 
   return (
     <DashboardShell>
@@ -71,6 +90,58 @@ function RewardsPage() {
         <Gift className="h-5 w-5 text-primary" />
         <h1 className="font-serif text-2xl font-bold">Rewards</h1>
       </div>
+
+      {appreciationEnabled && (
+        <section className="mb-6 rounded-xl border border-[oklch(0.82_0.14_80)]/40 bg-gradient-to-br from-[oklch(0.98_0.02_80)] to-white p-6 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-full bg-[oklch(0.82_0.14_80)]/20 text-[oklch(0.3_0.1_70)]">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 className="font-serif text-lg font-bold">Customer Appreciation</h2>
+                <span className="rounded-full bg-[oklch(0.82_0.14_80)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[oklch(0.2_0.05_265)]">Surprise Gift</span>
+              </div>
+              {appreciationEntries.length === 0 ? (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  No appreciation gift on record yet. Eligibility, selection, and availability are determined solely by ClaimForSure.
+                </p>
+              ) : (
+                <div className="mt-3 space-y-3">
+                  {appreciationEntries.map((r: any) => {
+                    const s = (r.shipping_status as string) || "under_review";
+                    return (
+                      <div key={r.id} className="rounded-lg border border-border bg-white/80 p-3 text-sm backdrop-blur">
+                        <div className="flex flex-wrap items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <div className="font-medium">{r.gift_type || "Appreciation gift"}</div>
+                            {s === "shipped" && (r.courier || r.awb) && (
+                              <div className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                                <Package className="h-3.5 w-3.5" />
+                                {r.courier || "Courier"}{r.awb ? ` · AWB ${r.awb}` : ""}
+                              </div>
+                            )}
+                            {s === "delivered" && (
+                              <div className="mt-1 flex items-center gap-1 text-xs text-green-700">
+                                <CheckCircle2 className="h-3.5 w-3.5" />
+                                Delivered{r.delivered_at ? ` on ${new Date(r.delivered_at).toLocaleDateString("en-IN")}` : ""} — thank you for being with us!
+                              </div>
+                            )}
+                          </div>
+                          <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${APP_STATUS_STYLES[s]}`}>{APP_STATUS_LABEL[s]}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+              <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
+                Any appreciation gift is entirely discretionary, subject to eligibility, availability, applicable laws, and our Terms &amp; Conditions. It is not guaranteed with the purchase of any insurance product.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {!enabled ? (
         <div className="rounded-xl border border-border bg-card p-8 text-center">
@@ -98,11 +169,11 @@ function RewardsPage() {
         <div className="border-b border-border px-6 py-4">
           <h2 className="font-serif text-lg font-bold">My reward status</h2>
         </div>
-        {rewards.length === 0 ? (
+        {rewardRequests.length === 0 ? (
           <p className="py-10 text-center text-sm text-muted-foreground">No reward requests yet.</p>
         ) : (
           <div className="divide-y divide-border">
-            {rewards.map(r => (
+            {rewardRequests.map(r => (
               <div key={r.id} className="flex items-start justify-between gap-3 px-6 py-4 text-sm">
                 <div>
                   <div className="font-medium capitalize">{r.reward_type.replace(/_/g, " ")} · {r.currency} {Number(r.reward_value).toLocaleString("en-IN")}</div>

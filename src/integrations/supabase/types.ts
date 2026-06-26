@@ -170,57 +170,81 @@ export type Database = {
       rewards: {
         Row: {
           admin_notes: string | null
+          admin_remarks: string | null
+          awb: string | null
           claim_id: string | null
+          courier: string | null
           created_at: string
           currency: string
           decided_at: string | null
           decided_by: string | null
+          delivered_at: string | null
           eligibility_snapshot: Json
+          gift_type: string | null
+          gift_value_inr: number | null
           id: string
           issue_reference: string | null
           issued_at: string | null
           policy_reference: string | null
+          program_type: string
           rejection_reason: string | null
           reward_type: string
           reward_value: number
+          shipping_status: string | null
           status: string
           updated_at: string
           user_id: string
         }
         Insert: {
           admin_notes?: string | null
+          admin_remarks?: string | null
+          awb?: string | null
           claim_id?: string | null
+          courier?: string | null
           created_at?: string
           currency?: string
           decided_at?: string | null
           decided_by?: string | null
+          delivered_at?: string | null
           eligibility_snapshot?: Json
+          gift_type?: string | null
+          gift_value_inr?: number | null
           id?: string
           issue_reference?: string | null
           issued_at?: string | null
           policy_reference?: string | null
+          program_type?: string
           rejection_reason?: string | null
           reward_type: string
           reward_value?: number
+          shipping_status?: string | null
           status?: string
           updated_at?: string
           user_id: string
         }
         Update: {
           admin_notes?: string | null
+          admin_remarks?: string | null
+          awb?: string | null
           claim_id?: string | null
+          courier?: string | null
           created_at?: string
           currency?: string
           decided_at?: string | null
           decided_by?: string | null
+          delivered_at?: string | null
           eligibility_snapshot?: Json
+          gift_type?: string | null
+          gift_value_inr?: number | null
           id?: string
           issue_reference?: string | null
           issued_at?: string | null
           policy_reference?: string | null
+          program_type?: string
           rejection_reason?: string | null
           reward_type?: string
           reward_value?: number
+          shipping_status?: string | null
           status?: string
           updated_at?: string
           user_id?: string
@@ -288,6 +312,7 @@ export type Database = {
       }
       rewards_config: {
         Row: {
+          appreciation_enabled: boolean
           currency: string
           disclaimer: string
           eligibility_rules: Json
@@ -299,6 +324,7 @@ export type Database = {
           updated_by: string | null
         }
         Insert: {
+          appreciation_enabled?: boolean
           currency?: string
           disclaimer?: string
           eligibility_rules?: Json
@@ -310,6 +336,7 @@ export type Database = {
           updated_by?: string | null
         }
         Update: {
+          appreciation_enabled?: boolean
           currency?: string
           disclaimer?: string
           eligibility_rules?: Json
