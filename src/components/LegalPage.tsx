@@ -18,8 +18,8 @@ export function LegalPage({ title, updated, children }: { title: string; updated
             <Link to="/refund" className="hover:text-foreground">Refund</Link>
             <Link to="/disclaimer" className="hover:text-foreground">Disclaimer</Link>
           </nav>
-          <a href="tel:+919438463174" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
-            Call +91 94384 63174
+          <a href="tel:+919439572073" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
+            Call +91 94395 72073
           </a>
         </div>
       </header>
@@ -101,8 +101,8 @@ function ContactBox() {
         Email: <a className="text-primary hover:underline" href="mailto:support@claimforsure.in">support@claimforsure.in</a>
       </p>
       <p className="text-sm text-muted-foreground">
-        Phone: <a className="text-primary hover:underline" href="tel:+919438463174">+91 94384 63174</a> ·{" "}
-        <a className="text-primary hover:underline" href="tel:+919439572073">+91 94395 72073</a>
+        Phone: <a className="text-primary hover:underline" href="tel:+919439572073">+91 94395 72073</a> ·{" "}
+        <a className="text-primary hover:underline" href="tel:+919438463174">+91 94384 63174</a>
       </p>
       <p className="mt-2 text-xs text-primary">🎯 Connect directly to our Claim Fighter — No Bot! 🤝</p>
     </div>

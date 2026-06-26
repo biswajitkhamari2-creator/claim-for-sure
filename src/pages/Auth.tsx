@@ -960,12 +960,12 @@ const Auth = () => {
                 <p className="text-foreground font-semibold mb-2">🎯 Connect directly to our Claim Fighter — No Bot! 🤝</p>
                 <p className="text-muted-foreground mb-3">Need help filling the form?</p>
                 <div className="flex items-center justify-center gap-4 flex-wrap">
-                  <a href="tel:+919438463174" className="text-primary hover:underline font-medium">
-                    📞 Call +91 94384 63174
+                  <a href="tel:+919439572073" className="text-primary hover:underline font-medium">
+                    📞 Call +91 94395 72073
                   </a>
                   <span className="text-muted-foreground">or</span>
                   <a 
-                    href="https://wa.me/919438463174" 
+                    href="https://wa.me/919439572073" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-primary hover:underline font-medium"

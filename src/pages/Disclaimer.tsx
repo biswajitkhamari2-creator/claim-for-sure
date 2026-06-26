@@ -39,8 +39,8 @@ const Disclaimer = () => {
                     </p>
                     <ul className="list-disc list-inside space-y-2 ml-2">
                       <li><strong>Email:</strong> support@claimforsure.in</li>
-                      <li><strong>Phone:</strong> +91 94384 63174 / +91 94395 72073</li>
-                      <li><strong>WhatsApp:</strong> +91 94384 63174</li>
+                      <li><strong>Phone:</strong> +91 94395 72073 / +91 94384 63174</li>
+                      <li><strong>WhatsApp:</strong> +91 94395 72073</li>
                     </ul>
                     <div className="mt-4 pt-4 border-t border-amber-300">
                       <p className="font-bold text-amber-800">
@@ -115,8 +115,8 @@ const Disclaimer = () => {
                   <div className="mt-4 p-4 bg-muted/50 rounded-lg">
                     <p className="text-foreground font-medium">Claim For Sure</p>
                     <p className="text-muted-foreground">Email: support@claimforsure.in</p>
-                    <p className="text-muted-foreground">Phone: +91 94384 63174 / +91 94395 72073</p>
-                    <p className="text-muted-foreground">WhatsApp: +91 94384 63174</p>
+                    <p className="text-muted-foreground">Phone: +91 94395 72073 / +91 94384 63174</p>
+                    <p className="text-muted-foreground">WhatsApp: +91 94395 72073</p>
                     <p className="text-sm text-primary mt-2">🎯 Connect directly to our Claim Fighter — No Bot! 🤝</p>
                   </div>
                 </div>

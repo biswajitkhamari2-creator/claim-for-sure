@@ -27,16 +27,16 @@ const CTASection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <Button variant="hero" size="xl" asChild className="group">
-                <a href="https://wa.me/919438463174" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919439572073" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5" />
                   WhatsApp Us
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <a href="tel:+919438463174">
+                <a href="tel:+919439572073">
                   <Phone className="w-5 h-5" />
-                  Call: +91 94384 63174 / 94395 72073
+                  Call: +91 94395 72073 / 94384 63174
                 </a>
               </Button>
             </div>
@@ -52,12 +52,12 @@ const CTASection = () => {
               <MessageCircle className="w-5 h-5" />
               <span>Or WhatsApp us at</span>
               <a 
-                href="https://wa.me/919438463174" 
+                href="https://wa.me/919439572073" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-accent font-semibold hover:underline"
               >
-                +91 94384 63174
+                +91 94395 72073
               </a>
             </div>
           </div>

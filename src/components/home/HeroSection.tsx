@@ -43,14 +43,14 @@ const HeroSection = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
               <Button variant="hero" size="xl" asChild className="group">
-                <a href="https://wa.me/919438463174" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/919439572073" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5" />
                   WhatsApp Us
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
-                <a href="tel:+919438463174">
+                <a href="tel:+919439572073">
                   <Phone className="w-5 h-5" />
                   Call Now
                 </a>
@@ -109,14 +109,14 @@ const HeroSection = () => {
               <div className="mt-6 pt-6 border-t border-border">
                 <p className="text-sm text-muted-foreground mb-3">🎯 Connect directly to our Claim Fighter — No Bot! 🤝</p>
                 <a 
-                  href="tel:+919438463174" 
+                  href="tel:+919439572073" 
                   className="flex items-center gap-3 p-3 bg-primary/5 hover:bg-primary/10 rounded-lg transition-colors"
                 >
                   <div className="w-10 h-10 hero-gradient rounded-full flex items-center justify-center">
                     <Phone className="w-5 h-5 text-white" />
                   </div>
                   <div>
-                    <div className="font-semibold text-foreground">+91 94384 63174 / +91 94395 72073</div>
+                    <div className="font-semibold text-foreground">+91 94395 72073 / +91 94384 63174</div>
                     <div className="text-xs text-muted-foreground">Available 24/7</div>
                   </div>
                 </a>
