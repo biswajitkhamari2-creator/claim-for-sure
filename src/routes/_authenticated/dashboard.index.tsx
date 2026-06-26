@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FilePlus2, FileText, User, ArrowRight, ShieldCheck, Gift } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardShell } from "@/components/DashboardShell";
+import { NoticesBanner } from "@/components/NoticesBanner";
 
 export const Route = createFileRoute("/_authenticated/dashboard/")({
   component: DashboardHome,
