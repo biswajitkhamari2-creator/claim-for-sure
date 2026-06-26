@@ -35,6 +35,7 @@ function DashboardHome() {
 
   return (
     <DashboardShell>
+      <NoticesBanner />
       <section className="rounded-2xl border border-border bg-gradient-to-br from-[oklch(0.2_0.05_265)] to-[oklch(0.3_0.08_265)] p-8 text-white shadow-lg">
         <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-white/70">
           <ShieldCheck className="h-4 w-4" /> Verified account
