@@ -169,11 +169,11 @@ function RewardsPage() {
         <div className="border-b border-border px-6 py-4">
           <h2 className="font-serif text-lg font-bold">My reward status</h2>
         </div>
-        {rewards.length === 0 ? (
+        {rewardRequests.length === 0 ? (
           <p className="py-10 text-center text-sm text-muted-foreground">No reward requests yet.</p>
         ) : (
           <div className="divide-y divide-border">
-            {rewards.map(r => (
+            {rewardRequests.map(r => (
               <div key={r.id} className="flex items-start justify-between gap-3 px-6 py-4 text-sm">
                 <div>
                   <div className="font-medium capitalize">{r.reward_type.replace(/_/g, " ")} · {r.currency} {Number(r.reward_value).toLocaleString("en-IN")}</div>
