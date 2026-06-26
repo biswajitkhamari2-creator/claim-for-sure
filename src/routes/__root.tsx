@@ -11,7 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -82,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "ClaimForSure helps policyholders file, track, and win insurance claims with expert guidance, transparent fees, and end-to-end support." },
       { name: "author", content: "ClaimForSure" },
       { property: "og:title", content: "ClaimForSure — Trusted Insurance Claim Assistance" },
-      { property: "og:description", content: "Expert-led insurance claim assistance. Transparent, secure, and built on trust." },
+      { property: "og:description", content: "ClaimForSure helps policyholders file, track, and win insurance claims with expert guidance, transparent fees, and end-to-end support." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@ClaimForSure" },
+      { name: "twitter:title", content: "ClaimForSure — Trusted Insurance Claim Assistance" },
+      { name: "twitter:description", content: "ClaimForSure helps policyholders file, track, and win insurance claims with expert guidance, transparent fees, and end-to-end support." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/42debc89-b728-4bae-9a28-29feb607dfd0/id-preview-290d71ba--cef1518f-f84e-42cd-aabb-49f47dc8c05b.lovable.app-1782450695957.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/42debc89-b728-4bae-9a28-29feb607dfd0/id-preview-290d71ba--cef1518f-f84e-42cd-aabb-49f47dc8c05b.lovable.app-1782450695957.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -121,7 +124,6 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
-      <Toaster position="top-right" richColors />
     </QueryClientProvider>
   );
 }
