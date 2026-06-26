@@ -110,6 +110,9 @@ function AdminDashboard() {
             <Link to="/admin/rewards" className="inline-flex items-center gap-1.5 rounded-md border border-white/20 px-3 py-1.5 text-xs hover:bg-white/10">
               Rewards
             </Link>
+            <Link to="/admin/notices" className="inline-flex items-center gap-1.5 rounded-md border border-white/20 px-3 py-1.5 text-xs hover:bg-white/10">
+              Notices
+            </Link>
             <button onClick={fetchClaims} className="inline-flex items-center gap-1.5 rounded-md border border-white/20 px-3 py-1.5 text-xs hover:bg-white/10">
               <RefreshCw className="h-3.5 w-3.5" /> Refresh
             </button>
