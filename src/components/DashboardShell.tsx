@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouter } from "@tanstack/react-router";
-import { LogOut, FilePlus2, FileText, User, LayoutDashboard, Home } from "lucide-react";
+import { LogOut, FilePlus2, FileText, User, LayoutDashboard, Home, Gift } from "lucide-react";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";

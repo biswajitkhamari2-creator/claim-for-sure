@@ -28,6 +28,7 @@ import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AdminRewardsRouteImport } from './routes/admin.rewards'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardRewardsRouteImport } from './routes/_authenticated/dashboard.rewards'
 import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
 import { Route as AuthenticatedDashboardClaimsIndexRouteImport } from './routes/_authenticated/dashboard.claims.index'
 import { Route as AuthenticatedDashboardClaimsNewRouteImport } from './routes/_authenticated/dashboard.claims.new'
@@ -128,6 +129,12 @@ const AuthenticatedDashboardIndexRoute =
     path: '/dashboard/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedDashboardRewardsRoute =
+  AuthenticatedDashboardRewardsRouteImport.update({
+    id: '/dashboard/rewards',
+    path: '/dashboard/rewards',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedDashboardProfileRoute =
   AuthenticatedDashboardProfileRouteImport.update({
     id: '/dashboard/profile',
@@ -172,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -196,6 +204,7 @@ export interface FileRoutesByTo {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin': typeof AdminIndexRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -222,6 +231,7 @@ export interface FileRoutesById {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
   '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/_authenticated/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/_authenticated/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin/'
     | '/dashboard/profile'
+    | '/dashboard/rewards'
     | '/dashboard/'
     | '/dashboard/claims/$id'
     | '/dashboard/claims/new'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin'
     | '/dashboard/profile'
+    | '/dashboard/rewards'
     | '/dashboard'
     | '/dashboard/claims/$id'
     | '/dashboard/claims/new'
@@ -297,6 +309,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin/'
     | '/_authenticated/dashboard/profile'
+    | '/_authenticated/dashboard/rewards'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/claims/$id'
     | '/_authenticated/dashboard/claims/new'
@@ -459,6 +472,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard/rewards': {
+      id: '/_authenticated/dashboard/rewards'
+      path: '/dashboard/rewards'
+      fullPath: '/dashboard/rewards'
+      preLoaderRoute: typeof AuthenticatedDashboardRewardsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard/profile': {
       id: '/_authenticated/dashboard/profile'
       path: '/dashboard/profile'
@@ -492,6 +512,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardProfileRoute: typeof AuthenticatedDashboardProfileRoute
+  AuthenticatedDashboardRewardsRoute: typeof AuthenticatedDashboardRewardsRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardClaimsIdRoute: typeof AuthenticatedDashboardClaimsIdRoute
   AuthenticatedDashboardClaimsNewRoute: typeof AuthenticatedDashboardClaimsNewRoute
@@ -500,6 +521,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardProfileRoute: AuthenticatedDashboardProfileRoute,
+  AuthenticatedDashboardRewardsRoute: AuthenticatedDashboardRewardsRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedDashboardClaimsIdRoute: AuthenticatedDashboardClaimsIdRoute,
   AuthenticatedDashboardClaimsNewRoute: AuthenticatedDashboardClaimsNewRoute,
