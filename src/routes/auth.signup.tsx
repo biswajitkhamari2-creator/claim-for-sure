@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthShell, Field, inputCx, btnPrimary, btnGhost } from "@/components/AuthCard";
+import { getAuthRedirectUrl } from "@/lib/auth-redirect";
 
 export const Route = createFileRoute("/auth/signup")({
   component: SignupPage,
@@ -59,7 +60,7 @@ function SignupPage() {
       email: form.email.trim(),
       password: form.password,
       options: {
-        emailRedirectTo: `${window.location.origin}/auth/verified`,
+        emailRedirectTo: getAuthRedirectUrl("/auth/verified"),
         data: { full_name: form.full_name.trim(), phone: form.phone },
       },
     });
@@ -75,7 +76,7 @@ function SignupPage() {
     const { error } = await supabase.auth.resend({
       type: "signup",
       email: form.email.trim(),
-      options: { emailRedirectTo: `${window.location.origin}/auth/verified` },
+      options: { emailRedirectTo: getAuthRedirectUrl("/auth/verified") },
     });
     if (error) toast.error(error.message);
     else { toast.success("Verification email resent."); startCooldown(); }

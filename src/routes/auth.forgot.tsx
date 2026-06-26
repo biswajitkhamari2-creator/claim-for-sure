@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { AuthShell, Field, inputCx, btnPrimary } from "@/components/AuthCard";
+import { getAuthRedirectUrl } from "@/lib/auth-redirect";
 
 export const Route = createFileRoute("/auth/forgot")({
   component: ForgotPage,
@@ -22,7 +23,7 @@ function ForgotPage() {
     if (!parsed.success) return toast.error("Enter a valid email");
     setLoading(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/auth/reset`,
+      redirectTo: getAuthRedirectUrl("/auth/reset"),
     });
     setLoading(false);
     if (error) return toast.error(error.message);
