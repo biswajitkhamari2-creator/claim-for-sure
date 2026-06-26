@@ -362,7 +362,7 @@ function Footer() {
           { label: "FAQ", href: "#faq" },
           { label: "Contact", href: "tel:+919438463174" },
         ]} />
-        <FooterCol title="Contact", links={[
+        <FooterCol title="Contact" links={[
           { label: "+91 94384 63174", href: "tel:+919438463174" },
           { label: "+91 94395 72073", href: "tel:+919439572073" },
           { label: "support@claimforsure.in", href: "mailto:support@claimforsure.in" },
