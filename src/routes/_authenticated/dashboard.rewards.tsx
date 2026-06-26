@@ -17,6 +17,22 @@ const STATUS_STYLES: Record<string, string> = {
   issued: "bg-green-100 text-green-800",
 };
 
+const APP_STATUS_STYLES: Record<string, string> = {
+  not_eligible: "bg-muted text-muted-foreground",
+  under_review: "bg-yellow-100 text-yellow-800",
+  approved: "bg-blue-100 text-blue-800",
+  shipped: "bg-indigo-100 text-indigo-800",
+  delivered: "bg-green-100 text-green-800",
+};
+
+const APP_STATUS_LABEL: Record<string, string> = {
+  not_eligible: "Not Eligible",
+  under_review: "Under Review",
+  approved: "Approved",
+  shipped: "Shipped",
+  delivered: "Delivered",
+};
+
 function RewardsPage() {
   const [config, setConfig] = useState<any>(null);
   const [rewards, setRewards] = useState<any[]>([]);
