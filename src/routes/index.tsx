@@ -45,9 +45,9 @@ function Header() {
           </span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-          <a href="#services" className="hover:text-foreground">Services</a>
+          <a href="#services" className="hover:text-foreground">Claim Help</a>
+          <a href="/policies" className="font-semibold text-primary hover:text-foreground">Buy Insurance</a>
           <a href="#process" className="hover:text-foreground">How it works</a>
-          <a href="#trust" className="hover:text-foreground">Why us</a>
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
         <div className="flex items-center gap-2">

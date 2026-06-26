@@ -13,6 +13,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
 import { Route as SplatRouteImport } from './routes/$'
@@ -49,6 +50,11 @@ const RefundRoute = RefundRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/$': typeof SplatRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -168,6 +175,7 @@ export interface FileRoutesByTo {
   '/$': typeof SplatRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -192,6 +200,7 @@ export interface FileRoutesById {
   '/$': typeof SplatRoute
   '/disclaimer': typeof DisclaimerRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/policies': typeof PoliciesRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -216,6 +225,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/disclaimer'
     | '/forgot-password'
+    | '/policies'
     | '/privacy'
     | '/refund'
     | '/reset-password'
@@ -238,6 +248,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/disclaimer'
     | '/forgot-password'
+    | '/policies'
     | '/privacy'
     | '/refund'
     | '/reset-password'
@@ -261,6 +272,7 @@ export interface FileRouteTypes {
     | '/$'
     | '/disclaimer'
     | '/forgot-password'
+    | '/policies'
     | '/privacy'
     | '/refund'
     | '/reset-password'
@@ -285,6 +297,7 @@ export interface RootRouteChildren {
   SplatRoute: typeof SplatRoute
   DisclaimerRoute: typeof DisclaimerRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  PoliciesRoute: typeof PoliciesRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/forgot-password': {
@@ -476,6 +496,7 @@ const rootRouteChildren: RootRouteChildren = {
   SplatRoute: SplatRoute,
   DisclaimerRoute: DisclaimerRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  PoliciesRoute: PoliciesRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -491,13 +512,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
