@@ -51,9 +51,10 @@ function Header() {
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
         <div className="flex items-center gap-2">
-          <a href="/auth/login" className="inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
-          <a href="/auth/signup" className="inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
-          <a href="tel:+919439572073" className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+          <a href="/policies" className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90">Buy Insurance</a>
+          <a href="/auth/login" className="hidden sm:inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
+          <a href="/auth/signup" className="hidden sm:inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
+          <a href="tel:+919439572073" className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-muted">
             <Phone className="h-4 w-4" /> Call
           </a>
         </div>
@@ -80,6 +81,9 @@ function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
               <Phone className="h-4 w-4" /> Call +91 94395 72073
+            </a>
+            <a href="/policies" className="inline-flex items-center gap-2 rounded-md bg-white/95 px-6 py-3 text-sm font-semibold text-primary shadow-lg transition hover:scale-[1.02]">
+              Buy a policy
             </a>
             <a href="#process" className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
               See how it works
