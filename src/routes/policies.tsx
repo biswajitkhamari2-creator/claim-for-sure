@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Heart, Car, Shield, Plane, Home, UserCheck, Phone, ExternalLink, MessageCircle, Lock, BadgeCheck, ArrowRight } from "lucide-react";
+import { Heart, Car, Shield, Plane, Home, UserCheck, Phone, ExternalLink, MessageCircle, Lock, BadgeCheck, ArrowRight, Gift, Headphones, FileSearch, Percent, Clock, Sparkles, Wallet, IndianRupee } from "lucide-react";
 import logoAsset from "@/assets/claim-for-sure-logo.png.asset.json";
 
 export const Route = createFileRoute("/policies")({
