@@ -297,19 +297,35 @@ function FAQ() {
 function CTA() {
   return (
     <section id="contact" className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-      <div className="mx-auto max-w-4xl px-6 py-20 text-center text-primary-foreground">
+      <div className="mx-auto max-w-5xl px-6 py-20 text-center text-primary-foreground">
         <Shield className="mx-auto h-10 w-10 text-[oklch(0.82_0.14_80)]" />
         <h2 className="mt-5 font-display text-3xl font-bold leading-tight md:text-5xl">
           Stop chasing your insurer. <br className="hidden md:block" />Let us do it.
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-white/80">Free 15-minute claim review. No paperwork to start, no obligation to continue.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="tel:+911800000000" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
-            <Phone className="h-4 w-4" /> Call 1800-000-000
+          <a href="tel:+919438463174" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
+            <Phone className="h-4 w-4" /> Call +91 94384 63174
           </a>
-          <a href="#" className="inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
-            Request a callback
+          <a href="mailto:support@claimforsure.in" className="inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
+            support@claimforsure.in
           </a>
+        </div>
+        <div className="mx-auto mt-10 grid max-w-3xl gap-4 text-left text-sm text-white/85 md:grid-cols-3">
+          <div className="rounded-xl border border-white/15 bg-white/5 p-4">
+            <p className="font-semibold text-white">Phone</p>
+            <a href="tel:+919438463174" className="mt-1 block hover:text-white">+91 94384 63174</a>
+            <a href="tel:+919439572073" className="block hover:text-white">+91 94395 72073</a>
+          </div>
+          <div className="rounded-xl border border-white/15 bg-white/5 p-4">
+            <p className="font-semibold text-white">Email</p>
+            <a href="mailto:support@claimforsure.in" className="mt-1 block hover:text-white">support@claimforsure.in</a>
+            <p className="mt-1 text-white/70">We reply within 24 hours</p>
+          </div>
+          <div className="rounded-xl border border-white/15 bg-white/5 p-4">
+            <p className="font-semibold text-white">Office</p>
+            <p className="mt-1">123 Business Park, Sector 15,<br />Gurugram, Haryana 122001</p>
+          </div>
         </div>
       </div>
     </section>
@@ -326,6 +342,13 @@ function Footer() {
             <span className="font-display font-bold text-primary">ClaimForSure</span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground">Your claim, handled with certainty.</p>
+          <p className="mt-3 text-xs text-muted-foreground">123 Business Park, Sector 15,<br />Gurugram, Haryana 122001</p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a> · <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a>
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
+          </p>
         </div>
         <FooterCol title="Services" links={["Health claims", "Motor claims", "Life claims", "Property claims"]} />
         <FooterCol title="Company" links={["About", "Process", "Contact", "Careers"]} />
