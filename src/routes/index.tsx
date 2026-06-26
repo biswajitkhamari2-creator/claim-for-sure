@@ -350,9 +350,23 @@ function Footer() {
             <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
           </p>
         </div>
-        <FooterCol title="Services" links={["Health claims", "Motor claims", "Life claims", "Property claims"]} />
-        <FooterCol title="Company" links={["About", "Process", "Contact", "Careers"]} />
-        <FooterCol title="Legal" links={["Privacy policy", "Terms of service", "Grievance redressal"]} />
+        <FooterCol title="Services" links={[
+          { label: "Health claims", href: "#services" },
+          { label: "Motor claims", href: "#services" },
+          { label: "Life claims", href: "#services" },
+          { label: "Property claims", href: "#services" },
+        ]} />
+        <FooterCol title="Company" links={[
+          { label: "How it works", href: "#process" },
+          { label: "Why us", href: "#trust" },
+          { label: "FAQ", href: "#faq" },
+          { label: "Contact", href: "tel:+919438463174" },
+        ]} />
+        <FooterCol title="Contact", links={[
+          { label: "+91 94384 63174", href: "tel:+919438463174" },
+          { label: "+91 94395 72073", href: "tel:+919439572073" },
+          { label: "support@claimforsure.in", href: "mailto:support@claimforsure.in" },
+        ]} />
       </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-muted-foreground md:flex-row">
