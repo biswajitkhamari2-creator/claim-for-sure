@@ -29,6 +29,7 @@ function DashboardHome() {
     { to: "/dashboard/claims/new", icon: FilePlus2, title: "Submit a new claim", desc: "Start a fresh claim with our advisors." },
     { to: "/dashboard/claims", icon: FileText, title: "My Claims", desc: count === null ? "Track status & documents." : `${count} claim${count === 1 ? "" : "s"} on file.` },
     { to: "/dashboard/profile", icon: User, title: "Profile & Settings", desc: "Update your name, mobile, and photo." },
+    { to: "/dashboard/rewards", icon: Gift, title: "Rewards", desc: "Check eligibility and request rewards." },
   ];
 
   return (
