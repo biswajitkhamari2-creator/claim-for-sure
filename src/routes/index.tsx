@@ -28,6 +28,7 @@ function Index() {
         <WhyTrust />
         <Testimonials />
         <FAQ />
+        <AppreciationSection />
         <CTA />
       </main>
       <Footer />
