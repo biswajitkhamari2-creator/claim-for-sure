@@ -247,6 +247,28 @@ function AdminRewards() {
           </div>
         </section>
 
+        {/* Appreciation master toggle */}
+        <section className="rounded-xl border border-[oklch(0.82_0.14_80)]/40 bg-[oklch(0.98_0.02_80)] p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="flex items-center gap-2 font-serif text-xl font-bold text-[oklch(0.3_0.1_70)]">
+                <Sparkles className="h-5 w-5" /> Customer Appreciation Program
+              </h2>
+              <p className="mt-1 text-sm text-[oklch(0.4_0.07_70)]">
+                Shows the homepage section and customer dashboard widget. Discretionary, post-purchase gratitude only — never advertised as a purchase incentive.
+              </p>
+            </div>
+            <label className="inline-flex cursor-pointer items-center gap-2">
+              <input type="checkbox" checked={!!config.appreciation_enabled}
+                onChange={(e) => setConfig({ ...config, appreciation_enabled: e.target.checked })}
+                className="h-5 w-5" />
+              <span className={`rounded-full px-2 py-1 text-xs font-medium ${config.appreciation_enabled ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}`}>
+                {config.appreciation_enabled ? "ENABLED" : "DISABLED"}
+              </span>
+            </label>
+          </div>
+        </section>
+
         {/* Reward config */}
         <section className="rounded-xl border border-border bg-card p-6 space-y-4">
           <h2 className="font-serif text-xl font-bold">Reward configuration</h2>
