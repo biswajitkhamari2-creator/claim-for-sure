@@ -18,6 +18,10 @@ const ResetPassword = () => {
   const [sessionReady, setSessionReady] = useState(false);
 
   useEffect(() => {
+    window.location.replace(`/auth/reset${window.location.search}${window.location.hash}`);
+  }, []);
+
+  useEffect(() => {
     // Listen for auth state change (when user clicks email link)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
