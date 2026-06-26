@@ -128,6 +128,7 @@ function AdminRewards() {
       currency: config.currency,
       eligibility_rules: config.eligibility_rules,
       disclaimer: config.disclaimer,
+      appreciation_enabled: !!config.appreciation_enabled,
       updated_by: user?.id,
     }).eq("id", config.id);
     if (error) { toast.error(error.message); setSaving(false); return; }
