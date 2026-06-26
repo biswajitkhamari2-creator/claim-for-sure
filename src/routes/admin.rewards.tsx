@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
-import { Loader2, Shield, ArrowLeft, Save, CheckCircle2, XCircle, Gift, History } from "lucide-react";
+import { Loader2, Shield, ArrowLeft, Save, CheckCircle2, XCircle, Gift, History, Sparkles, Package } from "lucide-react";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/admin/rewards")({
