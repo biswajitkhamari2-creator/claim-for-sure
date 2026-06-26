@@ -82,6 +82,9 @@ function Hero() {
             <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
               <Phone className="h-4 w-4" /> Call +91 94395 72073
             </a>
+            <a href="/policies" className="inline-flex items-center gap-2 rounded-md bg-white/95 px-6 py-3 text-sm font-semibold text-primary shadow-lg transition hover:scale-[1.02]">
+              Buy a policy
+            </a>
             <a href="#process" className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
               See how it works
             </a>
