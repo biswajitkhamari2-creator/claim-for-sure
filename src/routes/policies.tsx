@@ -161,7 +161,7 @@ function ComplianceBar() {
 
 function Catalog() {
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
+    <section id="categories" className="mx-auto max-w-6xl px-6 py-20">
       <div className="max-w-2xl">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary-glow">Policy categories</p>
         <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">All major insurance — one trusted advisor.</h2>
