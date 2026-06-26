@@ -25,8 +25,10 @@ import { Route as AuthSignupRouteImport } from './routes/auth.signup'
 import { Route as AuthResetRouteImport } from './routes/auth.reset'
 import { Route as AuthLoginRouteImport } from './routes/auth.login'
 import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
+import { Route as AdminRewardsRouteImport } from './routes/admin.rewards'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardRewardsRouteImport } from './routes/_authenticated/dashboard.rewards'
 import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
 import { Route as AuthenticatedDashboardClaimsIndexRouteImport } from './routes/_authenticated/dashboard.claims.index'
 import { Route as AuthenticatedDashboardClaimsNewRouteImport } from './routes/_authenticated/dashboard.claims.new'
@@ -111,6 +113,11 @@ const AuthForgotRoute = AuthForgotRouteImport.update({
   path: '/auth/forgot',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRewardsRoute = AdminRewardsRouteImport.update({
+  id: '/admin/rewards',
+  path: '/admin/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
@@ -120,6 +127,12 @@ const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/dashboard/',
     path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardRewardsRoute =
+  AuthenticatedDashboardRewardsRouteImport.update({
+    id: '/dashboard/rewards',
+    path: '/dashboard/rewards',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardProfileRoute =
@@ -158,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/reset': typeof AuthResetRoute
@@ -165,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -181,6 +196,7 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/reset': typeof AuthResetRoute
@@ -188,6 +204,7 @@ export interface FileRoutesByTo {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin': typeof AdminIndexRoute
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -206,6 +223,7 @@ export interface FileRoutesById {
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/rewards': typeof AdminRewardsRoute
   '/auth/forgot': typeof AuthForgotRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/reset': typeof AuthResetRoute
@@ -213,6 +231,7 @@ export interface FileRoutesById {
   '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
   '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/_authenticated/dashboard/rewards': typeof AuthenticatedDashboardRewardsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
   '/_authenticated/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
@@ -231,6 +250,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/reset'
@@ -238,6 +258,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin/'
     | '/dashboard/profile'
+    | '/dashboard/rewards'
     | '/dashboard/'
     | '/dashboard/claims/$id'
     | '/dashboard/claims/new'
@@ -254,6 +275,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/reset'
@@ -261,6 +283,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin'
     | '/dashboard/profile'
+    | '/dashboard/rewards'
     | '/dashboard'
     | '/dashboard/claims/$id'
     | '/dashboard/claims/new'
@@ -278,6 +301,7 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/terms'
     | '/admin/login'
+    | '/admin/rewards'
     | '/auth/forgot'
     | '/auth/login'
     | '/auth/reset'
@@ -285,6 +309,7 @@ export interface FileRouteTypes {
     | '/auth/verified'
     | '/admin/'
     | '/_authenticated/dashboard/profile'
+    | '/_authenticated/dashboard/rewards'
     | '/_authenticated/dashboard/'
     | '/_authenticated/dashboard/claims/$id'
     | '/_authenticated/dashboard/claims/new'
@@ -303,6 +328,7 @@ export interface RootRouteChildren {
   ResetPasswordRoute: typeof ResetPasswordRoute
   TermsRoute: typeof TermsRoute
   AdminLoginRoute: typeof AdminLoginRoute
+  AdminRewardsRoute: typeof AdminRewardsRoute
   AuthForgotRoute: typeof AuthForgotRoute
   AuthLoginRoute: typeof AuthLoginRoute
   AuthResetRoute: typeof AuthResetRoute
@@ -425,6 +451,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthForgotRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/rewards': {
+      id: '/admin/rewards'
+      path: '/admin/rewards'
+      fullPath: '/admin/rewards'
+      preLoaderRoute: typeof AdminRewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -437,6 +470,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/rewards': {
+      id: '/_authenticated/dashboard/rewards'
+      path: '/dashboard/rewards'
+      fullPath: '/dashboard/rewards'
+      preLoaderRoute: typeof AuthenticatedDashboardRewardsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/profile': {
@@ -472,6 +512,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardProfileRoute: typeof AuthenticatedDashboardProfileRoute
+  AuthenticatedDashboardRewardsRoute: typeof AuthenticatedDashboardRewardsRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
   AuthenticatedDashboardClaimsIdRoute: typeof AuthenticatedDashboardClaimsIdRoute
   AuthenticatedDashboardClaimsNewRoute: typeof AuthenticatedDashboardClaimsNewRoute
@@ -480,6 +521,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardProfileRoute: AuthenticatedDashboardProfileRoute,
+  AuthenticatedDashboardRewardsRoute: AuthenticatedDashboardRewardsRoute,
   AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   AuthenticatedDashboardClaimsIdRoute: AuthenticatedDashboardClaimsIdRoute,
   AuthenticatedDashboardClaimsNewRoute: AuthenticatedDashboardClaimsNewRoute,
@@ -502,6 +544,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResetPasswordRoute: ResetPasswordRoute,
   TermsRoute: TermsRoute,
   AdminLoginRoute: AdminLoginRoute,
+  AdminRewardsRoute: AdminRewardsRoute,
   AuthForgotRoute: AuthForgotRoute,
   AuthLoginRoute: AuthLoginRoute,
   AuthResetRoute: AuthResetRoute,

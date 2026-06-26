@@ -131,6 +131,161 @@ export type Database = {
         }
         Relationships: []
       }
+      rewards: {
+        Row: {
+          admin_notes: string | null
+          claim_id: string | null
+          created_at: string
+          currency: string
+          decided_at: string | null
+          decided_by: string | null
+          eligibility_snapshot: Json
+          id: string
+          issue_reference: string | null
+          issued_at: string | null
+          policy_reference: string | null
+          rejection_reason: string | null
+          reward_type: string
+          reward_value: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          claim_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          eligibility_snapshot?: Json
+          id?: string
+          issue_reference?: string | null
+          issued_at?: string | null
+          policy_reference?: string | null
+          rejection_reason?: string | null
+          reward_type: string
+          reward_value?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          admin_notes?: string | null
+          claim_id?: string | null
+          created_at?: string
+          currency?: string
+          decided_at?: string | null
+          decided_by?: string | null
+          eligibility_snapshot?: Json
+          id?: string
+          issue_reference?: string | null
+          issued_at?: string | null
+          policy_reference?: string | null
+          rejection_reason?: string | null
+          reward_type?: string
+          reward_value?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rewards_claim_id_fkey"
+            columns: ["claim_id"]
+            isOneToOne: false
+            referencedRelation: "claims"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rewards_audit_log: {
+        Row: {
+          action: string
+          actor_id: string | null
+          after_state: Json | null
+          before_state: Json | null
+          config_id: string | null
+          created_at: string
+          id: string
+          notes: string | null
+          reward_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          after_state?: Json | null
+          before_state?: Json | null
+          config_id?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reward_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          after_state?: Json | null
+          before_state?: Json | null
+          config_id?: string | null
+          created_at?: string
+          id?: string
+          notes?: string | null
+          reward_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rewards_audit_log_config_id_fkey"
+            columns: ["config_id"]
+            isOneToOne: false
+            referencedRelation: "rewards_config"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rewards_audit_log_reward_id_fkey"
+            columns: ["reward_id"]
+            isOneToOne: false
+            referencedRelation: "rewards"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rewards_config: {
+        Row: {
+          currency: string
+          disclaimer: string
+          eligibility_rules: Json
+          enabled: boolean
+          id: string
+          reward_type: string
+          reward_value: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          currency?: string
+          disclaimer?: string
+          eligibility_rules?: Json
+          enabled?: boolean
+          id?: string
+          reward_type?: string
+          reward_value?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          currency?: string
+          disclaimer?: string
+          eligibility_rules?: Json
+          enabled?: boolean
+          id?: string
+          reward_type?: string
+          reward_value?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

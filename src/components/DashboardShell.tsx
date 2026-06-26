@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouter } from "@tanstack/react-router";
-import { LogOut, FilePlus2, FileText, User, LayoutDashboard, Home } from "lucide-react";
+import { LogOut, FilePlus2, FileText, User, LayoutDashboard, Home, Gift } from "lucide-react";
 import type { ReactNode } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -28,6 +28,7 @@ export function DashboardShell({ children }: { children: ReactNode }) {
             <Link to="/dashboard" className="hover:text-foreground inline-flex items-center gap-1.5"><LayoutDashboard className="h-4 w-4" /> Dashboard</Link>
             <Link to="/dashboard/claims" className="hover:text-foreground inline-flex items-center gap-1.5"><FileText className="h-4 w-4" /> My Claims</Link>
             <Link to="/dashboard/profile" className="hover:text-foreground inline-flex items-center gap-1.5"><User className="h-4 w-4" /> Profile</Link>
+            <Link to="/dashboard/rewards" className="hover:text-foreground inline-flex items-center gap-1.5"><Gift className="h-4 w-4" /> Rewards</Link>
             <Link to="/" className="hover:text-foreground inline-flex items-center gap-1.5"><Home className="h-4 w-4" /> Site</Link>
           </nav>
           <div className="flex items-center gap-2">
