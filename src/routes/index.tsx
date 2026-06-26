@@ -378,12 +378,12 @@ function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">{title}</h4>
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-        {links.map((l) => <li key={l}><a href="#" className="hover:text-foreground">{l}</a></li>)}
+        {links.map((l) => <li key={l.label}><a href={l.href} className="hover:text-foreground">{l.label}</a></li>)}
       </ul>
     </div>
   );
