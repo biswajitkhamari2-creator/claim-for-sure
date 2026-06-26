@@ -34,6 +34,27 @@ type Reward = {
   rejection_reason: string | null;
   issue_reference: string | null;
   created_at: string;
+  program_type?: "request" | "appreciation";
+  gift_type?: string | null;
+  gift_value_inr?: number | null;
+  shipping_status?: string | null;
+  courier?: string | null;
+  awb?: string | null;
+  delivered_at?: string | null;
+  admin_remarks?: string | null;
+};
+
+type Profile = { user_id: string; full_name: string | null; email: string | null; phone: string | null };
+
+const APPRECIATION_STATUSES = ["not_eligible", "under_review", "approved", "shipped", "delivered"] as const;
+type AppStatus = typeof APPRECIATION_STATUSES[number];
+
+const APP_STATUS_STYLES: Record<string, string> = {
+  not_eligible: "bg-muted text-muted-foreground",
+  under_review: "bg-yellow-100 text-yellow-800",
+  approved: "bg-blue-100 text-blue-800",
+  shipped: "bg-indigo-100 text-indigo-800",
+  delivered: "bg-green-100 text-green-800",
 };
 
 const STATUS_STYLES: Record<string, string> = {
