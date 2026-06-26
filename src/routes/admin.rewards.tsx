@@ -76,9 +76,21 @@ function AdminRewards() {
   const [checking, setChecking] = useState(true);
   const [config, setConfig] = useState<Config | null>(null);
   const [rewards, setRewards] = useState<Reward[]>([]);
+  const [profiles, setProfiles] = useState<Profile[]>([]);
   const [audit, setAudit] = useState<any[]>([]);
   const [saving, setSaving] = useState(false);
-  const [tab, setTab] = useState<"requests" | "audit">("requests");
+  const [tab, setTab] = useState<"requests" | "appreciation" | "audit">("requests");
+
+  // appreciation entry form
+  const [appForm, setAppForm] = useState({
+    user_id: "",
+    status: "under_review" as AppStatus,
+    gift_type: "",
+    gift_value_inr: 0,
+    courier: "",
+    awb: "",
+    admin_remarks: "",
+  });
 
   useEffect(() => {
     (async () => {
