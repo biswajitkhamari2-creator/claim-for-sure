@@ -18,6 +18,7 @@ type Config = {
   currency: string;
   eligibility_rules: Record<string, boolean | number>;
   disclaimer: string;
+  appreciation_enabled?: boolean;
 };
 
 type Reward = {
