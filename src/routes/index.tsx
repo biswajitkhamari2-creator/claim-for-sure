@@ -362,16 +362,22 @@ function Footer() {
           { label: "FAQ", href: "#faq" },
           { label: "Contact", href: "tel:+919438463174" },
         ]} />
-        <FooterCol title="Contact" links={[
-          { label: "+91 94384 63174", href: "tel:+919438463174" },
-          { label: "+91 94395 72073", href: "tel:+919439572073" },
-          { label: "support@claimforsure.in", href: "mailto:support@claimforsure.in" },
+        <FooterCol title="Legal" links={[
+          { label: "Privacy Policy", href: "/privacy" },
+          { label: "Terms & Conditions", href: "/terms" },
+          { label: "Refund Policy", href: "/refund" },
+          { label: "Disclaimer", href: "/disclaimer" },
         ]} />
       </div>
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-muted-foreground md:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 py-5 text-xs text-muted-foreground md:flex-row">
           <p>© {new Date().getFullYear()} ClaimForSure. All rights reserved.</p>
-          <p>ClaimForSure is a claims-assistance service and is not an insurer.</p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <a href="/privacy" className="hover:text-foreground">Privacy</a>
+            <a href="/terms" className="hover:text-foreground">Terms</a>
+            <a href="/refund" className="hover:text-foreground">Refund</a>
+            <a href="/disclaimer" className="hover:text-foreground">Disclaimer</a>
+          </div>
         </div>
       </div>
     </footer>
