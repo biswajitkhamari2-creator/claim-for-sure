@@ -70,8 +70,8 @@ function Hero() {
             ClaimForSure stands between you and the paperwork. Our advisors prepare, file, and follow up on your claim — so you get a fair settlement without the runaround.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
-              Start your free claim review <ArrowRight className="h-4 w-4" />
+            <a href="tel:+919438463174" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
+              <Phone className="h-4 w-4" /> Call +91 94384 63174
             </a>
             <a href="#process" className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
               See how it works
