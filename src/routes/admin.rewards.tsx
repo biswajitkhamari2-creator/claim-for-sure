@@ -104,14 +104,16 @@ function AdminRewards() {
   }, [navigate]);
 
   async function load() {
-    const [{ data: cfg }, { data: r }, { data: a }] = await Promise.all([
+    const [{ data: cfg }, { data: r }, { data: a }, { data: p }] = await Promise.all([
       supabase.from("rewards_config" as any).select("*").limit(1).maybeSingle(),
       supabase.from("rewards" as any).select("*").order("created_at", { ascending: false }),
       supabase.from("rewards_audit_log" as any).select("*").order("created_at", { ascending: false }).limit(100),
+      supabase.from("profiles" as any).select("user_id,full_name,email,phone").order("created_at", { ascending: false }).limit(500),
     ]);
     if (cfg) setConfig(cfg as any);
     setRewards((r as any) ?? []);
     setAudit((a as any) ?? []);
+    setProfiles((p as any) ?? []);
   }
 
   async function saveConfig() {
