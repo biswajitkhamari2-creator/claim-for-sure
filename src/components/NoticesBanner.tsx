@@ -9,7 +9,7 @@ type Notice = {
   type: string;
 };
 
-const STYLES: Record<string, { wrap: string; icon: JSX.Element }> = {
+const STYLES: Record<string, { wrap: string; icon: ReactNode }> = {
   offer: {
     wrap: "border-emerald-300 bg-emerald-50 text-emerald-900",
     icon: <Sparkles className="h-4 w-4" />,
