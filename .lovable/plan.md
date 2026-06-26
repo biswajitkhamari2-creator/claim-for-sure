@@ -1,57 +1,80 @@
-# ClaimForSure Auth System
+# Customer Appreciation Program
 
-Integrates a complete user authentication and claim-submission flow on top of the current Navy/Gold landing page, legal pages, and existing admin panel — without removing anything that already works.
+A discretionary, post-purchase gratitude program — never an inducement to buy insurance. Reuses the existing `rewards` / `rewards_config` / `rewards_audit_log` tables and extends them so the same backend powers both flows.
 
-## What's already in place (reuse, do not rebuild)
-- Landing page `/` (Navy/Gold) with logo, contact info, footer links.
-- Legal pages: `/privacy`, `/terms`, `/refund`, `/disclaimer`.
-- Admin panel: `/admin/login`, `/admin` (claims dashboard, status updates).
-- Database: `profiles`, `claims`, `user_roles` (with `has_role` + admin role for `biswajitkhamari2@gmail.com`), `claim-documents` private storage bucket.
+## 1. Homepage section (`src/routes/index.tsx`)
 
-## New public auth routes
-- `/auth/signup` — Full Name, Email, Mobile (10 digits), Password, Confirm Password, Privacy checkbox. Zod validation matching the spec (8+ chars, upper/lower/number/special). Submit button disabled until valid. Creates Supabase user with `emailRedirectTo` → `/auth/verified`, stores name + mobile in `profiles`, shows "Verification email sent" screen with **Resend** button + 60s countdown.
-- `/auth/login` — Email + Password. On `Email not confirmed` error, shows inline notice with Resend Verification link. Links to `/auth/forgot` and `/auth/signup`.
-- `/auth/forgot` — Email input, calls `resetPasswordForEmail` with redirect to `/auth/reset`.
-- `/auth/reset` — New password + Confirm; calls `supabase.auth.updateUser({ password })`, then redirects to `/auth/login`.
-- `/auth/verified` — Landing after email link; shows success then redirects to `/dashboard`.
+New `<AppreciationSection />` inserted between testimonials and the final CTA.
 
-Apple-inspired card UI on Navy/Gold theme, glassmorphism, smooth transitions, password visibility toggle, sonner toasts, mobile-first.
+- Apple-inspired layout: large heading, generous whitespace, soft navy → cream gradient with grain texture
+- Animated SVG gift box (lid lifts on scroll-in, ribbon shimmer) — pure CSS keyframes
+- Glassmorphism card holding the program description
+- "Surprise Gift" gold pill badge + `Gift` / `Sparkles` icon
+- Primary copy = exact paragraph from the brief
+- `Learn More` → `/appreciation`; secondary `View My Status` → `/dashboard/rewards`
+- Fine-print disclaimer block at the bottom, verbatim from the brief
+- Motion: fade-up on scroll + gift-box hover tilt
 
-## Protected user area (under `_authenticated/`)
-The integration-managed `src/routes/_authenticated/route.tsx` already redirects unauthenticated users to `/auth` — we will add a tiny shim route that forwards `/auth` to `/auth/login` so the gate keeps working.
+Copy explicitly frames gifts as post-relationship gratitude, discretionary, T&C-bound — never as a purchase incentive.
 
-- `/dashboard` — "Welcome, {name}", quick cards: Submit New Claim, My Claims, Documents, Profile, Logout.
-- `/dashboard/profile` — Edit full name, mobile, optional avatar (uses `profiles` table; email read-only).
-- `/dashboard/claims/new` — Claim submission form (matches existing `claims` schema: full_name, phone, email, city, state, insurance_type, insurance_company, policy_number, claim_amount, rejection_date, rejection_reason). Generates `claim_id` `CFS-{timestamp}`, sets `user_id = auth.uid()`.
-- `/dashboard/claims` — List of user's own claims (RLS already restricts).
-- `/dashboard/claims/$id` — Detail view + document upload to `claim-documents/{user_id}/{claim_id}/...` (private bucket, signed URLs).
+## 2. New info page `/appreciation`
 
-## Landing page wiring
-- Header: add **Login** / **Sign Up** buttons (keep "Call" CTA).
-- Hero "Start Your Claim" CTA → `/auth/signup` (guests) or `/dashboard/claims/new` (signed-in).
-- Footer: add Login / Sign Up links.
-- No existing copy, contact info, or legal links removed.
+`src/routes/appreciation.tsx`:
+- What the program is (and isn't)
+- Who may be considered (existing customers in good standing)
+- Selection at sole discretion of ClaimForSure
+- What is NOT promised (no guarantee, no cashback, no premium rebate — Section 41 compliance)
+- Full T&Cs + disclaimer
+- CTA: "Sign in to view your status"
 
-## Database
-Existing schema covers everything. One small migration:
-- Add `avatar_url text` to `public.profiles` (optional photo).
-- Ensure `handle_new_user` trigger inserts `full_name` and `phone` from `raw_user_meta_data` (already does name; add phone).
+## 3. Admin controls
 
-No new tables. RLS already scopes `claims` and `profiles` to `auth.uid()`; admin sees all via `has_role`.
+Extend `/admin/rewards` with an **Appreciation Program** tab:
+- Master toggle: enable / disable homepage section + dashboard widget
+- Per-customer entry fields:
+  - Eligibility status (`not_eligible` | `under_review` | `approved` | `shipped` | `delivered`)
+  - Gift type (free-text, e.g. "Diwali hamper", "Branded mug")
+  - Gift value (₹)
+  - Shipping status + courier + AWB
+  - Admin remarks (internal)
+- "Select customer" picker to create an entry for any existing user
+- Every change logged to `rewards_audit_log`
 
-## Auth configuration
-- Email/password enabled, **auto-confirm OFF** (mandatory verification), HIBP password check ON, anonymous sign-ups OFF — applied via `configure_auth`.
-- Default Lovable auth emails are used (no custom templates this round — can be added later if you want branded emails).
+## 4. Customer dashboard
 
-## Security
-Supabase handles password hashing, session JWTs, secure cookies, prepared statements (via PostgREST), and email verification. We add: Zod validation client + server, RLS already enforces per-user data isolation, signed URLs for private documents, rate-limited resend (60s client cooldown), and the public-route rule that protected server fns are never called from public loaders.
+Extend `/dashboard/rewards` with an **Appreciation Status** card above existing rewards UI:
+- Status badge: Not Eligible / Under Review / Approved / Shipped / Delivered
+- Shipped → courier + AWB
+- Delivered → delivery date + thank-you message
+- Disclaimer footer verbatim from brief
+- Hidden entirely when admin master toggle is OFF
 
-## Out of scope this round
-- Custom-branded auth email templates (default Lovable emails will send).
-- Admin "deactivate user" UI (admin panel already lists claims; user management can be a follow-up).
+## 5. Database
 
-## Technical notes
-- New files under `src/routes/auth.*.tsx` and `src/routes/_authenticated/dashboard*.tsx`.
-- Shared `AuthCard` component for the glass UI.
-- Use `supabase` browser client for auth flows; `requireSupabaseAuth` server fn only if we need server-side claim insert (client insert is fine — RLS enforces `user_id = auth.uid()`).
-- `/auth` index route redirects to `/auth/login` so the managed gate's redirect target resolves.
+One migration to extend `rewards`:
+- Add `program_type` (`'request' | 'appreciation'`, default `'request'`)
+- Add `gift_type`, `gift_value_inr`, `shipping_status`, `courier`, `awb`, `delivered_at`, `admin_remarks`
+- Add `appreciation_enabled` bool to `rewards_config`
+- RLS: existing user-owns-row + admin policies cover the new flow — no new policy surface
+
+No new tables. No anon read.
+
+## 6. Visual tokens
+
+New entries in `src/styles.css`:
+```text
+--gradient-appreciation: navy → cream
+--shadow-glass: layered low-opacity navy
+```
+
+## 7. Compliance guardrails
+
+- No mention of gifts on any policy-buy CTA, hero, or `/policies` page
+- Disclaimer present on homepage section, dedicated page, AND dashboard widget
+- Section ships **disabled** by default so legal can review before going live
+
+## Out of scope (ask if needed)
+
+- Real shipping API integration (manual AWB only)
+- Automated eligibility scoring
+- Email notifications on status change
