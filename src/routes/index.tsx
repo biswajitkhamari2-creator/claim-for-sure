@@ -46,8 +46,8 @@ function Header() {
           <a href="#trust" className="hover:text-foreground">Why us</a>
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
-        <a href="#contact" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
-          Free consultation <ArrowRight className="h-4 w-4" />
+        <a href="tel:+919438463174" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+          <Phone className="h-4 w-4" /> Call +91 94384 63174
         </a>
       </div>
     </header>
@@ -70,8 +70,8 @@ function Hero() {
             ClaimForSure stands between you and the paperwork. Our advisors prepare, file, and follow up on your claim — so you get a fair settlement without the runaround.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="#contact" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
-              Start your free claim review <ArrowRight className="h-4 w-4" />
+            <a href="tel:+919438463174" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
+              <Phone className="h-4 w-4" /> Call +91 94384 63174
             </a>
             <a href="#process" className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
               See how it works
@@ -350,9 +350,23 @@ function Footer() {
             <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
           </p>
         </div>
-        <FooterCol title="Services" links={["Health claims", "Motor claims", "Life claims", "Property claims"]} />
-        <FooterCol title="Company" links={["About", "Process", "Contact", "Careers"]} />
-        <FooterCol title="Legal" links={["Privacy policy", "Terms of service", "Grievance redressal"]} />
+        <FooterCol title="Services" links={[
+          { label: "Health claims", href: "#services" },
+          { label: "Motor claims", href: "#services" },
+          { label: "Life claims", href: "#services" },
+          { label: "Property claims", href: "#services" },
+        ]} />
+        <FooterCol title="Company" links={[
+          { label: "How it works", href: "#process" },
+          { label: "Why us", href: "#trust" },
+          { label: "FAQ", href: "#faq" },
+          { label: "Contact", href: "tel:+919438463174" },
+        ]} />
+        <FooterCol title="Contact" links={[
+          { label: "+91 94384 63174", href: "tel:+919438463174" },
+          { label: "+91 94395 72073", href: "tel:+919439572073" },
+          { label: "support@claimforsure.in", href: "mailto:support@claimforsure.in" },
+        ]} />
       </div>
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-muted-foreground md:flex-row">
@@ -364,12 +378,12 @@ function Footer() {
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
+function FooterCol({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
       <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">{title}</h4>
       <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-        {links.map((l) => <li key={l}><a href="#" className="hover:text-foreground">{l}</a></li>)}
+        {links.map((l) => <li key={l.label}><a href={l.href} className="hover:text-foreground">{l.label}</a></li>)}
       </ul>
     </div>
   );
