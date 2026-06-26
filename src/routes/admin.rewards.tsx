@@ -337,6 +337,7 @@ function AdminRewards() {
           <div className="flex border-b border-border">
             {[
               { k: "requests", label: "Reward requests", icon: Gift },
+              { k: "appreciation", label: "Appreciation", icon: Sparkles },
               { k: "audit", label: "Audit log", icon: History },
             ].map(t => (
               <button key={t.k} onClick={() => setTab(t.k as any)}
@@ -347,41 +348,146 @@ function AdminRewards() {
           </div>
 
           {tab === "requests" ? (
-            rewards.length === 0 ? (
-              <p className="py-12 text-center text-sm text-muted-foreground">No reward requests yet.</p>
-            ) : (
-              <div className="divide-y divide-border">
-                {rewards.map(r => (
-                  <div key={r.id} className="p-4 text-sm">
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className="font-mono text-xs text-muted-foreground">user: {r.user_id.slice(0, 8)}… · policy: {r.policy_reference || "—"}</div>
-                        <div className="mt-1 font-medium">{REWARD_TYPES.find(t => t.value === r.reward_type)?.label ?? r.reward_type} · {r.currency} {Number(r.reward_value).toLocaleString("en-IN")}</div>
-                        <div className="mt-0.5 text-xs text-muted-foreground">{new Date(r.created_at).toLocaleString("en-IN")}</div>
-                        {r.rejection_reason && <div className="mt-1 text-xs text-red-700">Rejected: {r.rejection_reason}</div>}
-                        {r.issue_reference && <div className="mt-1 text-xs text-green-700">Issued ref: {r.issue_reference}</div>}
+            (() => {
+              const list = rewards.filter(r => (r.program_type ?? "request") === "request");
+              return list.length === 0 ? (
+                <p className="py-12 text-center text-sm text-muted-foreground">No reward requests yet.</p>
+              ) : (
+                <div className="divide-y divide-border">
+                  {list.map(r => (
+                    <div key={r.id} className="p-4 text-sm">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <div className="font-mono text-xs text-muted-foreground">user: {r.user_id.slice(0, 8)}… · policy: {r.policy_reference || "—"}</div>
+                          <div className="mt-1 font-medium">{REWARD_TYPES.find(t => t.value === r.reward_type)?.label ?? r.reward_type} · {r.currency} {Number(r.reward_value).toLocaleString("en-IN")}</div>
+                          <div className="mt-0.5 text-xs text-muted-foreground">{new Date(r.created_at).toLocaleString("en-IN")}</div>
+                          {r.rejection_reason && <div className="mt-1 text-xs text-red-700">Rejected: {r.rejection_reason}</div>}
+                          {r.issue_reference && <div className="mt-1 text-xs text-green-700">Issued ref: {r.issue_reference}</div>}
+                        </div>
+                        <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${STATUS_STYLES[r.status]}`}>{r.status}</span>
                       </div>
-                      <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${STATUS_STYLES[r.status]}`}>{r.status}</span>
+                      {r.status === "pending" && (
+                        <div className="mt-3 flex gap-2">
+                          <button onClick={() => decide(r, "approved")} className="inline-flex items-center gap-1 rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white">
+                            <CheckCircle2 className="h-3.5 w-3.5" /> Approve
+                          </button>
+                          <button onClick={() => decide(r, "rejected")} className="inline-flex items-center gap-1 rounded-md bg-red-600 px-3 py-1.5 text-xs font-medium text-white">
+                            <XCircle className="h-3.5 w-3.5" /> Reject
+                          </button>
+                        </div>
+                      )}
+                      {r.status === "approved" && (
+                        <button onClick={() => decide(r, "issued")} className="mt-3 inline-flex items-center gap-1 rounded-md bg-green-600 px-3 py-1.5 text-xs font-medium text-white">
+                          <Gift className="h-3.5 w-3.5" /> Mark as issued
+                        </button>
+                      )}
                     </div>
-                    {r.status === "pending" && (
-                      <div className="mt-3 flex gap-2">
-                        <button onClick={() => decide(r, "approved")} className="inline-flex items-center gap-1 rounded-md bg-blue-600 px-3 py-1.5 text-xs font-medium text-white">
-                          <CheckCircle2 className="h-3.5 w-3.5" /> Approve
-                        </button>
-                        <button onClick={() => decide(r, "rejected")} className="inline-flex items-center gap-1 rounded-md bg-red-600 px-3 py-1.5 text-xs font-medium text-white">
-                          <XCircle className="h-3.5 w-3.5" /> Reject
-                        </button>
-                      </div>
-                    )}
-                    {r.status === "approved" && (
-                      <button onClick={() => decide(r, "issued")} className="mt-3 inline-flex items-center gap-1 rounded-md bg-green-600 px-3 py-1.5 text-xs font-medium text-white">
-                        <Gift className="h-3.5 w-3.5" /> Mark as issued
-                      </button>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
+              );
+            })()
+          ) : tab === "appreciation" ? (
+            <div className="space-y-6 p-6">
+              {/* Create form */}
+              <div className="rounded-lg border border-border bg-background p-4">
+                <h3 className="flex items-center gap-2 font-semibold"><Package className="h-4 w-4" /> Create appreciation entry</h3>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">Customer</span>
+                    <select value={appForm.user_id}
+                      onChange={(e) => setAppForm({ ...appForm, user_id: e.target.value })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                      <option value="">— Select customer —</option>
+                      {profiles.map(p => (
+                        <option key={p.user_id} value={p.user_id}>
+                          {p.full_name || "(no name)"} · {p.email || p.phone || p.user_id.slice(0, 8)}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">Status</span>
+                    <select value={appForm.status}
+                      onChange={(e) => setAppForm({ ...appForm, status: e.target.value as AppStatus })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm">
+                      {APPRECIATION_STATUSES.map(s => <option key={s} value={s}>{s.replace(/_/g, " ")}</option>)}
+                    </select>
+                  </label>
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">Gift type</span>
+                    <input value={appForm.gift_type}
+                      onChange={(e) => setAppForm({ ...appForm, gift_type: e.target.value })}
+                      placeholder="e.g. Diwali hamper, Branded mug"
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  </label>
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">Gift value (₹)</span>
+                    <input type="number" min={0} value={appForm.gift_value_inr}
+                      onChange={(e) => setAppForm({ ...appForm, gift_value_inr: Number(e.target.value) })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  </label>
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">Courier</span>
+                    <input value={appForm.courier}
+                      onChange={(e) => setAppForm({ ...appForm, courier: e.target.value })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  </label>
+                  <label className="block">
+                    <span className="text-xs text-muted-foreground">AWB / Tracking</span>
+                    <input value={appForm.awb}
+                      onChange={(e) => setAppForm({ ...appForm, awb: e.target.value })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  </label>
+                  <label className="md:col-span-2 block">
+                    <span className="text-xs text-muted-foreground">Internal remarks</span>
+                    <textarea rows={2} value={appForm.admin_remarks}
+                      onChange={(e) => setAppForm({ ...appForm, admin_remarks: e.target.value })}
+                      className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" />
+                  </label>
+                </div>
+                <button onClick={createAppreciation}
+                  className="mt-4 inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground">
+                  <Sparkles className="h-4 w-4" /> Create entry
+                </button>
               </div>
-            )
+
+              {/* Existing entries */}
+              {(() => {
+                const list = rewards.filter(r => r.program_type === "appreciation");
+                if (list.length === 0) return <p className="py-8 text-center text-sm text-muted-foreground">No appreciation entries yet.</p>;
+                return (
+                  <div className="divide-y divide-border rounded-lg border border-border">
+                    {list.map(r => {
+                      const status = (r.shipping_status as AppStatus) || "under_review";
+                      const profile = profiles.find(p => p.user_id === r.user_id);
+                      return (
+                        <div key={r.id} className="p-4 text-sm">
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div className="min-w-0">
+                              <div className="font-medium">{profile?.full_name || "Customer"} · {profile?.email || profile?.phone || r.user_id.slice(0, 8)}</div>
+                              <div className="mt-1 text-xs text-muted-foreground">
+                                {r.gift_type || "—"} · ₹{Number(r.gift_value_inr || 0).toLocaleString("en-IN")}
+                                {r.courier && ` · ${r.courier}`}{r.awb && ` · AWB ${r.awb}`}
+                              </div>
+                              {r.admin_remarks && <div className="mt-1 text-xs italic text-muted-foreground">Note: {r.admin_remarks}</div>}
+                              <div className="mt-1 text-[11px] text-muted-foreground">{new Date(r.created_at).toLocaleString("en-IN")}</div>
+                            </div>
+                            <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${APP_STATUS_STYLES[status]}`}>{status.replace(/_/g, " ")}</span>
+                          </div>
+                          <div className="mt-3 flex flex-wrap items-center gap-2">
+                            <select value={status}
+                              onChange={(e) => updateAppreciation(r, { shipping_status: e.target.value as any })}
+                              className="rounded-md border border-border bg-background px-2 py-1 text-xs">
+                              {APPRECIATION_STATUSES.map(s => <option key={s} value={s}>{s.replace(/_/g, " ")}</option>)}
+                            </select>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
+            </div>
           ) : (
             audit.length === 0 ? (
               <p className="py-12 text-center text-sm text-muted-foreground">No audit entries yet.</p>
