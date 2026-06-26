@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Shield, CheckCircle2, Lock, Scale, Phone, FileCheck, Clock, Award, ArrowRight, Star } from "lucide-react";
+import logoAsset from "@/assets/claim-for-sure-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -36,9 +37,12 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#" className="flex items-center gap-2">
-          <Shield className="h-6 w-6 text-primary" strokeWidth={2.2} />
-          <span className="font-display text-lg font-bold tracking-tight text-primary">ClaimForSure</span>
+        <a href="#" className="flex items-center gap-2.5">
+          <img src={logoAsset.url} alt="Claim For Sure" className="h-10 w-10 rounded-md object-cover" />
+          <span className="flex flex-col leading-tight">
+            <span className="font-display text-lg font-bold tracking-tight text-primary">Claim For Sure</span>
+            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">by Sidheswar Enterprises</span>
+          </span>
         </a>
         <nav className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
           <a href="#services" className="hover:text-foreground">Services</a>
@@ -337,11 +341,14 @@ function Footer() {
     <footer className="border-t border-border bg-card">
       <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2">
-            <Shield className="h-5 w-5 text-primary" />
-            <span className="font-display font-bold text-primary">ClaimForSure</span>
+          <div className="flex items-center gap-2.5">
+            <img src={logoAsset.url} alt="Claim For Sure" className="h-9 w-9 rounded-md object-cover" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-display font-bold text-primary">Claim For Sure</span>
+              <span className="text-[10px] uppercase tracking-wider text-muted-foreground">by Sidheswar Enterprises</span>
+            </div>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">Your claim, handled with certainty.</p>
+          <p className="mt-3 text-sm italic text-muted-foreground">"We don't promise, we deliver."</p>
           <p className="mt-3 text-xs text-muted-foreground">123 Business Park, Sector 15,<br />Gurugram, Haryana 122001</p>
           <p className="mt-2 text-xs text-muted-foreground">
             <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a> · <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a>
