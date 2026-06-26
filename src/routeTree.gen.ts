@@ -13,10 +13,22 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as RefundRouteImport } from './routes/refund'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AuthVerifiedRouteImport } from './routes/auth.verified'
+import { Route as AuthSignupRouteImport } from './routes/auth.signup'
+import { Route as AuthResetRouteImport } from './routes/auth.reset'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
+import { Route as AuthenticatedDashboardClaimsIndexRouteImport } from './routes/_authenticated/dashboard.claims.index'
+import { Route as AuthenticatedDashboardClaimsNewRouteImport } from './routes/_authenticated/dashboard.claims.new'
+import { Route as AuthenticatedDashboardClaimsIdRouteImport } from './routes/_authenticated/dashboard.claims.$id'
 
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
@@ -38,9 +50,18 @@ const DisclaimerRoute = DisclaimerRouteImport.update({
   path: '/disclaimer',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -53,79 +74,204 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthVerifiedRoute = AuthVerifiedRouteImport.update({
+  id: '/verified',
+  path: '/verified',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/reset',
+  path: '/reset',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/forgot',
+  path: '/forgot',
+  getParentRoute: () => AuthRoute,
+} as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
   id: '/admin/login',
   path: '/admin/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/dashboard/',
+    path: '/dashboard/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardProfileRoute =
+  AuthenticatedDashboardProfileRouteImport.update({
+    id: '/dashboard/profile',
+    path: '/dashboard/profile',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardClaimsIndexRoute =
+  AuthenticatedDashboardClaimsIndexRouteImport.update({
+    id: '/dashboard/claims/',
+    path: '/dashboard/claims/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardClaimsNewRoute =
+  AuthenticatedDashboardClaimsNewRouteImport.update({
+    id: '/dashboard/claims/new',
+    path: '/dashboard/claims/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardClaimsIdRoute =
+  AuthenticatedDashboardClaimsIdRouteImport.update({
+    id: '/dashboard/claims/$id',
+    path: '/dashboard/claims/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/auth': typeof AuthRouteWithChildren
   '/disclaimer': typeof DisclaimerRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
+  '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
+  '/dashboard/claims/': typeof AuthenticatedDashboardClaimsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
+  '/auth': typeof AuthRouteWithChildren
   '/disclaimer': typeof DisclaimerRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verified': typeof AuthVerifiedRoute
   '/admin': typeof AdminIndexRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
+  '/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
+  '/dashboard/claims': typeof AuthenticatedDashboardClaimsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/auth': typeof AuthRouteWithChildren
   '/disclaimer': typeof DisclaimerRoute
   '/privacy': typeof PrivacyRoute
   '/refund': typeof RefundRoute
   '/terms': typeof TermsRoute
   '/admin/login': typeof AdminLoginRoute
+  '/auth/forgot': typeof AuthForgotRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/reset': typeof AuthResetRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/auth/verified': typeof AuthVerifiedRoute
   '/admin/': typeof AdminIndexRoute
+  '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/dashboard/claims/$id': typeof AuthenticatedDashboardClaimsIdRoute
+  '/_authenticated/dashboard/claims/new': typeof AuthenticatedDashboardClaimsNewRoute
+  '/_authenticated/dashboard/claims/': typeof AuthenticatedDashboardClaimsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/$'
+    | '/auth'
     | '/disclaimer'
     | '/privacy'
     | '/refund'
     | '/terms'
     | '/admin/login'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/signup'
+    | '/auth/verified'
     | '/admin/'
+    | '/dashboard/profile'
+    | '/dashboard/'
+    | '/dashboard/claims/$id'
+    | '/dashboard/claims/new'
+    | '/dashboard/claims/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$'
+    | '/auth'
     | '/disclaimer'
     | '/privacy'
     | '/refund'
     | '/terms'
     | '/admin/login'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/signup'
+    | '/auth/verified'
     | '/admin'
+    | '/dashboard/profile'
+    | '/dashboard'
+    | '/dashboard/claims/$id'
+    | '/dashboard/claims/new'
+    | '/dashboard/claims'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/$'
+    | '/auth'
     | '/disclaimer'
     | '/privacy'
     | '/refund'
     | '/terms'
     | '/admin/login'
+    | '/auth/forgot'
+    | '/auth/login'
+    | '/auth/reset'
+    | '/auth/signup'
+    | '/auth/verified'
     | '/admin/'
+    | '/_authenticated/dashboard/profile'
+    | '/_authenticated/dashboard/'
+    | '/_authenticated/dashboard/claims/$id'
+    | '/_authenticated/dashboard/claims/new'
+    | '/_authenticated/dashboard/claims/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
+  AuthRoute: typeof AuthRouteWithChildren
   DisclaimerRoute: typeof DisclaimerRoute
   PrivacyRoute: typeof PrivacyRoute
   RefundRoute: typeof RefundRoute
@@ -164,11 +310,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DisclaimerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$': {
       id: '/$'
       path: '/$'
       fullPath: '/$'
       preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -185,6 +345,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth/verified': {
+      id: '/auth/verified'
+      path: '/verified'
+      fullPath: '/auth/verified'
+      preLoaderRoute: typeof AuthVerifiedRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/reset': {
+      id: '/auth/reset'
+      path: '/reset'
+      fullPath: '/auth/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof AuthRoute
+    }
     '/admin/login': {
       id: '/admin/login'
       path: '/admin/login'
@@ -192,12 +387,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/dashboard'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/profile': {
+      id: '/_authenticated/dashboard/profile'
+      path: '/dashboard/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof AuthenticatedDashboardProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/claims/': {
+      id: '/_authenticated/dashboard/claims/'
+      path: '/dashboard/claims'
+      fullPath: '/dashboard/claims/'
+      preLoaderRoute: typeof AuthenticatedDashboardClaimsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/claims/new': {
+      id: '/_authenticated/dashboard/claims/new'
+      path: '/dashboard/claims/new'
+      fullPath: '/dashboard/claims/new'
+      preLoaderRoute: typeof AuthenticatedDashboardClaimsNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/claims/$id': {
+      id: '/_authenticated/dashboard/claims/$id'
+      path: '/dashboard/claims/$id'
+      fullPath: '/dashboard/claims/$id'
+      preLoaderRoute: typeof AuthenticatedDashboardClaimsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardProfileRoute: typeof AuthenticatedDashboardProfileRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardClaimsIdRoute: typeof AuthenticatedDashboardClaimsIdRoute
+  AuthenticatedDashboardClaimsNewRoute: typeof AuthenticatedDashboardClaimsNewRoute
+  AuthenticatedDashboardClaimsIndexRoute: typeof AuthenticatedDashboardClaimsIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardProfileRoute: AuthenticatedDashboardProfileRoute,
+  AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  AuthenticatedDashboardClaimsIdRoute: AuthenticatedDashboardClaimsIdRoute,
+  AuthenticatedDashboardClaimsNewRoute: AuthenticatedDashboardClaimsNewRoute,
+  AuthenticatedDashboardClaimsIndexRoute:
+    AuthenticatedDashboardClaimsIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface AuthRouteChildren {
+  AuthForgotRoute: typeof AuthForgotRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthResetRoute: typeof AuthResetRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+  AuthVerifiedRoute: typeof AuthVerifiedRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthForgotRoute: AuthForgotRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthResetRoute: AuthResetRoute,
+  AuthSignupRoute: AuthSignupRoute,
+  AuthVerifiedRoute: AuthVerifiedRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   SplatRoute: SplatRoute,
+  AuthRoute: AuthRouteWithChildren,
   DisclaimerRoute: DisclaimerRoute,
   PrivacyRoute: PrivacyRoute,
   RefundRoute: RefundRoute,
