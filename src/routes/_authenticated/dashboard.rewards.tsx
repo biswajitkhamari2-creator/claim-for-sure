@@ -80,6 +80,9 @@ function RewardsPage() {
   }
 
   const enabled = !!config?.enabled;
+  const appreciationEnabled = !!config?.appreciation_enabled;
+  const appreciationEntries = rewards.filter((r: any) => r.program_type === "appreciation");
+  const rewardRequests = rewards.filter((r: any) => (r.program_type ?? "request") === "request");
 
   return (
     <DashboardShell>
