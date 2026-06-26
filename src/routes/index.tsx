@@ -342,6 +342,13 @@ function Footer() {
             <span className="font-display font-bold text-primary">ClaimForSure</span>
           </div>
           <p className="mt-3 text-sm text-muted-foreground">Your claim, handled with certainty.</p>
+          <p className="mt-3 text-xs text-muted-foreground">123 Business Park, Sector 15,<br />Gurugram, Haryana 122001</p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a> · <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a>
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
+          </p>
         </div>
         <FooterCol title="Services" links={["Health claims", "Motor claims", "Life claims", "Property claims"]} />
         <FooterCol title="Company" links={["About", "Process", "Contact", "Careers"]} />
