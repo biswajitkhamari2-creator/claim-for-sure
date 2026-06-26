@@ -98,6 +98,42 @@ export type Database = {
         }
         Relationships: []
       }
+      notices: {
+        Row: {
+          active: boolean
+          body: string
+          created_at: string
+          created_by: string | null
+          expires_at: string | null
+          id: string
+          title: string
+          type: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          body: string
+          created_at?: string
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          title: string
+          type?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          body?: string
+          created_at?: string
+          created_by?: string | null
+          expires_at?: string | null
+          id?: string
+          title?: string
+          type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
