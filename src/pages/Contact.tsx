@@ -113,7 +113,7 @@ const Contact = () => {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent("Hi, I need help with my insurance claim.");
-    window.open(`https://wa.me/919438463174?text=${message}`, "_blank");
+    window.open(`https://wa.me/919439572073?text=${message}`, "_blank");
   };
 
   if (isSubmitted) {
@@ -196,7 +196,7 @@ const Contact = () => {
 
                 <div className="space-y-6">
                   <a 
-                    href="tel:+919438463174"
+                    href="tel:+919439572073"
                     className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-md transition-all group"
                   >
                     <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
@@ -204,8 +204,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground mb-1">📞 Phone</h3>
-                      <p className="text-primary font-medium">+91 94384 63174</p>
                       <p className="text-primary font-medium">+91 94395 72073</p>
+                      <p className="text-primary font-medium">+91 94384 63174</p>
                       <p className="text-sm text-muted-foreground">Mon-Sat, 9am-8pm IST</p>
                     </div>
                   </a>
@@ -219,7 +219,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground mb-1">💬 WhatsApp</h3>
-                      <p className="text-green-600 font-medium">+91 94384 63174</p>
+                      <p className="text-green-600 font-medium">+91 94395 72073</p>
                       <p className="text-sm text-muted-foreground">Available 24/7 - Click to chat</p>
                     </div>
                   </button>

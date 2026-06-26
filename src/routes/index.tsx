@@ -53,7 +53,7 @@ function Header() {
         <div className="flex items-center gap-2">
           <a href="/auth/login" className="inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
           <a href="/auth/signup" className="inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
-          <a href="tel:+919438463174" className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+          <a href="tel:+919439572073" className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
             <Phone className="h-4 w-4" /> Call
           </a>
         </div>
@@ -78,8 +78,8 @@ function Hero() {
             ClaimForSure stands between you and the paperwork. Our advisors prepare, file, and follow up on your claim — so you get a fair settlement without the runaround.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <a href="tel:+919438463174" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
-              <Phone className="h-4 w-4" /> Call +91 94384 63174
+            <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
+              <Phone className="h-4 w-4" /> Call +91 94395 72073
             </a>
             <a href="#process" className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
               See how it works
@@ -312,8 +312,8 @@ function CTA() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-white/80">Free 15-minute claim review. No paperwork to start, no obligation to continue.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="tel:+919438463174" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
-            <Phone className="h-4 w-4" /> Call +91 94384 63174
+          <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
+            <Phone className="h-4 w-4" /> Call +91 94395 72073
           </a>
           <a href="mailto:support@claimforsure.in" className="inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
             support@claimforsure.in
@@ -322,8 +322,8 @@ function CTA() {
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 text-left text-sm text-white/85 md:grid-cols-3">
           <div className="rounded-xl border border-white/15 bg-white/5 p-4">
             <p className="font-semibold text-white">Phone</p>
-            <a href="tel:+919438463174" className="mt-1 block hover:text-white">+91 94384 63174</a>
-            <a href="tel:+919439572073" className="block hover:text-white">+91 94395 72073</a>
+            <a href="tel:+919439572073" className="mt-1 block hover:text-white">+91 94395 72073</a>
+            <a href="tel:+919438463174" className="block hover:text-white">+91 94384 63174</a>
           </div>
           <div className="rounded-xl border border-white/15 bg-white/5 p-4">
             <p className="font-semibold text-white">Email</p>
@@ -355,7 +355,7 @@ function Footer() {
           <p className="mt-3 text-sm italic text-muted-foreground">"We don't promise, we deliver."</p>
           <p className="mt-3 text-xs text-muted-foreground">123 Business Park, Sector 15,<br />Gurugram, Haryana 122001</p>
           <p className="mt-2 text-xs text-muted-foreground">
-            <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a> · <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a>
+            <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a> · <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
@@ -371,7 +371,7 @@ function Footer() {
           { label: "How it works", href: "#process" },
           { label: "Why us", href: "#trust" },
           { label: "FAQ", href: "#faq" },
-          { label: "Contact", href: "tel:+919438463174" },
+          { label: "Contact", href: "tel:+919439572073" },
         ]} />
         <FooterCol title="Legal" links={[
           { label: "Privacy Policy", href: "/privacy" },

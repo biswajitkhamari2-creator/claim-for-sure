@@ -100,7 +100,7 @@ const PrivacyPolicy = () => {
                   <div className="mt-4 p-4 bg-muted/50 rounded-lg">
                     <p className="text-foreground font-medium">Claim For Sure</p>
                     <p className="text-muted-foreground">Email: support@claimforsure.in</p>
-                    <p className="text-muted-foreground">Phone: +91 94384 63174 / +91 94395 72073</p>
+                    <p className="text-muted-foreground">Phone: +91 94395 72073 / +91 94384 63174</p>
                     <p className="text-sm text-primary mt-2">🎯 Connect directly to our Claim Fighter — No Bot! 🤝</p>
                   </div>
                 </div>
