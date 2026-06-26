@@ -235,6 +235,124 @@ function RebatingNotice() {
   );
 }
 
+function OffersSection() {
+  const offers = [
+    {
+      icon: Headphones,
+      tag: "Always on",
+      title: "Free lifetime claim assistance",
+      body: "Every policy bought through us comes with our specialist claim-fighting team — at no extra cost, for the full life of the policy.",
+    },
+    {
+      icon: FileSearch,
+      tag: "Before you buy",
+      title: "Free policy comparison & advisory",
+      body: "Side-by-side comparison of features, sub-limits, waiting periods and exclusions across top insurers — so you don't overpay for the wrong cover.",
+    },
+    {
+      icon: Percent,
+      tag: "Tax saving",
+      title: "Save up to ₹54,600 in tax",
+      body: "Health premiums up to ₹1,00,000 deductible u/s 80D and life premiums u/s 80C — your premium can come back as tax savings (subject to applicable law).",
+    },
+    {
+      icon: Wallet,
+      tag: "Claim Shield Wallet",
+      title: "Earn service-fee credits",
+      body: "Active policyholders earn credits redeemable only against our future claim-assistance service fee — never as cash, never against premium.",
+    },
+    {
+      icon: Clock,
+      tag: "Fast track",
+      title: "Issuance in minutes",
+      body: "Motor, Health & Travel policies issued instantly with digital KYC. No branch visits, no paperwork chase.",
+    },
+    {
+      icon: Gift,
+      tag: "Renewal benefit",
+      title: "Free annual policy health-check",
+      body: "We review your cover every year — flag gaps, suggest top-ups, and make sure your sum insured keeps pace with medical inflation.",
+    },
+  ];
+
+  return (
+    <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-secondary/40 to-background">
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 80% 20%, hsl(var(--primary)) 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+      <div className="relative mx-auto max-w-6xl px-6 py-20">
+        <div className="flex flex-col items-center text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary">
+            <Sparkles className="h-3.5 w-3.5" /> Why buy through Claim For Sure
+          </span>
+          <h2 className="mt-4 max-w-3xl font-display text-3xl font-bold md:text-4xl">
+            Real benefits the law actually allows — <em className="text-[oklch(0.55_0.18_265)]">no fake cashback gimmicks.</em>
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted-foreground">
+            IRDAI rules forbid premium rebates (Section 41) — so anyone promising you "money back on premium" is breaking the
+            law and putting your future claim at risk. Here's what we genuinely give you instead.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {offers.map((o) => {
+            const Icon = o.icon;
+            return (
+              <div key={o.title} className="group relative flex flex-col rounded-xl border border-border bg-card p-6 transition hover:-translate-y-1 hover:border-primary/40" style={{ boxShadow: "var(--shadow-soft)" }}>
+                <div className="flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className="rounded-full bg-[oklch(0.96_0.04_80)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[oklch(0.45_0.15_70)]">
+                    {o.tag}
+                  </span>
+                </div>
+                <h3 className="mt-4 font-display text-lg font-semibold leading-snug">{o.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{o.body}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          <a href={waLink("I want to buy a policy with the offers shown")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.55_0.18_142)] px-6 py-3 text-sm font-semibold text-white shadow-lg hover:scale-[1.02]">
+            <MessageCircle className="h-4 w-4" /> Claim these benefits on WhatsApp
+          </a>
+          <a href="#categories" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-medium hover:border-primary/40">
+            <ArrowRight className="h-4 w-4" /> Browse policies
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ValueAddsSection() {
+  const items = [
+    { icon: IndianRupee, title: "Premium paid directly to insurer", body: "We never collect your premium. Payment goes straight to the IRDAI-licensed insurer — fully traceable, fully refundable in free-look period." },
+    { icon: BadgeCheck, title: "POSP-certified advisor on every call", body: "Real licensed humans (POSP code visible) — no chatbots, no overseas call centres." },
+    { icon: Shield, title: "Claim escalation up to Ombudsman", body: "If a claim is wrongly rejected, our team fights it through insurer grievance, IRDAI Bima Bharosa, and the Insurance Ombudsman." },
+  ];
+  return (
+    <section className="mx-auto max-w-6xl px-6 py-16">
+      <div className="grid gap-5 md:grid-cols-3">
+        {items.map((i) => {
+          const Icon = i.icon;
+          return (
+            <div key={i.title} className="flex gap-4 rounded-xl border border-border bg-secondary/30 p-5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <Icon className="h-5 w-5" />
+              </div>
+              <div>
+                <h3 className="font-semibold">{i.title}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{i.body}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
 function CTA() {
   return (
     <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
