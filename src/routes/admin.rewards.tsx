@@ -158,6 +158,52 @@ function AdminRewards() {
     load();
   }
 
+  async function createAppreciation() {
+    if (!appForm.user_id) { toast.error("Pick a customer"); return; }
+    if (!appForm.gift_type.trim()) { toast.error("Gift type is required"); return; }
+    const { data: { user } } = await supabase.auth.getUser();
+    const payload: any = {
+      user_id: appForm.user_id,
+      program_type: "appreciation",
+      reward_type: "appreciation_gift",
+      reward_value: appForm.gift_value_inr,
+      currency: "INR",
+      status: appForm.status === "approved" || appForm.status === "shipped" || appForm.status === "delivered" ? "approved" : "pending",
+      gift_type: appForm.gift_type.trim(),
+      gift_value_inr: appForm.gift_value_inr,
+      shipping_status: appForm.status,
+      courier: appForm.courier.trim() || null,
+      awb: appForm.awb.trim() || null,
+      admin_remarks: appForm.admin_remarks.trim() || null,
+      delivered_at: appForm.status === "delivered" ? new Date().toISOString() : null,
+      decided_by: user?.id,
+      decided_at: new Date().toISOString(),
+    };
+    const { data, error } = await supabase.from("rewards" as any).insert(payload).select().single();
+    if (error) { toast.error(error.message); return; }
+    await supabase.from("rewards_audit_log" as any).insert({
+      reward_id: (data as any)?.id, actor_id: user?.id, action: "appreciation_created",
+      after_state: payload,
+    });
+    toast.success("Appreciation entry created");
+    setAppForm({ user_id: "", status: "under_review", gift_type: "", gift_value_inr: 0, courier: "", awb: "", admin_remarks: "" });
+    load();
+  }
+
+  async function updateAppreciation(r: Reward, patch: Partial<Reward>) {
+    const { data: { user } } = await supabase.auth.getUser();
+    const fullPatch: any = { ...patch };
+    if (patch.shipping_status === "delivered" && !r.delivered_at) fullPatch.delivered_at = new Date().toISOString();
+    const { error } = await supabase.from("rewards" as any).update(fullPatch).eq("id", r.id);
+    if (error) { toast.error(error.message); return; }
+    await supabase.from("rewards_audit_log" as any).insert({
+      reward_id: r.id, actor_id: user?.id, action: "appreciation_updated",
+      before_state: r, after_state: { ...r, ...fullPatch },
+    });
+    toast.success("Updated");
+    load();
+  }
+
   const stats = useMemo(() => ({
     total: rewards.length,
     pending: rewards.filter(r => r.status === "pending").length,
