@@ -95,17 +95,18 @@ function ResetPage() {
         </div>
       ) : (
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Field label="New password">
+        <Field label="New password" error={password && !passwordRe.test(password) ? "8+ chars with uppercase, lowercase, number & special character" : undefined}>
           <div className="relative">
-            <input type={show ? "text" : "password"} className={inputCx} value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type={show ? "text" : "password"} className={inputCx} value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" />
             <button type="button" onClick={() => setShow((s) => !s)} className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1.5 text-white/60 hover:text-white">
               {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
             </button>
           </div>
         </Field>
-        <Field label="Confirm password">
-          <input type={show ? "text" : "password"} className={inputCx} value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+        <Field label="Confirm password" error={confirm && password !== confirm ? "Passwords do not match" : undefined}>
+          <input type={show ? "text" : "password"} className={inputCx} value={confirm} onChange={(e) => setConfirm(e.target.value)} autoComplete="new-password" />
         </Field>
+        <p className="text-xs text-white/60">Must be 8+ characters and include uppercase, lowercase, a number, and a special character (e.g. <code>!@#$%</code>).</p>
         <button type="submit" disabled={loading} className={btnPrimary}>
           {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Update password"}
         </button>
