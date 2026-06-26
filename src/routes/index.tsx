@@ -412,3 +412,113 @@ function FooterCol({ title, links }: { title: string; links: { label: string; hr
     </div>
   );
 }
+
+function AppreciationSection() {
+  const [enabled, setEnabled] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase
+        .from("rewards_config" as any)
+        .select("appreciation_enabled")
+        .limit(1)
+        .maybeSingle();
+      setEnabled(Boolean((data as any)?.appreciation_enabled));
+    })();
+  }, []);
+
+  if (enabled === false || enabled === null) return null;
+
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, oklch(0.22 0.05 265) 0%, oklch(0.34 0.07 265) 55%, oklch(0.96 0.025 80) 100%)" }}
+    >
+      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: "radial-gradient(circle at 15% 25%, white 1px, transparent 1px)", backgroundSize: "30px 30px" }} />
+      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-2 md:items-center md:py-28">
+        {/* Copy */}
+        <div className="text-white animate-fade-in">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.14_80)]/40 bg-[oklch(0.82_0.14_80)]/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[oklch(0.92_0.1_80)]">
+            <Sparkles className="h-3.5 w-3.5" /> Surprise Gift
+          </span>
+          <h2 className="mt-5 font-display text-3xl font-bold leading-tight md:text-4xl lg:text-5xl">
+            Customer Appreciation Program
+          </h2>
+          <p className="mt-5 max-w-xl text-white/85 md:text-lg">
+            At <strong>ClaimForSure</strong>, we value every customer. From time to time, eligible customers may receive
+            exclusive appreciation gifts or surprise rewards as a token of gratitude. Eligibility, selection criteria, and
+            availability are determined solely by ClaimForSure and are subject to our Terms &amp; Conditions.
+          </p>
+          <div className="mt-7 flex flex-wrap gap-3">
+            <Link to="/appreciation" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-5 py-2.5 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg transition hover:scale-[1.02]">
+              <Gift className="h-4 w-4" /> Learn More
+            </Link>
+            <Link to="/dashboard/rewards" className="inline-flex items-center gap-2 rounded-md border border-white/25 bg-white/5 px-5 py-2.5 text-sm font-medium text-white backdrop-blur hover:bg-white/10">
+              View My Status <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <p className="mt-8 max-w-xl text-[11px] leading-relaxed text-white/65">
+            <strong className="text-white/85">Disclaimer:</strong> Any appreciation gift is entirely discretionary, subject to
+            eligibility, availability, applicable laws, and our Terms &amp; Conditions. It is not guaranteed with the purchase
+            of any insurance product.
+          </p>
+        </div>
+
+        {/* Glass gift card */}
+        <div className="relative animate-fade-in" style={{ animationDelay: "0.15s" }}>
+          <div
+            className="group relative mx-auto max-w-sm rounded-3xl border border-white/25 bg-white/10 p-8 text-center text-white backdrop-blur-xl transition hover:-translate-y-1"
+            style={{ boxShadow: "0 30px 80px -20px oklch(0.15 0.05 265 / 0.6), inset 0 1px 0 rgba(255,255,255,0.2)" }}
+          >
+            <GiftBoxArt />
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-[oklch(0.92_0.1_80)]">By Invitation</p>
+            <p className="mt-3 font-display text-xl font-semibold leading-snug">
+              A small thank-you, hand-picked by us
+            </p>
+            <p className="mt-2 text-sm text-white/75">
+              No application. No queue. Just gratitude — if and when it's your turn.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function GiftBoxArt() {
+  return (
+    <div className="relative mx-auto h-32 w-32">
+      <style>{`
+        @keyframes cfs-lid { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-6px) rotate(-3deg); } }
+        @keyframes cfs-shimmer { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+        @keyframes cfs-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+        .cfs-gift { animation: cfs-float 4s ease-in-out infinite; }
+        .cfs-gift .lid { transform-origin: center bottom; animation: cfs-lid 5s ease-in-out infinite; }
+        .cfs-gift .ribbon { animation: cfs-shimmer 2.6s ease-in-out infinite; }
+      `}</style>
+      <svg viewBox="0 0 128 128" className="cfs-gift h-full w-full drop-shadow-2xl" fill="none">
+        {/* box body */}
+        <rect x="20" y="56" width="88" height="58" rx="6" fill="oklch(0.82 0.14 80)" />
+        <rect x="58" y="56" width="12" height="58" fill="oklch(0.7 0.16 60)" />
+        {/* lid */}
+        <g className="lid">
+          <rect x="14" y="44" width="100" height="20" rx="4" fill="oklch(0.88 0.14 82)" />
+          <rect x="58" y="44" width="12" height="20" fill="oklch(0.7 0.16 60)" />
+        </g>
+        {/* bow */}
+        <g className="ribbon" transform="translate(64 44)">
+          <ellipse cx="-10" cy="0" rx="10" ry="7" fill="oklch(0.7 0.16 60)" />
+          <ellipse cx="10" cy="0" rx="10" ry="7" fill="oklch(0.7 0.16 60)" />
+          <circle cx="0" cy="0" r="4.5" fill="oklch(0.6 0.18 55)" />
+        </g>
+        {/* sparkles */}
+        <g className="ribbon" fill="white">
+          <circle cx="22" cy="34" r="1.6" />
+          <circle cx="104" cy="30" r="2" />
+          <circle cx="110" cy="70" r="1.4" />
+          <circle cx="18" cy="84" r="1.4" />
+        </g>
+      </svg>
+    </div>
+  );
+}
