@@ -51,9 +51,10 @@ function Header() {
           <a href="#faq" className="hover:text-foreground">FAQ</a>
         </nav>
         <div className="flex items-center gap-2">
-          <a href="/auth/login" className="inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
-          <a href="/auth/signup" className="inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
-          <a href="tel:+919439572073" className="hidden sm:inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90">
+          <a href="/policies" className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90">Buy Insurance</a>
+          <a href="/auth/login" className="hidden sm:inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
+          <a href="/auth/signup" className="hidden sm:inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
+          <a href="tel:+919439572073" className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-muted">
             <Phone className="h-4 w-4" /> Call
           </a>
         </div>
