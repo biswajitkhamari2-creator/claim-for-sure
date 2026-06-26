@@ -1,5 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Shield, CheckCircle2, Lock, Scale, Phone, FileCheck, Clock, Award, ArrowRight, Star } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { Shield, CheckCircle2, Lock, Scale, Phone, FileCheck, Clock, Award, ArrowRight, Star, Gift, Sparkles } from "lucide-react";
 import logoAsset from "@/assets/claim-for-sure-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
