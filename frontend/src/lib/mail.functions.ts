@@ -20,6 +20,25 @@ export const sendMail = createServerFn({ method: "POST" })
         if (!isLocal) return "";
         return `http://${host}:8000`;
       }
+      
+      const env = typeof process !== "undefined" ? process.env : {};
+      const metaEnv = typeof import.meta !== "undefined" && import.meta.env ? import.meta.env : {};
+      
+      const vercelProdUrl = env.VERCEL_PROJECT_PRODUCTION_URL || metaEnv.VERCEL_PROJECT_PRODUCTION_URL;
+      if (vercelProdUrl) {
+        return `https://${vercelProdUrl}`;
+      }
+      
+      const vercelUrl = env.VERCEL_URL || metaEnv.VERCEL_URL;
+      if (vercelUrl) {
+        return `https://${vercelUrl}`;
+      }
+      
+      const customUrl = env.VITE_PHP_BACKEND || metaEnv.VITE_PHP_BACKEND || env.VITE_API_BASE_URL || metaEnv.VITE_API_BASE_URL;
+      if (customUrl) {
+        return customUrl;
+      }
+      
       return "http://localhost:8000";
     };
     const BASE = getApiBaseUrl();
