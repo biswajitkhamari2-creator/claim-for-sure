@@ -1,0 +1,13 @@
+.env
+.env.*
+.env.local
+.env.production
+**/.env
+**/.env.*
+**/.env.local
+**/.env.production
+.git
+node_modules
+dist
+.output
+.nitro

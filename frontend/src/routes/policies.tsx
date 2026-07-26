@@ -19,7 +19,7 @@ export const Route = createFileRoute("/policies")({
 
 const POSP_CODE = "EI00349540";
 const PRINCIPAL = "RenewBuy (D2C Insurance Broking Pvt. Ltd.)";
-const WA = "919439572073";
+const WA = "919439151934";
 type Category = {
   slug: string;
   icon: typeof Heart;
@@ -119,7 +119,7 @@ function Header() {
           <a href="#categories" className="font-semibold text-foreground">Buy Insurance</a>
           <a href="/#services" className="hover:text-foreground">Claim Help</a>
         </nav>
-        <a href="tel:+919439572073" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
+        <a href="tel:+919439151934" className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3.5 py-2 text-sm font-medium text-primary-foreground hover:opacity-90">
           <Phone className="h-4 w-4" /> Call
         </a>
       </div>
@@ -253,7 +253,7 @@ function ContactPanel({ request, onClose }: { request: ContactRequest; onClose: 
         </div>
 
         <p className="mt-4 text-xs text-muted-foreground">
-          If WhatsApp is blocked in preview, call directly or copy this message and send it to +91 94395 72073.
+          If WhatsApp is blocked in preview, call directly or copy this message and send it to +91 94391 51934.
         </p>
       </div>
     </div>
@@ -406,8 +406,8 @@ function CTA({ onContact }: { onContact: (title: string) => void }) {
         <h2 className="font-display text-3xl font-bold md:text-4xl">Not sure which policy you need?</h2>
         <p className="mt-4 text-white/80">Talk to a licensed advisor. No obligation, no spam.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg hover:scale-[1.02]">
-            <Phone className="h-4 w-4" /> Call +91 94395 72073
+          <a href="tel:+919439151934" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.78_0.14_78)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg hover:scale-[1.02]">
+            <Phone className="h-4 w-4" /> Call +91 94391 51934
           </a>
           <button type="button" onClick={() => onContact("a policy recommendation")} className="inline-flex items-center gap-2 rounded-md border border-white/25 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
             <MessageCircle className="h-4 w-4" /> Get recommendation

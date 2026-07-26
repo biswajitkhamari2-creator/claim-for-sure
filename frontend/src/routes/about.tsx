@@ -247,9 +247,9 @@ function ReachUs() {
         <h2 className="font-display text-2xl font-extrabold text-[#0B3D91] md:text-3xl">Talk to our team</h2>
         <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-slate-600">
           WhatsApp / Call:{" "}
-          <a href="tel:+919439572073" className="font-semibold text-[#0B3D91] hover:underline">+91 94395 72073</a>{" "}
+          <a href="tel:+919439151934" className="font-semibold text-[#0B3D91] hover:underline">+91 94391 51934</a>{" "}
           or{" "}
-          <a href="tel:+919438463174" className="font-semibold text-[#0B3D91] hover:underline">+91 94384 63174</a>.
+          <a href="tel:+918144503650" className="font-semibold text-[#0B3D91] hover:underline">+91 81445 03650</a>.
           We operate only through phone, WhatsApp, and email — please verify any other channel claiming our name.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">

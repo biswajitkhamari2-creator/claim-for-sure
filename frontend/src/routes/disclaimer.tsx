@@ -31,8 +31,8 @@ function DisclaimerPage() {
         </p>
         <ul className="ml-5 mt-2 list-disc space-y-1">
           <li><strong>Email:</strong> support@claimforsure.in</li>
-          <li><strong>Phone:</strong> +91 94395 72073 / +91 94384 63174</li>
-          <li><strong>WhatsApp:</strong> +91 94395 72073</li>
+          <li><strong>Phone:</strong> +91 94391 51934 / +91 81445 03650</li>
+          <li><strong>WhatsApp:</strong> +91 94391 51934</li>
         </ul>
       </Callout>
 

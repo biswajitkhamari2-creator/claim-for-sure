@@ -100,7 +100,7 @@ function AppreciationPage() {
           <Link to="/dashboard/rewards" className="inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg hover:opacity-90">
             <Gift className="h-4 w-4" /> Sign in to view your status <ArrowRight className="h-4 w-4" />
           </Link>
-          <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-medium hover:bg-muted">
+          <a href="tel:+919439151934" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-6 py-3 text-sm font-medium hover:bg-muted">
             <Phone className="h-4 w-4" /> Talk to support
           </a>
         </section>

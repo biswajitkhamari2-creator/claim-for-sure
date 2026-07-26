@@ -65,7 +65,7 @@ function ClaimHelp() {
         <div className="mt-12 rounded-xl bg-primary p-8 text-primary-foreground">
           <h2 className="font-display text-xl font-bold">Not sure if you have a case?</h2>
           <p className="mt-2 text-sm opacity-90">Send us your rejection letter — first review is free.</p>
-          <a href="https://wa.me/919439572073" className="mt-5 inline-flex rounded-md bg-background px-4 py-2 text-sm font-semibold text-foreground">
+          <a href="https://wa.me/919439151934" className="mt-5 inline-flex rounded-md bg-background px-4 py-2 text-sm font-semibold text-foreground">
             WhatsApp us
           </a>
         </div>

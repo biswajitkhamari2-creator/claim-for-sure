@@ -172,7 +172,7 @@ function ClaimRejected() {
           </p>
           <div className="mt-5 flex flex-wrap gap-3">
             <a
-              href="https://wa.me/919439572073"
+              href="https://wa.me/919439151934"
               className="inline-flex rounded-md bg-background px-4 py-2 text-sm font-semibold text-foreground"
             >
               WhatsApp us

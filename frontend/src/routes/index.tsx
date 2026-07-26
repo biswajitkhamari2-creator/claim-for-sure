@@ -114,7 +114,7 @@ function Header() {
           <Link to="/policies" className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-xs sm:text-sm font-semibold text-primary-foreground hover:opacity-90">Buy Insurance</Link>
           <a href="/auth/login" className="hidden sm:inline-flex items-center rounded-md border border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground hover:bg-muted">Login</a>
           <a href="/auth/signup" className="hidden sm:inline-flex items-center rounded-md bg-foreground/90 px-3 py-2 text-xs sm:text-sm font-medium text-background hover:bg-foreground">Sign up</a>
-          <a href="tel:+919439572073" className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-muted">
+          <a href="tel:+919439151934" className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-border px-3 py-2 text-sm font-medium hover:bg-muted">
             <Phone className="h-4 w-4" /> Call
           </a>
         </div>
@@ -567,8 +567,8 @@ function CTA() {
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-white/80">Free 15-minute claim review. No paperwork to start, no obligation to continue.</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="tel:+919439572073" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
-            <Phone className="h-4 w-4" /> Call +91 94395 72073
+          <a href="tel:+919439151934" className="inline-flex items-center gap-2 rounded-md bg-[oklch(0.82_0.14_80)] px-6 py-3 text-sm font-semibold text-[oklch(0.2_0.05_265)] shadow-lg">
+            <Phone className="h-4 w-4" /> Call +91 94391 51934
           </a>
           <a href="mailto:support@claimforsure.in" className="inline-flex items-center gap-2 rounded-md border border-white/30 px-6 py-3 text-sm font-medium text-white hover:bg-white/10">
             support@claimforsure.in
@@ -577,8 +577,8 @@ function CTA() {
         <div className="mx-auto mt-10 grid max-w-3xl gap-4 text-left text-sm text-white/85 md:grid-cols-3">
           <div className="rounded-xl border border-white/15 bg-white/5 p-4">
             <p className="font-semibold text-white">Phone</p>
-            <a href="tel:+919439572073" className="mt-1 block hover:text-white">+91 94395 72073</a>
-            <a href="tel:+919438463174" className="block hover:text-white">+91 94384 63174</a>
+            <a href="tel:+919439151934" className="mt-1 block hover:text-white">+91 94391 51934</a>
+            <a href="tel:+918144503650" className="block hover:text-white">+91 81445 03650</a>
           </div>
           <div className="rounded-xl border border-white/15 bg-white/5 p-4">
             <p className="font-semibold text-white">Email</p>
@@ -608,7 +608,7 @@ function Footer() {
           <p className="mt-3 text-xs text-muted-foreground"><span className="font-semibold text-foreground">Head Office:</span><br />AT - 21/C, Near Government Primary School, Sankarakhole, Dist. Kandhamal, Odisha - 762019</p>
           <p className="mt-2 text-xs text-muted-foreground"><span className="font-semibold text-foreground">Branch Office:</span><br />B1/G8, Ground Floor, Rose IT Solutions, Mohan Cooperative Industrial Estate, New Delhi 110044</p>
           <p className="mt-2 text-xs text-muted-foreground">
-            <a href="tel:+919439572073" className="hover:text-primary">+91 94395 72073</a> · <a href="tel:+919438463174" className="hover:text-primary">+91 94384 63174</a>
+            <a href="tel:+919439151934" className="hover:text-primary">+91 94391 51934</a> · <a href="tel:+918144503650" className="hover:text-primary">+91 81445 03650</a>
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             <a href="mailto:support@claimforsure.in" className="hover:text-primary">support@claimforsure.in</a>
@@ -630,7 +630,7 @@ function Footer() {
           { label: "How it works", href: "#process" },
           { label: "Why us", href: "#trust" },
           { label: "FAQ", href: "#faq" },
-          { label: "Contact", href: "tel:+919439572073" },
+          { label: "Contact", href: "tel:+919439151934" },
         ]} />
         <FooterCol title="Legal" links={[
           { label: "Privacy Policy", href: "/privacy" },
