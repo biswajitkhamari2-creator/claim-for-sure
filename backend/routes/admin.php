@@ -8,4 +8,6 @@ return [
     'PATCH /api/admin/users/{id}'    => ['AdminController', 'toggleUser'],
     'GET /api/admin/claims'          => ['AdminController', 'claims'],
     'POST /api/admin/send-mail'      => ['AdminController', 'sendMail'],
+    'GET /api/admin/leads'           => ['LeadController', 'getLeads'],
+    'PATCH /api/admin/leads/{id}/status' => ['LeadController', 'updateStatus'],
 ];

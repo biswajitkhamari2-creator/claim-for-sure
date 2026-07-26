@@ -14,6 +14,8 @@ return [
     'POST /api/storage/upload'       => ['DbController', 'uploadStorage'],
     'GET /api/storage/download'      => ['DbController', 'downloadStorage'],
 
+    'POST /api/leads'                => ['LeadController', 'submit'],
+    
     'POST /api/claims'               => ['ClaimController', 'create'],
     'GET /api/claims'                => ['ClaimController', 'listMine'],
     'GET /api/claims/{id}'           => ['ClaimController', 'view'],
