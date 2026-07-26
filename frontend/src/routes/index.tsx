@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Shield, CheckCircle2, Lock, Scale, Phone, FileCheck, Clock, Award, ArrowRight, Star, Gift, Sparkles, FileText, ShieldCheck, Eye, HeartHandshake } from "lucide-react";
 import WhyBuyThroughUsSection from "@/components/home/WhyBuyThroughUsSection";
 import { BrandLockup } from "@/components/BrandLockup";
-import grandfatherChild from "@/assets/grandfather-child.jpg";
+import { LeadForm } from "@/components/leads/LeadForm";
 
 function TypeEraseText({ text, className = "" }: { text: string; className?: string }) {
   const [shown, setShown] = useState("");
@@ -225,33 +225,19 @@ function Hero() {
         </div>
 
         {/* Cinematic scene */}
-        <HeroScene />
+        <HeroForm />
       </div>
     </section>
   );
 }
 
-function HeroScene() {
+function HeroForm() {
   return (
     <div className="relative mx-auto w-full max-w-[480px] cfs-rise" style={{ animationDelay: "0.2s" }}>
-      <div className="relative overflow-hidden rounded-3xl shadow-2xl shadow-[#0B3D91]/25 ring-1 ring-white/60">
-        <img
-          src={grandfatherChild}
-          alt="Grandfather playfully tossing his grandchild — the family moments we help protect"
-          width={1024}
-          height={1024}
-          className="h-auto w-full object-cover"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0B3D91]/70 via-transparent to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <p className="font-display text-lg font-semibold leading-snug text-white drop-shadow">
-            Protecting the moments that matter most.
-          </p>
-          <p className="mt-1 text-xs text-white/85">Because every family deserves certainty.</p>
-        </div>
-        <span className="absolute -right-3 -top-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#16A34A] text-white shadow-lg ring-4 ring-white">
-          <Shield className="h-5 w-5" />
-        </span>
+      <div className="relative overflow-hidden rounded-3xl bg-white p-6 md:p-8 shadow-2xl shadow-[#0B3D91]/25 ring-1 ring-[#0B3D91]/10">
+        <h2 className="text-xl md:text-2xl font-bold text-[#0B3D91] mb-2">Request Free Callback</h2>
+        <p className="text-sm text-slate-500 mb-6">Our experts will call you shortly to assess your case for free.</p>
+        <LeadForm />
       </div>
     </div>
   );
