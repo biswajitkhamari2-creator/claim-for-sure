@@ -48,7 +48,7 @@ final class LeadController
             ]);
             
             // Send admin notification
-            $adminEmail = $_ENV['ADMIN_EMAIL'] ?? 'admin@claimforsure.com';
+            $adminEmail = $_ENV['ADMIN_EMAIL'] ?? 'support@claimforsure.in';
             $subject = "New Claim Assessment Lead: " . $fullName;
             $htmlBody = "<h3>New Free Claim Assessment Request</h3>
                          <p><strong>Name:</strong> " . htmlspecialchars($fullName) . "</p>
