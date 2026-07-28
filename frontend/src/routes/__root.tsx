@@ -86,7 +86,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "ClaimForSure" },
       { property: "og:locale", content: "en_IN" },
-      { property: "og:url", content: "https://www.claimforsure.in" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@ClaimForSure" },
     ],
