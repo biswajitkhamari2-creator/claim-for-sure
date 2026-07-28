@@ -16,29 +16,48 @@ export const Route = createFileRoute("/claim-help")({
     meta: [
       { title: "Insurance Claim Help — Every Category | ClaimForSure" },
       { name: "description", content: "Expert help for health, motor, life, home, travel & accident insurance claims in India. Rejected, delayed or underpaid — we appeal and recover it." },
-      { property: "og:title", content: "Insurance Claim Help — Every Category" },
+      { name: "keywords", content: "insurance claim help, health insurance claim, motor claim recovery, life insurance claim help, IRDAI ombudsman claim assistance" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Insurance Claim Help — Every Category | ClaimForSure" },
       { property: "og:description", content: "Help with rejected, delayed, and underpaid insurance claims across every category." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/claim-help" },
+      { property: "og:url", content: "https://www.claimforsure.in/claim-help" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/claim-help" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Service",
-        serviceType: "Insurance Claim Assistance",
-        provider: { "@id": "https://connect-brite.lovable.app/#organization" },
-        areaServed: { "@type": "Country", name: "India" },
-        hasOfferCatalog: {
-          "@type": "OfferCatalog",
-          name: "Claim categories",
-          itemListElement: CATS.map((c) => ({
-            "@type": "Offer",
-            itemOffered: { "@type": "Service", name: c.title, description: c.desc },
-          })),
-        },
-      }),
-    }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/claim-help" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Insurance Claim Assistance",
+          provider: { "@id": "https://www.claimforsure.in/#organization" },
+          areaServed: { "@type": "Country", name: "India" },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Claim categories",
+            itemListElement: CATS.map((c) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name: c.title, description: c.desc },
+            })),
+          },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Claim Help", item: "https://www.claimforsure.in/claim-help" },
+          ],
+        }),
+      },
+    ],
   }),
   component: ClaimHelp,
 });

@@ -14,25 +14,44 @@ export const Route = createFileRoute("/how-it-works")({
     meta: [
       { title: "How ClaimForSure Works — From Rejection to Recovery" },
       { name: "description", content: "Our 4-step process for handling rejected and delayed insurance claims: free review, document preparation, insurer escalation, and final resolution." },
-      { property: "og:title", content: "How ClaimForSure Works" },
+      { name: "keywords", content: "how insurance claim help works, claim recovery process, IRDAI ombudsman appeal process" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "How ClaimForSure Works — From Rejection to Recovery" },
       { property: "og:description", content: "From free case review to insurer escalation and final claim recovery — see our 4-step process." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/how-it-works" },
+      { property: "og:url", content: "https://www.claimforsure.in/how-it-works" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/how-it-works" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "HowTo",
-        name: "How to recover a rejected insurance claim with ClaimForSure",
-        step: STEPS.map((s, i) => ({
-          "@type": "HowToStep",
-          position: i + 1,
-          name: s.title,
-          text: s.desc,
-        })),
-      }),
-    }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/how-it-works" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          name: "How to recover a rejected insurance claim with ClaimForSure",
+          step: STEPS.map((s, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            name: s.title,
+            text: s.desc,
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "How It Works", item: "https://www.claimforsure.in/how-it-works" },
+          ],
+        }),
+      },
+    ],
   }),
   component: HowItWorks,
 });

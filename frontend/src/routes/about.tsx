@@ -5,22 +5,41 @@ import { Shield, HandHeart, FileText, TrendingUp, Sparkles, Quote, ArrowRight, M
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About ClaimForSure — A Sidheswar Enterprises Initiative" },
+      { title: "About ClaimForSure — Sidheswar Enterprises Initiative" },
       { name: "description", content: "ClaimForSure is a Sidheswar Enterprises initiative helping Indian policyholders recover rejected and delayed insurance claims with transparent fees and expert support." },
-      { property: "og:title", content: "About ClaimForSure" },
+      { name: "keywords", content: "about ClaimForSure, Sidheswar Enterprises, insurance claim company India, claim settlement experts" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "About ClaimForSure — Sidheswar Enterprises Initiative" },
       { property: "og:description", content: "Who we are, what we stand for, and how we help Indian policyholders win insurance claims." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/about" },
+      { property: "og:url", content: "https://www.claimforsure.in/about" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/about" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "AboutPage",
-        url: "https://connect-brite.lovable.app/about",
-        mainEntity: { "@id": "https://connect-brite.lovable.app/#organization" },
-      }),
-    }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/about" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AboutPage",
+          url: "https://www.claimforsure.in/about",
+          mainEntity: { "@id": "https://www.claimforsure.in/#organization" },
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "About Us", item: "https://www.claimforsure.in/about" },
+          ],
+        }),
+      },
+    ],
   }),
   component: AboutPage,
 });

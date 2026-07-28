@@ -37,23 +37,42 @@ export const Route = createFileRoute("/faq")({
     meta: [
       { title: "Insurance Claim FAQs — ClaimForSure" },
       { name: "description", content: "Answers to the most common questions about insurance claim help, rejected claims, fees, timelines, and the insurers we work with." },
+      { name: "keywords", content: "insurance claim FAQ, rejected claim questions, insurance ombudsman process FAQ, ClaimForSure FAQs" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { property: "og:title", content: "Insurance Claim FAQs — ClaimForSure" },
       { property: "og:description", content: "Common questions about insurance claim assistance, rejected claims, fees, and timelines." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/faq" },
+      { property: "og:url", content: "https://www.claimforsure.in/faq" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/faq" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        mainEntity: FAQS.map((f) => ({
-          "@type": "Question",
-          name: f.q,
-          acceptedAnswer: { "@type": "Answer", text: f.a },
-        })),
-      }),
-    }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/faq" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "FAQ", item: "https://www.claimforsure.in/faq" },
+          ],
+        }),
+      },
+    ],
   }),
   component: FAQPage,
 });

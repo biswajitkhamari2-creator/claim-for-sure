@@ -9,55 +9,136 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ServiceAgreementRouteImport } from './routes/service-agreement'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as RefundRouteImport } from './routes/refund'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as InsuranceClaimRejectedRouteImport } from './routes/insurance-claim-rejected'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as FreeClaimAssessmentSuccessRouteImport } from './routes/free-claim-assessment-success'
+import { Route as FreeClaimAssessmentRouteImport } from './routes/free-claim-assessment'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as DisclaimerRouteImport } from './routes/disclaimer'
+import { Route as ClaimHelpRouteImport } from './routes/claim-help'
+import { Route as AppreciationRouteImport } from './routes/appreciation'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AppreciationRouteImport } from './routes/appreciation'
-import { Route as ClaimHelpRouteImport } from './routes/claim-help'
-import { Route as DisclaimerRouteImport } from './routes/disclaimer'
-import { Route as FaqRouteImport } from './routes/faq'
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
-import { Route as FreeClaimAssessmentRouteImport } from './routes/free-claim-assessment'
-import { Route as FreeClaimAssessmentSuccessRouteImport } from './routes/free-claim-assessment-success'
-import { Route as HowItWorksRouteImport } from './routes/how-it-works'
-import { Route as InsuranceClaimRejectedRouteImport } from './routes/insurance-claim-rejected'
-import { Route as PoliciesRouteImport } from './routes/policies'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as RefundRouteImport } from './routes/refund'
-import { Route as ResetPasswordRouteImport } from './routes/reset-password'
-import { Route as ServiceAgreementRouteImport } from './routes/service-agreement'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as TermsRouteImport } from './routes/terms'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminInvoicesRouteImport } from './routes/admin.invoices'
-import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
-import { Route as AdminMailTestRouteImport } from './routes/admin.mail-test'
-import { Route as AdminNoticesRouteImport } from './routes/admin.notices'
-import { Route as AdminPayoutsRouteImport } from './routes/admin.payouts'
-import { Route as AdminPromocodesRouteImport } from './routes/admin.promocodes'
-import { Route as AdminRewardsRouteImport } from './routes/admin.rewards'
-import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
-import { Route as AuthLoginRouteImport } from './routes/auth.login'
-import { Route as AuthResetRouteImport } from './routes/auth.reset'
-import { Route as AuthSignupRouteImport } from './routes/auth.signup'
-import { Route as AuthVerifiedRouteImport } from './routes/auth.verified'
 import { Route as AuthVerifyRouteImport } from './routes/auth.verify'
+import { Route as AuthVerifiedRouteImport } from './routes/auth.verified'
+import { Route as AuthSignupRouteImport } from './routes/auth.signup'
+import { Route as AuthResetRouteImport } from './routes/auth.reset'
+import { Route as AuthLoginRouteImport } from './routes/auth.login'
+import { Route as AuthForgotRouteImport } from './routes/auth.forgot'
+import { Route as AdminRewardsRouteImport } from './routes/admin.rewards'
+import { Route as AdminPromocodesRouteImport } from './routes/admin.promocodes'
+import { Route as AdminPayoutsRouteImport } from './routes/admin.payouts'
+import { Route as AdminNoticesRouteImport } from './routes/admin.notices'
+import { Route as AdminMailTestRouteImport } from './routes/admin.mail-test'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminInvoicesRouteImport } from './routes/admin.invoices'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
-import { Route as AuthenticatedDashboardInvoicesRouteImport } from './routes/_authenticated/dashboard.invoices'
-import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
 import { Route as AuthenticatedDashboardRewardsRouteImport } from './routes/_authenticated/dashboard.rewards'
-import { Route as AuthenticatedDashboardAgreementClaimIdRouteImport } from './routes/_authenticated/dashboard.agreement.$claimId'
+import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard.profile'
+import { Route as AuthenticatedDashboardInvoicesRouteImport } from './routes/_authenticated/dashboard.invoices'
 import { Route as AuthenticatedDashboardClaimsIndexRouteImport } from './routes/_authenticated/dashboard.claims.index'
-import { Route as AuthenticatedDashboardClaimsIdRouteImport } from './routes/_authenticated/dashboard.claims.$id'
-import { Route as AuthenticatedDashboardClaimsNewRouteImport } from './routes/_authenticated/dashboard.claims.new'
-import { Route as AuthenticatedDashboardDeclareClaimIdRouteImport } from './routes/_authenticated/dashboard.declare.$claimId'
 import { Route as AuthenticatedDashboardPayClaimIdRouteImport } from './routes/_authenticated/dashboard.pay.$claimId'
+import { Route as AuthenticatedDashboardDeclareClaimIdRouteImport } from './routes/_authenticated/dashboard.declare.$claimId'
+import { Route as AuthenticatedDashboardClaimsNewRouteImport } from './routes/_authenticated/dashboard.claims.new'
+import { Route as AuthenticatedDashboardClaimsIdRouteImport } from './routes/_authenticated/dashboard.claims.$id'
+import { Route as AuthenticatedDashboardAgreementClaimIdRouteImport } from './routes/_authenticated/dashboard.agreement.$claimId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServiceAgreementRoute = ServiceAgreementRouteImport.update({
+  id: '/service-agreement',
+  path: '/service-agreement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RefundRoute = RefundRouteImport.update({
+  id: '/refund',
+  path: '/refund',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsuranceClaimRejectedRoute = InsuranceClaimRejectedRouteImport.update({
+  id: '/insurance-claim-rejected',
+  path: '/insurance-claim-rejected',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FreeClaimAssessmentSuccessRoute =
+  FreeClaimAssessmentSuccessRouteImport.update({
+    id: '/free-claim-assessment-success',
+    path: '/free-claim-assessment-success',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FreeClaimAssessmentRoute = FreeClaimAssessmentRouteImport.update({
+  id: '/free-claim-assessment',
+  path: '/free-claim-assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DisclaimerRoute = DisclaimerRouteImport.update({
+  id: '/disclaimer',
+  path: '/disclaimer',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClaimHelpRoute = ClaimHelpRouteImport.update({
+  id: '/claim-help',
+  path: '/claim-help',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppreciationRoute = AppreciationRouteImport.update({
+  id: '/appreciation',
+  path: '/appreciation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SplatRoute = SplatRouteImport.update({
@@ -69,90 +150,9 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppreciationRoute = AppreciationRouteImport.update({
-  id: '/appreciation',
-  path: '/appreciation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ClaimHelpRoute = ClaimHelpRouteImport.update({
-  id: '/claim-help',
-  path: '/claim-help',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DisclaimerRoute = DisclaimerRouteImport.update({
-  id: '/disclaimer',
-  path: '/disclaimer',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FaqRoute = FaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FreeClaimAssessmentRoute = FreeClaimAssessmentRouteImport.update({
-  id: '/free-claim-assessment',
-  path: '/free-claim-assessment',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FreeClaimAssessmentSuccessRoute =
-  FreeClaimAssessmentSuccessRouteImport.update({
-    id: '/free-claim-assessment-success',
-    path: '/free-claim-assessment-success',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const HowItWorksRoute = HowItWorksRouteImport.update({
-  id: '/how-it-works',
-  path: '/how-it-works',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InsuranceClaimRejectedRoute = InsuranceClaimRejectedRouteImport.update({
-  id: '/insurance-claim-rejected',
-  path: '/insurance-claim-rejected',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoliciesRoute = PoliciesRouteImport.update({
-  id: '/policies',
-  path: '/policies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RefundRoute = RefundRouteImport.update({
-  id: '/refund',
-  path: '/refund',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResetPasswordRoute = ResetPasswordRouteImport.update({
-  id: '/reset-password',
-  path: '/reset-password',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServiceAgreementRoute = ServiceAgreementRouteImport.update({
-  id: '/service-agreement',
-  path: '/service-agreement',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TermsRoute = TermsRouteImport.update({
-  id: '/terms',
-  path: '/terms',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -160,64 +160,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminInvoicesRoute = AdminInvoicesRouteImport.update({
-  id: '/admin/invoices',
-  path: '/admin/invoices',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLeadsRoute = AdminLeadsRouteImport.update({
-  id: '/admin/leads',
-  path: '/admin/leads',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminLoginRoute = AdminLoginRouteImport.update({
-  id: '/admin/login',
-  path: '/admin/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminMailTestRoute = AdminMailTestRouteImport.update({
-  id: '/admin/mail-test',
-  path: '/admin/mail-test',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminNoticesRoute = AdminNoticesRouteImport.update({
-  id: '/admin/notices',
-  path: '/admin/notices',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminPayoutsRoute = AdminPayoutsRouteImport.update({
-  id: '/admin/payouts',
-  path: '/admin/payouts',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminPromocodesRoute = AdminPromocodesRouteImport.update({
-  id: '/admin/promocodes',
-  path: '/admin/promocodes',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRewardsRoute = AdminRewardsRouteImport.update({
-  id: '/admin/rewards',
-  path: '/admin/rewards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthForgotRoute = AuthForgotRouteImport.update({
-  id: '/auth/forgot',
-  path: '/auth/forgot',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthLoginRoute = AuthLoginRouteImport.update({
-  id: '/auth/login',
-  path: '/auth/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthResetRoute = AuthResetRouteImport.update({
-  id: '/auth/reset',
-  path: '/auth/reset',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AuthSignupRoute = AuthSignupRouteImport.update({
-  id: '/auth/signup',
-  path: '/auth/signup',
+const AuthVerifyRoute = AuthVerifyRouteImport.update({
+  id: '/auth/verify',
+  path: '/auth/verify',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthVerifiedRoute = AuthVerifiedRouteImport.update({
@@ -225,9 +170,64 @@ const AuthVerifiedRoute = AuthVerifiedRouteImport.update({
   path: '/auth/verified',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthVerifyRoute = AuthVerifyRouteImport.update({
-  id: '/auth/verify',
-  path: '/auth/verify',
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthResetRoute = AuthResetRouteImport.update({
+  id: '/auth/reset',
+  path: '/auth/reset',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthForgotRoute = AuthForgotRouteImport.update({
+  id: '/auth/forgot',
+  path: '/auth/forgot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRewardsRoute = AdminRewardsRouteImport.update({
+  id: '/admin/rewards',
+  path: '/admin/rewards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPromocodesRoute = AdminPromocodesRouteImport.update({
+  id: '/admin/promocodes',
+  path: '/admin/promocodes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminPayoutsRoute = AdminPayoutsRouteImport.update({
+  id: '/admin/payouts',
+  path: '/admin/payouts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNoticesRoute = AdminNoticesRouteImport.update({
+  id: '/admin/notices',
+  path: '/admin/notices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminMailTestRoute = AdminMailTestRouteImport.update({
+  id: '/admin/mail-test',
+  path: '/admin/mail-test',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLeadsRoute = AdminLeadsRouteImport.update({
+  id: '/admin/leads',
+  path: '/admin/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminInvoicesRoute = AdminInvoicesRouteImport.update({
+  id: '/admin/invoices',
+  path: '/admin/invoices',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedDashboardIndexRoute =
@@ -236,10 +236,10 @@ const AuthenticatedDashboardIndexRoute =
     path: '/dashboard/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardInvoicesRoute =
-  AuthenticatedDashboardInvoicesRouteImport.update({
-    id: '/dashboard/invoices',
-    path: '/dashboard/invoices',
+const AuthenticatedDashboardRewardsRoute =
+  AuthenticatedDashboardRewardsRouteImport.update({
+    id: '/dashboard/rewards',
+    path: '/dashboard/rewards',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardProfileRoute =
@@ -248,16 +248,10 @@ const AuthenticatedDashboardProfileRoute =
     path: '/dashboard/profile',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardRewardsRoute =
-  AuthenticatedDashboardRewardsRouteImport.update({
-    id: '/dashboard/rewards',
-    path: '/dashboard/rewards',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardAgreementClaimIdRoute =
-  AuthenticatedDashboardAgreementClaimIdRouteImport.update({
-    id: '/dashboard/agreement/$claimId',
-    path: '/dashboard/agreement/$claimId',
+const AuthenticatedDashboardInvoicesRoute =
+  AuthenticatedDashboardInvoicesRouteImport.update({
+    id: '/dashboard/invoices',
+    path: '/dashboard/invoices',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardClaimsIndexRoute =
@@ -266,16 +260,10 @@ const AuthenticatedDashboardClaimsIndexRoute =
     path: '/dashboard/claims/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardClaimsIdRoute =
-  AuthenticatedDashboardClaimsIdRouteImport.update({
-    id: '/dashboard/claims/$id',
-    path: '/dashboard/claims/$id',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedDashboardClaimsNewRoute =
-  AuthenticatedDashboardClaimsNewRouteImport.update({
-    id: '/dashboard/claims/new',
-    path: '/dashboard/claims/new',
+const AuthenticatedDashboardPayClaimIdRoute =
+  AuthenticatedDashboardPayClaimIdRouteImport.update({
+    id: '/dashboard/pay/$claimId',
+    path: '/dashboard/pay/$claimId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 const AuthenticatedDashboardDeclareClaimIdRoute =
@@ -284,10 +272,22 @@ const AuthenticatedDashboardDeclareClaimIdRoute =
     path: '/dashboard/declare/$claimId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedDashboardPayClaimIdRoute =
-  AuthenticatedDashboardPayClaimIdRouteImport.update({
-    id: '/dashboard/pay/$claimId',
-    path: '/dashboard/pay/$claimId',
+const AuthenticatedDashboardClaimsNewRoute =
+  AuthenticatedDashboardClaimsNewRouteImport.update({
+    id: '/dashboard/claims/new',
+    path: '/dashboard/claims/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardClaimsIdRoute =
+  AuthenticatedDashboardClaimsIdRouteImport.update({
+    id: '/dashboard/claims/$id',
+    path: '/dashboard/claims/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardAgreementClaimIdRoute =
+  AuthenticatedDashboardAgreementClaimIdRouteImport.update({
+    id: '/dashboard/agreement/$claimId',
+    path: '/dashboard/agreement/$claimId',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
 
@@ -613,11 +613,123 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/service-agreement': {
+      id: '/service-agreement'
+      path: '/service-agreement'
+      fullPath: '/service-agreement'
+      preLoaderRoute: typeof ServiceAgreementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/refund': {
+      id: '/refund'
+      path: '/refund'
+      fullPath: '/refund'
+      preLoaderRoute: typeof RefundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insurance-claim-rejected': {
+      id: '/insurance-claim-rejected'
+      path: '/insurance-claim-rejected'
+      fullPath: '/insurance-claim-rejected'
+      preLoaderRoute: typeof InsuranceClaimRejectedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/free-claim-assessment-success': {
+      id: '/free-claim-assessment-success'
+      path: '/free-claim-assessment-success'
+      fullPath: '/free-claim-assessment-success'
+      preLoaderRoute: typeof FreeClaimAssessmentSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/free-claim-assessment': {
+      id: '/free-claim-assessment'
+      path: '/free-claim-assessment'
+      fullPath: '/free-claim-assessment'
+      preLoaderRoute: typeof FreeClaimAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/disclaimer': {
+      id: '/disclaimer'
+      path: '/disclaimer'
+      fullPath: '/disclaimer'
+      preLoaderRoute: typeof DisclaimerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/claim-help': {
+      id: '/claim-help'
+      path: '/claim-help'
+      fullPath: '/claim-help'
+      preLoaderRoute: typeof ClaimHelpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appreciation': {
+      id: '/appreciation'
+      path: '/appreciation'
+      fullPath: '/appreciation'
+      preLoaderRoute: typeof AppreciationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$': {
@@ -634,123 +746,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/appreciation': {
-      id: '/appreciation'
-      path: '/appreciation'
-      fullPath: '/appreciation'
-      preLoaderRoute: typeof AppreciationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/claim-help': {
-      id: '/claim-help'
-      path: '/claim-help'
-      fullPath: '/claim-help'
-      preLoaderRoute: typeof ClaimHelpRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/disclaimer': {
-      id: '/disclaimer'
-      path: '/disclaimer'
-      fullPath: '/disclaimer'
-      preLoaderRoute: typeof DisclaimerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/faq': {
-      id: '/faq'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/forgot-password': {
-      id: '/forgot-password'
-      path: '/forgot-password'
-      fullPath: '/forgot-password'
-      preLoaderRoute: typeof ForgotPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/free-claim-assessment': {
-      id: '/free-claim-assessment'
-      path: '/free-claim-assessment'
-      fullPath: '/free-claim-assessment'
-      preLoaderRoute: typeof FreeClaimAssessmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/free-claim-assessment-success': {
-      id: '/free-claim-assessment-success'
-      path: '/free-claim-assessment-success'
-      fullPath: '/free-claim-assessment-success'
-      preLoaderRoute: typeof FreeClaimAssessmentSuccessRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-it-works': {
-      id: '/how-it-works'
-      path: '/how-it-works'
-      fullPath: '/how-it-works'
-      preLoaderRoute: typeof HowItWorksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/insurance-claim-rejected': {
-      id: '/insurance-claim-rejected'
-      path: '/insurance-claim-rejected'
-      fullPath: '/insurance-claim-rejected'
-      preLoaderRoute: typeof InsuranceClaimRejectedRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/policies': {
-      id: '/policies'
-      path: '/policies'
-      fullPath: '/policies'
-      preLoaderRoute: typeof PoliciesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/refund': {
-      id: '/refund'
-      path: '/refund'
-      fullPath: '/refund'
-      preLoaderRoute: typeof RefundRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reset-password': {
-      id: '/reset-password'
-      path: '/reset-password'
-      fullPath: '/reset-password'
-      preLoaderRoute: typeof ResetPasswordRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/service-agreement': {
-      id: '/service-agreement'
-      path: '/service-agreement'
-      fullPath: '/service-agreement'
-      preLoaderRoute: typeof ServiceAgreementRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/terms': {
-      id: '/terms'
-      path: '/terms'
-      fullPath: '/terms'
-      preLoaderRoute: typeof TermsRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -760,88 +760,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/invoices': {
-      id: '/admin/invoices'
-      path: '/admin/invoices'
-      fullPath: '/admin/invoices'
-      preLoaderRoute: typeof AdminInvoicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/leads': {
-      id: '/admin/leads'
-      path: '/admin/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AdminLeadsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/login': {
-      id: '/admin/login'
-      path: '/admin/login'
-      fullPath: '/admin/login'
-      preLoaderRoute: typeof AdminLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/mail-test': {
-      id: '/admin/mail-test'
-      path: '/admin/mail-test'
-      fullPath: '/admin/mail-test'
-      preLoaderRoute: typeof AdminMailTestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/notices': {
-      id: '/admin/notices'
-      path: '/admin/notices'
-      fullPath: '/admin/notices'
-      preLoaderRoute: typeof AdminNoticesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/payouts': {
-      id: '/admin/payouts'
-      path: '/admin/payouts'
-      fullPath: '/admin/payouts'
-      preLoaderRoute: typeof AdminPayoutsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/promocodes': {
-      id: '/admin/promocodes'
-      path: '/admin/promocodes'
-      fullPath: '/admin/promocodes'
-      preLoaderRoute: typeof AdminPromocodesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/rewards': {
-      id: '/admin/rewards'
-      path: '/admin/rewards'
-      fullPath: '/admin/rewards'
-      preLoaderRoute: typeof AdminRewardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/forgot': {
-      id: '/auth/forgot'
-      path: '/auth/forgot'
-      fullPath: '/auth/forgot'
-      preLoaderRoute: typeof AuthForgotRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/login': {
-      id: '/auth/login'
-      path: '/auth/login'
-      fullPath: '/auth/login'
-      preLoaderRoute: typeof AuthLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/reset': {
-      id: '/auth/reset'
-      path: '/auth/reset'
-      fullPath: '/auth/reset'
-      preLoaderRoute: typeof AuthResetRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth/signup': {
-      id: '/auth/signup'
-      path: '/auth/signup'
-      fullPath: '/auth/signup'
-      preLoaderRoute: typeof AuthSignupRouteImport
+    '/auth/verify': {
+      id: '/auth/verify'
+      path: '/auth/verify'
+      fullPath: '/auth/verify'
+      preLoaderRoute: typeof AuthVerifyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth/verified': {
@@ -851,11 +774,88 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthVerifiedRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/auth/verify': {
-      id: '/auth/verify'
-      path: '/auth/verify'
-      fullPath: '/auth/verify'
-      preLoaderRoute: typeof AuthVerifyRouteImport
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/reset': {
+      id: '/auth/reset'
+      path: '/auth/reset'
+      fullPath: '/auth/reset'
+      preLoaderRoute: typeof AuthResetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/forgot': {
+      id: '/auth/forgot'
+      path: '/auth/forgot'
+      fullPath: '/auth/forgot'
+      preLoaderRoute: typeof AuthForgotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/rewards': {
+      id: '/admin/rewards'
+      path: '/admin/rewards'
+      fullPath: '/admin/rewards'
+      preLoaderRoute: typeof AdminRewardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/promocodes': {
+      id: '/admin/promocodes'
+      path: '/admin/promocodes'
+      fullPath: '/admin/promocodes'
+      preLoaderRoute: typeof AdminPromocodesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/payouts': {
+      id: '/admin/payouts'
+      path: '/admin/payouts'
+      fullPath: '/admin/payouts'
+      preLoaderRoute: typeof AdminPayoutsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/notices': {
+      id: '/admin/notices'
+      path: '/admin/notices'
+      fullPath: '/admin/notices'
+      preLoaderRoute: typeof AdminNoticesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/mail-test': {
+      id: '/admin/mail-test'
+      path: '/admin/mail-test'
+      fullPath: '/admin/mail-test'
+      preLoaderRoute: typeof AdminMailTestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/admin/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/invoices': {
+      id: '/admin/invoices'
+      path: '/admin/invoices'
+      fullPath: '/admin/invoices'
+      preLoaderRoute: typeof AdminInvoicesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/dashboard/': {
@@ -865,11 +865,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/invoices': {
-      id: '/_authenticated/dashboard/invoices'
-      path: '/dashboard/invoices'
-      fullPath: '/dashboard/invoices'
-      preLoaderRoute: typeof AuthenticatedDashboardInvoicesRouteImport
+    '/_authenticated/dashboard/rewards': {
+      id: '/_authenticated/dashboard/rewards'
+      path: '/dashboard/rewards'
+      fullPath: '/dashboard/rewards'
+      preLoaderRoute: typeof AuthenticatedDashboardRewardsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/profile': {
@@ -879,18 +879,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardProfileRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/rewards': {
-      id: '/_authenticated/dashboard/rewards'
-      path: '/dashboard/rewards'
-      fullPath: '/dashboard/rewards'
-      preLoaderRoute: typeof AuthenticatedDashboardRewardsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/agreement/$claimId': {
-      id: '/_authenticated/dashboard/agreement/$claimId'
-      path: '/dashboard/agreement/$claimId'
-      fullPath: '/dashboard/agreement/$claimId'
-      preLoaderRoute: typeof AuthenticatedDashboardAgreementClaimIdRouteImport
+    '/_authenticated/dashboard/invoices': {
+      id: '/_authenticated/dashboard/invoices'
+      path: '/dashboard/invoices'
+      fullPath: '/dashboard/invoices'
+      preLoaderRoute: typeof AuthenticatedDashboardInvoicesRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/claims/': {
@@ -900,18 +893,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardClaimsIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/claims/$id': {
-      id: '/_authenticated/dashboard/claims/$id'
-      path: '/dashboard/claims/$id'
-      fullPath: '/dashboard/claims/$id'
-      preLoaderRoute: typeof AuthenticatedDashboardClaimsIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard/claims/new': {
-      id: '/_authenticated/dashboard/claims/new'
-      path: '/dashboard/claims/new'
-      fullPath: '/dashboard/claims/new'
-      preLoaderRoute: typeof AuthenticatedDashboardClaimsNewRouteImport
+    '/_authenticated/dashboard/pay/$claimId': {
+      id: '/_authenticated/dashboard/pay/$claimId'
+      path: '/dashboard/pay/$claimId'
+      fullPath: '/dashboard/pay/$claimId'
+      preLoaderRoute: typeof AuthenticatedDashboardPayClaimIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/dashboard/declare/$claimId': {
@@ -921,11 +907,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardDeclareClaimIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/dashboard/pay/$claimId': {
-      id: '/_authenticated/dashboard/pay/$claimId'
-      path: '/dashboard/pay/$claimId'
-      fullPath: '/dashboard/pay/$claimId'
-      preLoaderRoute: typeof AuthenticatedDashboardPayClaimIdRouteImport
+    '/_authenticated/dashboard/claims/new': {
+      id: '/_authenticated/dashboard/claims/new'
+      path: '/dashboard/claims/new'
+      fullPath: '/dashboard/claims/new'
+      preLoaderRoute: typeof AuthenticatedDashboardClaimsNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/claims/$id': {
+      id: '/_authenticated/dashboard/claims/$id'
+      path: '/dashboard/claims/$id'
+      fullPath: '/dashboard/claims/$id'
+      preLoaderRoute: typeof AuthenticatedDashboardClaimsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard/agreement/$claimId': {
+      id: '/_authenticated/dashboard/agreement/$claimId'
+      path: '/dashboard/agreement/$claimId'
+      fullPath: '/dashboard/agreement/$claimId'
+      preLoaderRoute: typeof AuthenticatedDashboardAgreementClaimIdRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
   }
@@ -1003,3 +1003,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

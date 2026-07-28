@@ -3,6 +3,35 @@ import { LeadForm } from '@/components/leads/LeadForm';
 import { ShieldAlert, PhoneCall, FileText } from 'lucide-react';
 
 export const Route = createFileRoute('/free-claim-assessment')({
+  head: () => ({
+    meta: [
+      { title: "Free Insurance Claim Assessment | ClaimForSure" },
+      { name: "description", content: "Request a free 15-minute case review with ClaimForSure. We evaluate rejected, underpaid, or delayed health, motor, and life insurance claims across India." },
+      { name: "keywords", content: "free claim assessment, insurance claim evaluation, free claim consultation, rejected claim review" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Free Insurance Claim Assessment | ClaimForSure" },
+      { property: "og:description", content: "Get a free 15-minute consultation with an insurance claim specialist." },
+      { property: "og:url", content: "https://www.claimforsure.in/free-claim-assessment" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/free-claim-assessment" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Free Claim Assessment", item: "https://www.claimforsure.in/free-claim-assessment" },
+          ],
+        }),
+      },
+    ],
+  }),
   component: FreeClaimAssessment,
 });
 

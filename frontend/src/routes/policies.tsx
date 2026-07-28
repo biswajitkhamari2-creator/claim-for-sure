@@ -6,13 +6,32 @@ import { BrandLockup } from "@/components/BrandLockup";
 export const Route = createFileRoute("/policies")({
   head: () => ({
     meta: [
-      { title: "Buy Insurance — Claim For Sure (POSP, RenewBuy)" },
-      { name: "description", content: "Buy Health, Motor, Term Life, Personal Accident, Travel and Home insurance through Claim For Sure — a licensed POSP partner of RenewBuy." },
-      { property: "og:title", content: "Buy Insurance — Claim For Sure" },
-      { property: "og:description", content: "Licensed POSP partner of RenewBuy. Buy policies across all major categories with end-to-end support." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/policies" },
+      { title: "Buy Insurance Policies Online — ClaimForSure (RenewBuy POSP Partner)" },
+      { name: "description", content: "Buy Health, Motor, Term Life, Personal Accident, Travel and Home insurance through ClaimForSure — licensed POSP partner of RenewBuy." },
+      { name: "keywords", content: "buy health insurance online, motor insurance policy, term life insurance India, RenewBuy POSP partner, ClaimForSure insurance" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Buy Insurance Policies Online — ClaimForSure" },
+      { property: "og:description", content: "Licensed POSP partner of RenewBuy. Buy policies across all major categories with end-to-end claim support." },
+      { property: "og:url", content: "https://www.claimforsure.in/policies" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/policies" }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/policies" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Buy Insurance", item: "https://www.claimforsure.in/policies" },
+          ],
+        }),
+      },
+    ],
   }),
   component: PoliciesPage,
 });

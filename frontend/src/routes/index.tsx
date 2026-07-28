@@ -51,22 +51,23 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "File, track, and recover rejected or delayed insurance claims in India. Expert help across health, motor, life, and property. Transparent fees." },
       { property: "og:title", content: "Insurance Claim Help & Policy Buying in India | ClaimForSure" },
       { property: "og:description", content: "Expert insurance claim recovery and policy buying in India — transparent fees, end-to-end support." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/" },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/42debc89-b728-4bae-9a28-29feb607dfd0/id-preview-290d71ba--cef1518f-f84e-42cd-aabb-49f47dc8c05b.lovable.app-1782450695957.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/42debc89-b728-4bae-9a28-29feb607dfd0/id-preview-290d71ba--cef1518f-f84e-42cd-aabb-49f47dc8c05b.lovable.app-1782450695957.png" },
+      { property: "og:url", content: "https://www.claimforsure.in/" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
       { name: "keywords", content: "insurance claim help, rejected claim, health insurance claim, motor insurance claim, life insurance claim, claim settlement India, IRDAI claim assistance" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/" }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/" }],
     scripts: [{
       type: "application/ld+json",
       children: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Service",
         serviceType: "Insurance Claim Assistance",
-        provider: { "@id": "https://connect-brite.lovable.app/#organization" },
+        provider: { "@id": "https://www.claimforsure.in/#organization" },
         areaServed: { "@type": "Country", name: "India" },
         description: "End-to-end help filing, tracking, and recovering rejected or delayed insurance claims across health, motor, life, and property categories.",
-        url: "https://connect-brite.lovable.app/",
+        url: "https://www.claimforsure.in/",
       }),
     }],
   }),
@@ -607,22 +608,23 @@ function Footer() {
           </p>
         </div>
         <FooterCol title="Services" links={[
-          { label: "Health claims", href: "#services" },
-          { label: "Motor claims", href: "#services" },
-          { label: "Life claims", href: "#services" },
-          { label: "Property claims", href: "#services" },
+          { label: "Claim Help", href: "/claim-help" },
+          { label: "Rejected Claim Assistance", href: "/insurance-claim-rejected" },
+          { label: "Buy Insurance Policies", href: "/policies" },
+          { label: "Free Claim Assessment", href: "/free-claim-assessment" },
         ]} />
         <FooterCol title="Company" links={[
-          { label: "How it works", href: "#process" },
-          { label: "Why us", href: "#trust" },
-          { label: "FAQ", href: "#faq" },
-          { label: "Contact", href: "tel:+919439151934" },
+          { label: "About ClaimForSure", href: "/about" },
+          { label: "How It Works", href: "/how-it-works" },
+          { label: "FAQ", href: "/faq" },
+          { label: "Customer Appreciation", href: "/appreciation" },
         ]} />
         <FooterCol title="Legal" links={[
           { label: "Privacy Policy", href: "/privacy" },
           { label: "Terms & Conditions", href: "/terms" },
           { label: "Refund Policy", href: "/refund" },
           { label: "Disclaimer", href: "/disclaimer" },
+          { label: "Service Agreement", href: "/service-agreement" },
         ]} />
       </div>
       <div className="border-t border-border">
@@ -633,6 +635,7 @@ function Footer() {
             <a href="/terms" className="hover:text-foreground">Terms</a>
             <a href="/refund" className="hover:text-foreground">Refund</a>
             <a href="/disclaimer" className="hover:text-foreground">Disclaimer</a>
+            <a href="/service-agreement" className="hover:text-foreground">Service Agreement</a>
           </div>
         </div>
       </div>

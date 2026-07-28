@@ -16,4 +16,4 @@ Disallow: /admin
 Disallow: /auth
 Disallow: /dashboard
 
-Sitemap: https://connect-brite.lovable.app/sitemap.xml
+Sitemap: https://www.claimforsure.in/sitemap.xml

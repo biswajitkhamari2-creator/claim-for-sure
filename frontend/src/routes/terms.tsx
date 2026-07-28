@@ -4,13 +4,32 @@ import { LegalPage, Section, P, UL, Callout } from "@/components/LegalPage";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms & Conditions — Claim For Sure" },
-      { name: "description", content: "Terms and Conditions governing the use of Claim For Sure, a branch of Sidheswar Enterprises." },
-      { property: "og:title", content: "Terms & Conditions — Claim For Sure" },
-      { property: "og:description", content: "Terms and Conditions governing the use of Claim For Sure, a branch of Sidheswar Enterprises." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/terms" },
+      { title: "Terms & Conditions — ClaimForSure" },
+      { name: "description", content: "Terms and Conditions governing the use of ClaimForSure, an initiative of Sidheswar Enterprises." },
+      { name: "keywords", content: "ClaimForSure terms and conditions, legal terms, service terms" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Terms & Conditions — ClaimForSure" },
+      { property: "og:description", content: "Terms and Conditions governing the use of ClaimForSure." },
+      { property: "og:url", content: "https://www.claimforsure.in/terms" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/terms" }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/terms" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Terms & Conditions", item: "https://www.claimforsure.in/terms" },
+          ],
+        }),
+      },
+    ],
   }),
   component: TermsPage,
 });

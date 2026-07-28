@@ -7,6 +7,29 @@ export const Route = createFileRoute("/service-agreement")({
     meta: [
       { title: "Service Agreement — ClaimForSure" },
       { name: "description", content: "Legally binding Service Agreement between ClaimForSure and the customer for insurance claim assistance, including 20% + GST success fee, Odisha jurisdiction." },
+      { name: "keywords", content: "ClaimForSure service agreement, claim resolution agreement terms, legal contract insurance claim" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Service Agreement — ClaimForSure" },
+      { property: "og:description", content: "Official Service Agreement governing insurance claim resolution support by ClaimForSure." },
+      { property: "og:url", content: "https://www.claimforsure.in/service-agreement" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/service-agreement" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Service Agreement", item: "https://www.claimforsure.in/service-agreement" },
+          ],
+        }),
+      },
     ],
   }),
 });

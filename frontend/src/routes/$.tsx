@@ -2,6 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/$")({
+  head: () => ({
+    meta: [
+      { title: "Page Not Found — ClaimForSure" },
+      { name: "robots", content: "noindex, nofollow" },
+    ],
+  }),
   component: NotFoundFallback,
   ssr: false,
 });

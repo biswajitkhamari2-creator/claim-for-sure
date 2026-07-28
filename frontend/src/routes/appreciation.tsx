@@ -5,10 +5,31 @@ import { BrandLockup } from "@/components/BrandLockup";
 export const Route = createFileRoute("/appreciation")({
   head: () => ({
     meta: [
-      { title: "Customer Appreciation Program — Claim For Sure" },
-      { name: "description", content: "A discretionary gratitude program for valued Claim For Sure customers. Eligibility, selection and availability are at our sole discretion and subject to Terms & Conditions." },
-      { property: "og:title", content: "Customer Appreciation Program — Claim For Sure" },
+      { title: "Customer Appreciation Program — ClaimForSure" },
+      { name: "description", content: "A discretionary gratitude program for valued ClaimForSure customers. Eligibility, selection and availability are at our sole discretion." },
+      { name: "keywords", content: "ClaimForSure appreciation program, customer gratitude, reward terms" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
+      { property: "og:title", content: "Customer Appreciation Program — ClaimForSure" },
       { property: "og:description", content: "A discretionary token of gratitude for valued customers. Not an inducement to buy insurance." },
+      { property: "og:url", content: "https://www.claimforsure.in/appreciation" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
+    ],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/appreciation" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Customer Appreciation", item: "https://www.claimforsure.in/appreciation" },
+          ],
+        }),
+      },
     ],
   }),
   component: AppreciationPage,

@@ -6,11 +6,30 @@ export const Route = createFileRoute("/privacy")({
     meta: [
       { title: "Privacy Policy — ClaimForSure" },
       { name: "description", content: "How ClaimForSure collects, uses, and protects your personal data during insurance claim assistance." },
+      { name: "keywords", content: "ClaimForSure privacy policy, data security, customer data protection" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { property: "og:title", content: "Privacy Policy — ClaimForSure" },
       { property: "og:description", content: "How ClaimForSure collects, uses, and protects your personal data." },
-      { property: "og:url", content: "https://connect-brite.lovable.app/privacy" },
+      { property: "og:url", content: "https://www.claimforsure.in/privacy" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/privacy" }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/privacy" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Privacy Policy", item: "https://www.claimforsure.in/privacy" },
+          ],
+        }),
+      },
+    ],
   }),
   component: PrivacyPage,
 });

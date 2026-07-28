@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "https://connect-brite.lovable.app";
+const BASE_URL = "https://www.claimforsure.in";
 
 interface SitemapEntry {
   path: string;
@@ -15,18 +15,19 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async () => {
         const entries: SitemapEntry[] = [
           { path: "/", changefreq: "weekly", priority: "1.0" },
-          { path: "/claim-help", changefreq: "weekly", priority: "0.9" },
+          { path: "/claim-help", changefreq: "weekly", priority: "0.95" },
           { path: "/insurance-claim-rejected", changefreq: "weekly", priority: "0.95" },
-          { path: "/how-it-works", changefreq: "monthly", priority: "0.8" },
-          { path: "/faq", changefreq: "monthly", priority: "0.8" },
-          { path: "/about", changefreq: "monthly", priority: "0.7" },
-          { path: "/policies", changefreq: "weekly", priority: "0.9" },
-          { path: "/appreciation", changefreq: "monthly", priority: "0.5" },
-          { path: "/privacy", changefreq: "yearly", priority: "0.3" },
-          { path: "/terms", changefreq: "yearly", priority: "0.3" },
-          { path: "/refund", changefreq: "yearly", priority: "0.3" },
-          { path: "/disclaimer", changefreq: "yearly", priority: "0.3" },
-          { path: "/service-agreement", changefreq: "yearly", priority: "0.3" },
+          { path: "/policies", changefreq: "weekly", priority: "0.90" },
+          { path: "/free-claim-assessment", changefreq: "weekly", priority: "0.90" },
+          { path: "/how-it-works", changefreq: "monthly", priority: "0.85" },
+          { path: "/faq", changefreq: "monthly", priority: "0.85" },
+          { path: "/about", changefreq: "monthly", priority: "0.80" },
+          { path: "/appreciation", changefreq: "monthly", priority: "0.70" },
+          { path: "/service-agreement", changefreq: "yearly", priority: "0.50" },
+          { path: "/privacy", changefreq: "yearly", priority: "0.40" },
+          { path: "/terms", changefreq: "yearly", priority: "0.40" },
+          { path: "/refund", changefreq: "yearly", priority: "0.40" },
+          { path: "/disclaimer", changefreq: "yearly", priority: "0.40" },
         ];
 
         const lastmod = new Date().toISOString().slice(0, 10);

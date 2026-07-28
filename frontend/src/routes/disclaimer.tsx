@@ -6,10 +6,30 @@ export const Route = createFileRoute("/disclaimer")({
     meta: [
       { title: "Disclaimer — ClaimForSure" },
       { name: "description", content: "Official communication channels and service disclaimers for ClaimForSure." },
+      { name: "keywords", content: "ClaimForSure disclaimer, official channels, insurance advice disclaimer" },
+      { name: "robots", content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" },
       { property: "og:title", content: "Disclaimer — ClaimForSure" },
-      { property: "og:url", content: "https://connect-brite.lovable.app/disclaimer" },
+      { property: "og:description", content: "Official communication channels and service disclaimers for ClaimForSure." },
+      { property: "og:url", content: "https://www.claimforsure.in/disclaimer" },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://www.claimforsure.in/favicon.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "https://www.claimforsure.in/favicon.png" },
     ],
-    links: [{ rel: "canonical", href: "https://connect-brite.lovable.app/disclaimer" }],
+    links: [{ rel: "canonical", href: "https://www.claimforsure.in/disclaimer" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://www.claimforsure.in/" },
+            { "@type": "ListItem", position: 2, name: "Disclaimer", item: "https://www.claimforsure.in/disclaimer" },
+          ],
+        }),
+      },
+    ],
   }),
   component: DisclaimerPage,
 });
