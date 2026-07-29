@@ -19,8 +19,9 @@ final class MailService
             $mail->SMTPAuth   = true;
             $mail->Username   = $_ENV['SMTP_USER'] ?? '';
             $mail->Password   = $_ENV['SMTP_PASS'] ?? '';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = (int)($_ENV['SMTP_PORT'] ?? 465);
+            $port             = (int)($_ENV['SMTP_PORT'] ?? 465);
+            $mail->Port       = $port;
+            $mail->SMTPSecure = ($port === 587) ? PHPMailer::ENCRYPTION_STARTTLS : PHPMailer::ENCRYPTION_SMTPS;
             $mail->setFrom($_ENV['MAIL_FROM'] ?? 'no-reply@claimforsure.com', APP_NAME);
             $mail->addAddress($toEmail, $toName);
             $mail->isHTML(true);
