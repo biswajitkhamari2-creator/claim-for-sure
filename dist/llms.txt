@@ -1,0 +1,23 @@
+# Claim For Sure
+
+> Claim For Sure (by Sidheswar Enterprises) helps Indian policyholders buy insurance and recover rejected, delayed, or underpaid insurance claims — across health, motor, life, home, travel, and personal accident cover.
+
+Claim For Sure is a licensed POSP partner of RenewBuy for policy sales, and provides independent claim-assistance services including document preparation, insurer grievance follow-ups, IRDAI Bima Bharosa filings, and Insurance Ombudsman representation. We do not guarantee claim approval; final decisions rest with the insurer or competent authority.
+
+## Pages
+
+- [Home](/): Insurance claim help and policy buying in India.
+- [Claim Help](/claim-help): Assistance for health, motor, life, home, travel, and personal-accident claims.
+- [Buy Insurance](/policies): Compare and buy health, motor, term-life, personal accident, travel, and home policies via our RenewBuy POSP.
+- [How It Works](/how-it-works): Our 4-step process from free case review to claim recovery.
+- [FAQ](/faq): Common questions about fees, timelines, rejected claims, and insurers we work with.
+- [About](/about): Founder story and mission of Claim For Sure by Sidheswar Enterprises.
+- [Appreciation Program](/appreciation): Rewards for referrals and long-term customers.
+
+## Legal
+
+- [Privacy Policy](/privacy)
+- [Terms & Conditions](/terms)
+- [Refund Policy](/refund)
+- [Disclaimer](/disclaimer)
+- [Service Agreement](/service-agreement)
