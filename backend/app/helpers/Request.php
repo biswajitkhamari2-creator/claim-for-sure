@@ -4,12 +4,12 @@ final class Request
 {
     public static function body(): array
     {
-        $ct = $_SERVER['CONTENT_TYPE'] ?? '';
-        if (str_contains($ct, 'application/json')) {
-            $data = json_decode(file_get_contents('php://input'), true);
-            return is_array($data) ? $data : [];
+        $raw = file_get_contents('php://input');
+        if (!empty($raw)) {
+            $data = json_decode($raw, true);
+            if (is_array($data)) return $data;
         }
-        return $_POST;
+        return $_POST ?: [];
     }
     public static function clientIp(): string
     {
