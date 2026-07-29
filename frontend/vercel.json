@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node build-vercel.js",
+  "buildCommand": "echo 'Using pre-built dist assets'",
   "outputDirectory": "dist",
   "functions": {
     "api/public/index.php": {
