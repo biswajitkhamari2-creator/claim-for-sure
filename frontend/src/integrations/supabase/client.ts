@@ -191,9 +191,13 @@ export const supabase = {
       }
       try {
         const res = await request<any>("/api/auth/me", {});
-        const user = res.data;
+        const raw = res?.data ?? res;
+        const user = raw?.user ?? (raw?.email ? raw : null);
         if (user) {
           user.id = String(user.id);
+          if (typeof localStorage !== "undefined") {
+            localStorage.setItem("cfs_user", JSON.stringify(user));
+          }
         }
         return { data: { user }, error: null };
       } catch (e: any) {
@@ -208,12 +212,15 @@ export const supabase = {
           password: credentials.password,
         });
         const token = res?.data?.token ?? res?.token;
-        const user = res?.data?.user ?? res?.user;
+        const rawUser = res?.data?.user ?? res?.user;
+        const user = rawUser ?? (res?.data?.email ? res.data : null);
         if (token) {
           setToken(token);
           if (user) {
             user.id = String(user.id);
-            localStorage.setItem("cfs_user", JSON.stringify(user));
+            if (typeof localStorage !== "undefined") {
+              localStorage.setItem("cfs_user", JSON.stringify(user));
+            }
           }
         }
         return { data: { user }, error: null };
@@ -231,9 +238,13 @@ export const supabase = {
           phone: b.options?.data?.phone || "",
         };
         const res = await request<any>("/api/auth/register", payload);
-        const user = res?.data?.user ?? res?.user;
+        const rawUser = res?.data?.user ?? res?.user;
+        const user = rawUser ?? (res?.data?.email ? res.data : null);
         if (user) {
           user.id = String(user.id);
+          if (typeof localStorage !== "undefined") {
+            localStorage.setItem("cfs_user", JSON.stringify(user));
+          }
         }
         return { data: { user }, error: null };
       } catch (e: any) {
@@ -260,9 +271,13 @@ export const supabase = {
       if (!token) return { data: { session: null }, error: null };
       try {
         const res = await request<any>("/api/auth/me", {});
-        const user = res.data;
+        const raw = res?.data ?? res;
+        const user = raw?.user ?? (raw?.email ? raw : null);
         if (user) {
           user.id = String(user.id);
+          if (typeof localStorage !== "undefined") {
+            localStorage.setItem("cfs_user", JSON.stringify(user));
+          }
         }
         return { data: { session: { user, access_token: token } }, error: null };
       } catch (e: any) {
