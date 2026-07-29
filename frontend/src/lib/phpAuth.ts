@@ -13,7 +13,13 @@ export function getCachedUser(): AuthUser | null {
   if (typeof localStorage === "undefined") return null;
   try {
     const raw = localStorage.getItem("cfs_user");
-    return raw ? (JSON.parse(raw) as AuthUser) : null;
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as AuthUser;
+    if (!parsed || (!parsed.email && !parsed.full_name && !(parsed as any).name)) {
+      localStorage.removeItem("cfs_user");
+      return null;
+    }
+    return parsed;
   } catch {
     return null;
   }

@@ -20,11 +20,11 @@ function ProfilePage() {
 
   useEffect(() => {
     (async () => {
-      // Show cached data instantly
+      // Show cached data instantly if valid
       const cached = getCachedUser();
-      if (cached) {
+      if (cached && (cached.email || cached.full_name || (cached as any).name)) {
         setUser(cached);
-        setFullName(cached.full_name ?? "");
+        setFullName(cached.full_name ?? (cached as any).name ?? "");
         setPhone(cached.phone ?? "");
         setLoading(false);
       }
@@ -35,7 +35,7 @@ function ProfilePage() {
         const u = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
         if (u) {
           setUser(u);
-          setFullName(u.full_name ?? "");
+          setFullName(u.full_name ?? (u as any).name ?? "");
           setPhone(u.phone ?? "");
           localStorage.setItem("cfs_user", JSON.stringify(u));
         }
