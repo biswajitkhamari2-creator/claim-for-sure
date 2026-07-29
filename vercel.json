@@ -1,6 +1,6 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
+  "outputDirectory": "dist",
   "functions": {
     "api/public/index.php": {
       "runtime": "vercel-php@0.9.0",
