@@ -1,6 +1,6 @@
 {
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/.output/public",
+  "buildCommand": "cd frontend && npm install && npm run build && node -e \"import('node:fs').then(fs => { if(fs.existsSync('dist')) fs.cpSync('dist','../dist',{recursive:true}); });\"",
+  "outputDirectory": "dist",
   "functions": {
     "api/public/index.php": {
       "runtime": "vercel-php@0.9.0",

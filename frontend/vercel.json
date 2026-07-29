@@ -1,5 +1,5 @@
 {
-  "outputDirectory": ".output/public",
+  "outputDirectory": "dist",
   "functions": {
     "api/public/index.php": {
       "runtime": "vercel-php@0.9.0",
