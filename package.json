@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "cd frontend && npm install && npm run build && node -e \"import('node:fs').then(fs => { if(fs.existsSync('dist')) fs.cpSync('dist','../dist',{recursive:true}); });\"",
-    "vercel-build": "cd frontend && npm install && npm run build && node -e \"import('node:fs').then(fs => { if(fs.existsSync('dist')) fs.cpSync('dist','../dist',{recursive:true}); });\""
+    "build": "node build-vercel.js",
+    "vercel-build": "node build-vercel.js"
   }
 }
