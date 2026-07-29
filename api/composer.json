@@ -1,0 +1,13 @@
+{
+    "name": "claimforsure/backend",
+    "description": "ClaimForSure insurance claim management backend",
+    "type": "project",
+    "require": {
+        "php": ">=8.2",
+        "phpmailer/phpmailer": "^6.9",
+        "razorpay/razorpay": "^2.9"
+    },
+    "config": {
+        "optimize-autoloader": true
+    }
+}
