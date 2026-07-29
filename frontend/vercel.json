@@ -18,10 +18,10 @@
       ]
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/public/index.php"
+      "source": "/api/:path*",
+      "destination": "/api/public/index.php"
     }
   ]
 }
