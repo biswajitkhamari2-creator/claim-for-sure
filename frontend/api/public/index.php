@@ -5,25 +5,9 @@ declare(strict_types=1);
 $baseDir = file_exists(__DIR__ . '/config/bootstrap.php') ? __DIR__ : dirname(__DIR__);
 require_once $baseDir . '/config/bootstrap.php';
 
-// ── CORS — allow the Vite frontend (and any local dev origin / Vercel domain) ──────────────
-$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-$isVercel = preg_match('/\.vercel\.app$/', parse_url($origin, PHP_URL_HOST) ?? '');
-
-if (
-    $isVercel ||
-    in_array($origin, [
-        'http://localhost:8080',
-        'http://localhost:5173',
-        'http://localhost:3000',
-        'http://127.0.0.1:8080',
-        'http://127.0.0.1:5173',
-    ], true) ||
-    $origin === ''
-) {
-    header('Access-Control-Allow-Origin: ' . ($origin ?: '*'));
-} else {
-    header('Access-Control-Allow-Origin: http://localhost:8080');
-}
+// ── CORS — allow any origin (Vite, local dev, Vercel, Rocket web preview) ──────────────
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '*';
+header('Access-Control-Allow-Origin: ' . ($origin ?: '*'));
 header('Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 header('Access-Control-Allow-Credentials: true');
