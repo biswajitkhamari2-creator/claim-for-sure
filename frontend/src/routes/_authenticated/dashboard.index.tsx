@@ -25,7 +25,8 @@ function DashboardHome() {
       try {
         // Fetch fresh user from PHP backend
         const res = await api.auth.me();
-        const user = res?.data?.user ?? res?.user;
+        const raw = res?.data ?? res;
+        const user = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
         if (user?.full_name) setName(user.full_name);
         else if (user?.email) setName(user.email.split("@")[0]);
 

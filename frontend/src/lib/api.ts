@@ -134,6 +134,13 @@ export const api = {
     me: () =>
       request<{ status: string; data: { user: AuthUser } }>("/api/auth/me"),
 
+    /** PATCH /api/auth/me */
+    updateProfile: (b: { full_name?: string; phone?: string }) =>
+      request<{ status: string; message: string; data: { user: AuthUser } }>("/api/auth/me", {
+        method: "PATCH",
+        body: JSON.stringify(b),
+      }),
+
     /** POST /api/auth/forgot-password */
     forgot: (email: string) =>
       request<{ status: string; message: string }>("/api/auth/forgot-password", {

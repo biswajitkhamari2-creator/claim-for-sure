@@ -31,7 +31,8 @@ function ProfilePage() {
       // Refresh from backend
       try {
         const res = await api.auth.me();
-        const u = res?.data?.user ?? res?.user;
+        const raw = res?.data ?? res;
+        const u = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
         if (u) {
           setUser(u);
           setFullName(u.full_name ?? "");
@@ -48,11 +49,14 @@ function ProfilePage() {
     if (phone && !/^\d{10}$/.test(phone)) return toast.error("Mobile must be exactly 10 digits");
     setSaving(true);
     try {
-      // PHP backend doesn't have a profile update endpoint yet — save to cache
-      // and show success. (Can be extended when PATCH /api/auth/me is added.)
-      const updated = { ...user, full_name: fullName, phone } as AuthUser;
-      localStorage.setItem("cfs_user", JSON.stringify(updated));
-      toast.success("Profile saved locally. Contact support to update account details.");
+      const res = await api.auth.updateProfile({ full_name: fullName, phone });
+      const raw = res?.data ?? res;
+      const updated = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
+      if (updated) {
+        setUser(updated);
+        localStorage.setItem("cfs_user", JSON.stringify(updated));
+      }
+      toast.success("Profile details saved successfully");
     } catch (err) {
       toast.error((err as Error).message);
     } finally {

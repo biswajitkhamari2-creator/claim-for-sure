@@ -22,7 +22,7 @@ final class AuthService
         ]);
         Logger::audit('user.register', ['user_id' => $id, 'ip' => Request::clientIp()]);
         return ['token' => Jwt::encode(['sub' => $id, 'role' => 'customer', 'email' => $email]),
-                'user' => ['id' => $id, 'name' => trim($in['full_name']), 'role' => 'customer']];
+                'user' => ['id' => $id, 'uuid' => $in['uuid'] ?? null, 'email' => $email, 'full_name' => trim($in['full_name']), 'phone' => !empty($in['phone']) ? $in['phone'] : null, 'role' => 'customer']];
     }
     public function login(array $in): array
     {
@@ -37,7 +37,7 @@ final class AuthService
         }
         Logger::audit('user.login', ['user_id' => $user['id'], 'ip' => Request::clientIp()]);
         return ['token' => Jwt::encode(['sub' => (int)$user['id'], 'role' => $user['role'], 'email' => $user['email']]),
-                'user' => ['id' => (int)$user['id'], 'name' => $user['full_name'], 'role' => $user['role']]];
+                'user' => ['id' => (int)$user['id'], 'uuid' => $user['uuid'] ?? null, 'email' => $user['email'], 'full_name' => $user['full_name'], 'phone' => $user['phone'] ?? null, 'role' => $user['role']]];
     }
     private static function uuid4(): string
     {

@@ -7,6 +7,7 @@ return [
     'POST /api/auth/logout'          => ['AuthController', 'logout'],
     'GET /api/auth/me'               => ['AuthController', 'me'],
     'POST /api/auth/me'              => ['AuthController', 'me'],
+    'PATCH /api/auth/me'             => ['AuthController', 'updateProfile'],
     
     // Generic Database & RPC Proxy
     'POST /api/db/query'             => ['DbController', 'query'],

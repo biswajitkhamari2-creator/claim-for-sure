@@ -24,7 +24,8 @@ export async function getUser(): Promise<AuthUser | null> {
   if (!getToken()) return null;
   try {
     const res = await api.auth.me();
-    const user = res?.data?.user ?? res?.user ?? null;
+    const raw = res?.data ?? res;
+    const user = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
     if (user) localStorage.setItem("cfs_user", JSON.stringify(user));
     return user;
   } catch {

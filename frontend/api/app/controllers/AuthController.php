@@ -12,7 +12,27 @@ final class AuthController
         $user = (new UserRepository(Database::getConnection()))->findById((int)$payload['sub']);
         if (!$user) Response::error('User not found', 404);
         unset($user['password_hash']);
-        Response::success($user, 'Profile fetched');
+        Response::success(['user' => $user], 'Profile fetched');
+    }
+    public function updateProfile(): void
+    {
+        $payload = AuthMiddleware::authenticate();
+        $userId = (int)$payload['sub'];
+        $body = Request::body();
+        $repo = new UserRepository(Database::getConnection());
+        $user = $repo->findById($userId);
+        if (!$user) Response::error('User not found', 404);
+        
+        $fullName = isset($body['full_name']) ? trim((string)$body['full_name']) : $user['full_name'];
+        $phone    = isset($body['phone']) ? trim((string)$body['phone']) : $user['phone'];
+        
+        $db = Database::getConnection();
+        $stmt = $db->prepare('UPDATE users SET full_name = ?, phone = ?, updated_at = NOW() WHERE id = ?');
+        $stmt->execute([$fullName, $phone, $userId]);
+        
+        $updated = $repo->findById($userId);
+        unset($updated['password_hash']);
+        Response::success(['user' => $updated], 'Profile updated successfully');
     }
     public function logout(): void
     {
