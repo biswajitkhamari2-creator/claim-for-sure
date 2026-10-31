@@ -108,18 +108,14 @@ export const api = {
   isLoggedIn,
 
   auth: {
-    /** POST /api/auth/otp/send — texts a 6-digit code to the mobile number */
-    sendOtp: (phone: string) =>
-      request<{ data: { sent: boolean; expires_in: number; resend_in: number; dev_otp?: string } }>("/api/auth/otp/send", {
-        method: "POST",
-        body: JSON.stringify({ phone }),
-      }),
-
-    /** POST /api/auth/otp/verify → signs in known numbers; new numbers get a signup_token */
-    verifyOtp: (phone: string, otp: string) =>
+    /**
+     * POST /api/auth/otp/verify with the MSG91 widget's access token → signs in known
+     * numbers; new numbers get a signup_token
+     */
+    verifyOtp: (phone: string, access_token: string) =>
       request<{ data: OtpSession | { new_user: true; signup_token: string } }>("/api/auth/otp/verify", {
         method: "POST",
-        body: JSON.stringify({ phone, otp }),
+        body: JSON.stringify({ phone, access_token }),
       }).then(storeSession),
 
     /** POST /api/auth/otp/complete → creates the account for a verified new number */

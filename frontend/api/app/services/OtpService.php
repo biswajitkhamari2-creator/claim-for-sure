@@ -1,19 +1,19 @@
 <?php
 declare(strict_types=1);
 
-// Customer sign-in / sign-up with a mobile number and a one-time code sent by SMS (MSG91).
-//   send()     → texts a 6-digit code to the number
-//   verify()   → checks the code; returns a session for known numbers, or a short-lived
-//                signup token for new ones
+// Customer sign-in / sign-up with a mobile number. The MSG91 OTP widget sends and checks
+// the SMS code in the browser and hands back an access token:
+//   verify()   → confirms that token with MSG91 (server-side, secret auth key) and checks it
+//                was issued for this number; returns a session for known numbers, or a
+//                short-lived signup token for new ones
 //   complete() → creates the account for a new number (name + agreement acceptance)
 final class OtpService
 {
-    private const TTL = 300;            // code lifetime, seconds
-    private const MAX_ATTEMPTS = 5;     // wrong guesses allowed per code
-    private const RESEND_GAP = 30;      // seconds between sends to one number
     private const SIGNUP_TOKEN_TTL = 900;
     private const AGREEMENT_VERSION = '1.0';
-    private const MSG91_OTP_URL = 'https://control.msg91.com/api/v5/otp';
+    private const MSG91_VERIFY_URL = 'https://control.msg91.com/api/v5/widget/verifyAccessToken';
+    // Only accepted when the server runs with OTP_TEST_MODE=1 (local / staging).
+    private const TEST_ACCESS_TOKEN = 'test-mode-token';
 
     public function __construct(private PDO $db) {}
 
@@ -36,66 +36,23 @@ final class OtpService
         return $digits;
     }
 
-    public function send(array $in): array
-    {
-        $phone = self::phone($in['phone'] ?? '');
-        RateLimitMiddleware::check('otp-send-ip:' . Request::clientIp(), 20, 3600);
-        RateLimitMiddleware::check('otp-send-phone:' . $phone, 5, 3600);
-
-        $stmt = $this->db->prepare('SELECT expires_at FROM otps WHERE identifier = ? ORDER BY id DESC LIMIT 1');
-        $stmt->execute([$phone]);
-        $lastExpiry = $stmt->fetchColumn();
-        if ($lastExpiry && strtotime((string)$lastExpiry) - self::TTL > time() - self::RESEND_GAP) {
-            Response::error('Please wait ' . self::RESEND_GAP . ' seconds before requesting another OTP', 429);
-        }
-
-        $code = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-
-        // Only the newest code for a number is ever valid.
-        $this->db->prepare('UPDATE otps SET verified = 1 WHERE identifier = ? AND verified = 0')->execute([$phone]);
-        $this->db->prepare('INSERT INTO otps (identifier, otp_code, expires_at, attempts) VALUES (?, ?, ?, 0)')
-            ->execute([$phone, password_hash($code, PASSWORD_DEFAULT), date('Y-m-d H:i:s', time() + self::TTL)]);
-
-        $testMode = self::env('OTP_TEST_MODE') === '1';
-        if ($testMode) {
-            Logger::info('otp.test_mode_send', ['phone' => $phone]);
-        } else {
-            $this->sendSms($phone, $code);
-        }
-        Logger::audit('otp.sent', ['phone' => $phone, 'ip' => Request::clientIp()]);
-
-        $out = ['sent' => true, 'expires_in' => self::TTL, 'resend_in' => self::RESEND_GAP];
-        if ($testMode) $out['dev_otp'] = $code;
-        return $out;
-    }
-
     public function verify(array $in): array
     {
         $phone = self::phone($in['phone'] ?? '');
-        $code = preg_replace('/\D/', '', (string)($in['otp'] ?? ''));
+        $token = trim((string)($in['access_token'] ?? ''));
         RateLimitMiddleware::check('otp-verify-ip:' . Request::clientIp(), 30, 3600);
-
-        $stmt = $this->db->prepare('SELECT id, otp_code, expires_at, attempts FROM otps WHERE identifier = ? AND verified = 0 ORDER BY id DESC LIMIT 1');
-        $stmt->execute([$phone]);
-        $row = $stmt->fetch();
-        if (!$row || strtotime((string)$row['expires_at']) < time()) {
-            Response::error('OTP expired. Please request a new one.', 400);
-        }
-        if ((int)$row['attempts'] >= self::MAX_ATTEMPTS) {
-            Response::error('Too many wrong attempts. Please request a new OTP.', 429);
-        }
-        if (strlen($code) !== 6 || !password_verify($code, (string)$row['otp_code'])) {
-            $this->db->prepare('UPDATE otps SET attempts = attempts + 1 WHERE id = ?')->execute([(int)$row['id']]);
-            Logger::audit('otp.failed', ['phone' => $phone, 'ip' => Request::clientIp()]);
-            Response::error('Incorrect OTP. Please try again.', 400);
+        if ($token === '' || strlen($token) > 2048) {
+            Response::error('OTP verification failed. Please try again.', 400);
         }
 
-        // Consume the code; a parallel request with the same code gets nothing.
-        $stmt = $this->db->prepare('UPDATE otps SET verified = 1 WHERE id = ? AND verified = 0');
-        $stmt->execute([(int)$row['id']]);
-        if ($stmt->rowCount() === 0) {
-            Response::error('OTP expired. Please request a new one.', 400);
+        if (!(self::env('OTP_TEST_MODE') === '1' && $token === self::TEST_ACCESS_TOKEN)) {
+            $this->assertTokenUnused($token);
+            $this->confirmWithMsg91($token, $phone);
+            // Remember the token so it cannot be replayed.
+            $this->db->prepare('INSERT INTO otps (identifier, otp_code, expires_at, verified, attempts) VALUES (?, ?, ?, 1, 0)')
+                ->execute([$phone, hash('sha256', $token), date('Y-m-d H:i:s')]);
         }
+        Logger::audit('otp.verified', ['phone' => $phone, 'ip' => Request::clientIp()]);
 
         $user = $this->findUserByPhone($phone);
         if ($user) {
@@ -137,6 +94,51 @@ final class OtpService
         return $this->session($user);
     }
 
+    private function assertTokenUnused(string $token): void
+    {
+        $stmt = $this->db->prepare('SELECT 1 FROM otps WHERE otp_code = ? LIMIT 1');
+        $stmt->execute([hash('sha256', $token)]);
+        if ($stmt->fetchColumn()) {
+            Response::error('This OTP has already been used. Please request a new one.', 400);
+        }
+    }
+
+    // Asks MSG91 whether the widget's access token is genuine, and requires the number it
+    // verified to be the number being signed in. Fails closed on any unexpected reply.
+    private function confirmWithMsg91(string $token, string $phone): void
+    {
+        $authKey = self::env('MSG91_AUTH_KEY');
+        if ($authKey === '' || !function_exists('curl_init')) {
+            Logger::error('otp.msg91_not_configured');
+            Response::error('OTP service is not configured. Please contact support.', 503);
+        }
+
+        // MSG91_VERIFY_URL is only for pointing tests at a stub; production uses the default.
+        $ch = curl_init(self::env('MSG91_VERIFY_URL') ?: self::MSG91_VERIFY_URL);
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => json_encode(['authkey' => $authKey, 'access-token' => $token]),
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json', 'Accept: application/json'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 15,
+        ]);
+        $raw = curl_exec($ch);
+        $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+        $data = is_string($raw) ? json_decode($raw, true) : null;
+        if ($status < 200 || $status >= 300 || !is_array($data) || ($data['type'] ?? '') !== 'success') {
+            Logger::error('otp.msg91_rejected', ['status' => $status, 'body' => is_string($raw) ? substr($raw, 0, 300) : null]);
+            Response::error('OTP verification failed. Please request a new OTP.', 401);
+        }
+
+        // MSG91 reports the verified identifier (e.g. "919876543210") in "message".
+        $verified = preg_replace('/\D/', '', (string)($data['message'] ?? ''));
+        if ($verified !== $phone && $verified !== '91' . $phone) {
+            Logger::error('otp.msg91_number_mismatch', ['phone' => $phone, 'body' => substr((string)$raw, 0, 300)]);
+            Response::error('OTP verification failed. Please request a new OTP.', 401);
+        }
+    }
+
     private function findUserByPhone(string $phone): ?array
     {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE phone IN (?, ?, ?) ORDER BY id LIMIT 1');
@@ -161,39 +163,6 @@ final class OtpService
                 'full_name' => $user['full_name'], 'phone' => $user['phone'], 'role' => $user['role'],
             ],
         ];
-    }
-
-    private function sendSms(string $phone, string $code): void
-    {
-        $authKey = self::env('MSG91_AUTH_KEY');
-        $templateId = self::env('MSG91_OTP_TEMPLATE_ID');
-        if ($authKey === '' || $templateId === '' || !function_exists('curl_init')) {
-            Logger::error('otp.sms_not_configured');
-            Response::error('SMS service is not configured. Please contact support.', 503);
-        }
-
-        $url = self::MSG91_OTP_URL . '?' . http_build_query([
-            'template_id' => $templateId,
-            'mobile' => '91' . $phone,
-            'otp' => $code,
-            'otp_expiry' => (int)(self::TTL / 60),
-        ]);
-        $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => '{}',
-            CURLOPT_HTTPHEADER => ['authkey: ' . $authKey, 'Content-Type: application/json'],
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 15,
-        ]);
-        $raw = curl_exec($ch);
-        $status = (int)curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-        $data = is_string($raw) ? json_decode($raw, true) : null;
-        if ($status < 200 || $status >= 300 || !is_array($data) || ($data['type'] ?? '') !== 'success') {
-            Logger::error('otp.sms_failed', ['status' => $status, 'body' => is_string($raw) ? substr($raw, 0, 300) : null]);
-            Response::error('Could not send the OTP right now. Please try again shortly.', 502);
-        }
     }
 
     private static function uuid4(): string

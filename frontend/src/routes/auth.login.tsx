@@ -4,6 +4,13 @@ import { ArrowLeft, CheckCircle2, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { AuthShell, Field, inputCx, btnPrimary, btnGhost } from "@/components/AuthCard";
 import { api } from "@/lib/api";
+import {
+  OTP_TEST_MODE,
+  loadOtpWidget,
+  resendOtp as widgetResendOtp,
+  sendOtp as widgetSendOtp,
+  verifyOtp as widgetVerifyOtp,
+} from "@/lib/msg91Widget";
 
 export const Route = createFileRoute("/auth/login")({
   component: PhoneLoginPage,
@@ -20,6 +27,8 @@ export const Route = createFileRoute("/auth/login")({
 
 const AGREEMENT_VERSION = "1.0";
 const mobileRe = /^[6-9]\d{9}$/;
+const otpRe = /^\d{4,8}$/; // MSG91 widget OTP length is configurable
+const RESEND_SECONDS = 30;
 
 type Step = "phone" | "otp" | "profile";
 
@@ -28,6 +37,7 @@ function PhoneLoginPage() {
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
+  const [reqId, setReqId] = useState("");
   const [resendIn, setResendIn] = useState(0);
   const [signupToken, setSignupToken] = useState("");
   const [fullName, setFullName] = useState("");
@@ -41,6 +51,11 @@ function PhoneLoginPage() {
     return () => clearTimeout(t);
   }, [resendIn]);
 
+  // Load the MSG91 widget early so "Send OTP" responds immediately.
+  useEffect(() => {
+    loadOtpWidget().catch(() => {});
+  }, []);
+
   async function sendOtp() {
     if (!mobileRe.test(phone)) {
       toast.error("Enter a valid 10-digit mobile number");
@@ -48,9 +63,9 @@ function PhoneLoginPage() {
     }
     setLoading(true);
     try {
-      const r = await api.auth.sendOtp(phone);
-      setOtp(r.data.dev_otp ?? "");
-      setResendIn(r.data.resend_in ?? 30);
+      setReqId(await widgetSendOtp(phone));
+      setOtp("");
+      setResendIn(RESEND_SECONDS);
       setStep("otp");
       toast.success(`OTP sent to +91 ${phone}`);
     } catch (err) {
@@ -60,14 +75,28 @@ function PhoneLoginPage() {
     }
   }
 
+  async function resend() {
+    setLoading(true);
+    try {
+      await widgetResendOtp(reqId);
+      setResendIn(RESEND_SECONDS);
+      toast.success(`OTP re-sent to +91 ${phone}`);
+    } catch (err) {
+      toast.error((err as Error).message || "Could not resend OTP");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function verifyOtp() {
-    if (!/^\d{6}$/.test(otp)) {
-      toast.error("Enter the 6-digit OTP");
+    if (!otpRe.test(otp)) {
+      toast.error("Enter the OTP sent to your phone");
       return;
     }
     setLoading(true);
     try {
-      const r = await api.auth.verifyOtp(phone, otp);
+      const accessToken = await widgetVerifyOtp(otp, reqId);
+      const r = await api.auth.verifyOtp(phone, accessToken);
       if ("new_user" in r.data) {
         setSignupToken(r.data.signup_token);
         setStep("profile");
@@ -124,7 +153,7 @@ function PhoneLoginPage() {
 
   const titles: Record<Step, [string, string]> = {
     phone: ["Login or sign up", "Enter your mobile number. We'll text you a one-time code."],
-    otp: ["Enter OTP", `We sent a 6-digit code to +91 ${phone}.`],
+    otp: ["Enter OTP", `We sent a one-time code to +91 ${phone}.`],
     profile: ["Create your account", "Your number is verified. Just a few details to finish."],
   };
 
@@ -163,15 +192,15 @@ function PhoneLoginPage() {
                 name="otp"
                 inputMode="numeric"
                 autoComplete="one-time-code"
-                maxLength={6}
+                maxLength={8}
                 autoFocus
                 className={`${inputCx} text-center text-lg tracking-[0.5em]`}
                 value={otp}
-                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 8))}
                 placeholder="••••••"
               />
             </Field>
-            <button type="submit" disabled={loading || otp.length !== 6} className={btnPrimary}>
+            <button type="submit" disabled={loading || !otpRe.test(otp)} className={btnPrimary}>
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Verify & continue"}
             </button>
             <div className="flex items-center justify-between text-xs text-white/70">
@@ -181,7 +210,7 @@ function PhoneLoginPage() {
               {resendIn > 0 ? (
                 <span>Resend OTP in {resendIn}s</span>
               ) : (
-                <button type="button" disabled={loading} onClick={() => void sendOtp()} className="font-semibold text-[oklch(0.85_0.14_80)] hover:underline">
+                <button type="button" disabled={loading} onClick={() => void resend()} className="font-semibold text-[oklch(0.85_0.14_80)] hover:underline">
                   Resend OTP
                 </button>
               )}
@@ -222,6 +251,9 @@ function PhoneLoginPage() {
             </button>
           </>
         )}
+        {/* MSG91 renders its captcha here when the widget asks for one. */}
+        <div id="msg91-captcha" className="flex justify-center" />
+        {OTP_TEST_MODE && <p className="text-center text-xs text-amber-300">Test mode: any 4–8 digit code is accepted.</p>}
       </form>
     </AuthShell>
   );

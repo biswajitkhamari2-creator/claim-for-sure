@@ -2,7 +2,6 @@
 declare(strict_types=1);
 return [
     'GET /api/health'                => ['HealthController', 'check'],
-    'POST /api/auth/otp/send'        => ['OtpController', 'send'],
     'POST /api/auth/otp/verify'      => ['OtpController', 'verify'],
     'POST /api/auth/otp/complete'    => ['OtpController', 'complete'],
     'POST /api/auth/login'           => ['AuthController', 'login'],
