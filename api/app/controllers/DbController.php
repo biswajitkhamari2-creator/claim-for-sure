@@ -409,10 +409,6 @@ final class DbController
             case 'get_appreciation_enabled':
                 $this->rpcGetAppreciationEnabled();
                 break;
-            case 'verify_claim_payment':
-                Response::success((new PaymentService($this->db))->verifyClaimFee($args, $userId, $isAdmin));
-            case 'verify_invoice_payment':
-                Response::success((new PaymentService($this->db))->verifyInvoice($args, $userId, $isAdmin));
             default:
                 Response::error('Unknown RPC function', 400);
         }

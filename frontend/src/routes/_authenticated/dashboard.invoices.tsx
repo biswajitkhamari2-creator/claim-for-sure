@@ -2,7 +2,6 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { DashboardShell } from "@/components/DashboardShell";
-import { Button } from "@/components/ui/button";
 import { Loader2, FileText, IndianRupee, CheckCircle2, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -24,22 +23,8 @@ type Invoice = {
   paid_at: string | null;
 };
 
-const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
-
-function loadRazorpay() {
-  return new Promise<boolean>((resolve) => {
-    if ((window as any).Razorpay) return resolve(true);
-    const s = document.createElement("script");
-    s.src = "https://checkout.razorpay.com/v1/checkout.js";
-    s.onload = () => resolve(true);
-    s.onerror = () => resolve(false);
-    document.body.appendChild(s);
-  });
-}
-
 function InvoicesList() {
   const [list, setList] = useState<Invoice[] | null>(null);
-  const [payingId, setPayingId] = useState<string | null>(null);
   const navigate = useNavigate();
 
   async function load() {
@@ -51,28 +36,6 @@ function InvoicesList() {
     setList((data ?? []) as Invoice[]);
   }
   useEffect(() => { load(); }, []);
-
-  async function pay(inv: Invoice) {
-    if (!RAZORPAY_KEY_ID) return toast.error("Payment gateway not configured");
-    setPayingId(inv.id);
-    const ok = await loadRazorpay();
-    if (!ok) { setPayingId(null); return toast.error("Could not load Razorpay"); }
-    const rzp = new (window as any).Razorpay({
-      key: RAZORPAY_KEY_ID,
-      amount: inv.total_paise,
-      currency: "INR",
-      name: "ClaimForSure",
-      description: `Invoice ${inv.invoice_no}`,
-      handler: async (resp: { razorpay_payment_id: string }) => {
-        const { error } = await supabase.rpc("verify_invoice_payment", { _invoice_id: inv.id, _razorpay_payment_id: resp.razorpay_payment_id });
-        setPayingId(null);
-        if (error) toast.error(error.message || "Payment could not be verified. Contact support."); else { toast.success("Payment received. Thank you!"); load(); }
-      },
-      theme: { color: "#4f46e5" },
-      modal: { ondismiss: () => setPayingId(null) },
-    });
-    rzp.open();
-  }
 
   return (
     <DashboardShell>
@@ -114,9 +77,7 @@ function InvoicesList() {
                       {paid ? (
                         <span className="inline-flex items-center gap-1 text-xs text-emerald-700"><CheckCircle2 className="h-3.5 w-3.5" /> Paid</span>
                       ) : (
-                        <Button size="sm" onClick={() => pay(i)} disabled={payingId === i.id}>
-                          {payingId === i.id ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <><IndianRupee className="mr-1 h-3.5 w-3.5" /> Pay ₹{total}</>}
-                        </Button>
+                        <span className="text-xs text-muted-foreground">Awaiting payment</span>
                       )}
                     </td>
                   </tr>
@@ -127,7 +88,12 @@ function InvoicesList() {
         )}
       </div>
 
-      <div className="mt-6 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+      <div className="mt-6 flex items-start gap-2 rounded-lg border border-border bg-muted/40 p-3 text-xs text-muted-foreground">
+        <IndianRupee className="mt-0.5 h-4 w-4 shrink-0" />
+        <div>Online payment is not available yet. Our team will share bank / UPI details for each invoice, and it is marked paid here once we receive your payment.</div>
+      </div>
+
+      <div className="mt-3 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
         <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
         <div>Invoices unpaid past their due date are marked overdue and your account is flagged. Defaulters are blocked from filing new claims and may receive legal recovery notices.</div>
       </div>

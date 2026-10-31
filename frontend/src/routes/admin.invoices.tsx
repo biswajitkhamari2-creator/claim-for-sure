@@ -62,7 +62,7 @@ function AdminInvoices() {
   }
 
   async function markPaid(inv: Inv) {
-    const ref = prompt("Payment reference (UTR / Razorpay payment ID / cheque #):") || "manual";
+    const ref = prompt("Payment reference (UTR / cheque #):") || "manual";
     const { error } = await supabase.rpc("mark_invoice_paid", { _invoice_id: inv.id, _razorpay_payment_id: ref });
     if (error) toast.error(error.message); else { toast.success("Marked paid"); load(); }
   }
