@@ -26,7 +26,7 @@ final class PasswordResetService
             $rawToken  = bin2hex(random_bytes(32));
             $tokenHash = hash('sha256', $rawToken);
             $this->resets->create((int)$user['id'], $tokenHash, date('Y-m-d H:i:s', time() + 1800));
-            $base = rtrim($_ENV['APP_URL'] ?? 'http://localhost:8000', '/');
+            $base = rtrim($_ENV['APP_URL'] ?? 'https://www.claimforsure.in', '/');
             $link = $base . '/reset-password?token=' . $rawToken;
             $this->mail->passwordReset($user['email'], $user['full_name'], $link);
             Logger::audit('password.reset_requested', ['user_id' => $user['id']]);

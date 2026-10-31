@@ -13,7 +13,8 @@ final class Csrf
             session_start([
                 'cookie_httponly' => true,
                 'cookie_samesite' => 'Strict',
-                'cookie_secure'   => (($_SERVER['HTTPS'] ?? '') === 'on'),
+                'cookie_secure'   => (($_SERVER['HTTPS'] ?? '') === 'on')
+                    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https'),
             ]);
         }
     }

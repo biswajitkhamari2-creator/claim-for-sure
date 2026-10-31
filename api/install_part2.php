@@ -33,7 +33,7 @@ DB_NAME=claimforsure
 DB_USER=root
 DB_PASS=
 JWT_SECRET=CHANGE_ME_LONG_RANDOM_SECRET_MIN_32_CHARS
-APP_URL=http://localhost:8000
+APP_URL=https://www.claimforsure.in
 SMTP_HOST=smtp.hostinger.com
 SMTP_USER=no-reply@yourdomain.com
 SMTP_PASS=your_mailbox_password
@@ -60,7 +60,8 @@ final class Csrf
             session_start([
                 'cookie_httponly' => true,
                 'cookie_samesite' => 'Strict',
-                'cookie_secure'   => (($_SERVER['HTTPS'] ?? '') === 'on'),
+                'cookie_secure'   => (($_SERVER['HTTPS'] ?? '') === 'on')
+                    || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https'),
             ]);
         }
     }
@@ -268,7 +269,7 @@ final class PasswordResetService
             $rawToken  = bin2hex(random_bytes(32));
             $tokenHash = hash('sha256', $rawToken);
             $this->resets->create((int)$user['id'], $tokenHash, date('Y-m-d H:i:s', time() + 1800));
-            $base = rtrim($_ENV['APP_URL'] ?? 'http://localhost:8000', '/');
+            $base = rtrim($_ENV['APP_URL'] ?? 'https://www.claimforsure.in', '/');
             $link = $base . '/reset-password?token=' . $rawToken;
             $this->mail->passwordReset($user['email'], $user['full_name'], $link);
             Logger::audit('password.reset_requested', ['user_id' => $user['id']]);
