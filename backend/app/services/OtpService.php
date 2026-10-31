@@ -15,7 +15,10 @@ final class OtpService
     // Only accepted when the server runs with OTP_TEST_MODE=1 (local / staging).
     private const TEST_ACCESS_TOKEN = 'test-mode-token';
 
-    public function __construct(private PDO $db) {}
+    public function __construct(private PDO $db)
+    {
+        PhoneAuthSchema::ensure($db);
+    }
 
     private static function env(string $key): string
     {
