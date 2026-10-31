@@ -122,7 +122,7 @@ const SignupInput = z.object({
 });
 
 export const sendSignupOtp = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => SignupInput.parse(data))
+  .validator((data: unknown) => SignupInput.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const email = data.email.toLowerCase();
@@ -187,7 +187,7 @@ const VerifyInput = z.object({
 });
 
 export const verifySignupOtp = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => VerifyInput.parse(data))
+  .validator((data: unknown) => VerifyInput.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const email = data.email.toLowerCase();
@@ -260,7 +260,7 @@ const RecoveryInput = z.object({
 });
 
 export const sendPasswordRecovery = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => RecoveryInput.parse(data))
+  .validator((data: unknown) => RecoveryInput.parse(data))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 

@@ -44,7 +44,7 @@ function htmlBody(name: string, whenIST: string, ip: string, ua: string) {
 
 export const sendLoginNotification = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((data: unknown) => Input.parse(data))
+  .validator((data: unknown) => Input.parse(data))
   .handler(async ({ data, context }) => {
     const host = process.env.SMTP_HOST;
     const portStr = process.env.SMTP_PORT;

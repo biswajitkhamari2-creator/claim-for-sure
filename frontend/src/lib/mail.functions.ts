@@ -11,7 +11,7 @@ const InputSchema = z.object({
 });
 
 export const sendMail = createServerFn({ method: "POST" })
-  .inputValidator((data: unknown) => InputSchema.parse(data))
+  .validator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
     const getApiBaseUrl = (): string => {
       if (typeof window !== "undefined" && window.location.hostname) {
