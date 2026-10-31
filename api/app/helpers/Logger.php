@@ -8,6 +8,8 @@ final class Logger
         $line = sprintf("[%s] %s: %s %s\n", date('Y-m-d H:i:s'),
             strtoupper($level), $msg, $ctx ? json_encode($ctx) : '');
         @file_put_contents(LOG_DIR . '/app-' . date('Y-m-d') . '.log', $line, FILE_APPEND | LOCK_EX);
+        // Serverless hosts (Vercel) discard local files; errors also go to stderr so they show in the platform logs.
+        if ($level === 'error') @file_put_contents('php://stderr', $line);
     }
     public static function info(string $m, array $c = []): void  { self::write('info', $m, $c); }
     public static function error(string $m, array $c = []): void { self::write('error', $m, $c); }
