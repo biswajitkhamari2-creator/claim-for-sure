@@ -6,9 +6,11 @@ final class Jwt
     private static function b64d(string $d): string { return base64_decode(strtr($d, '-_', '+/')); }
     private static function getSecret(): string
     {
-        $secret = $_ENV['JWT_SECRET'] ?? $_SERVER['JWT_SECRET'] ?? getenv('JWT_SECRET') ?? '';
-        if ($secret === '') {
-            return 'claimforsure_default_jwt_secret_key_2026_super_secure';
+        $secret = $_ENV['JWT_SECRET'] ?? $_SERVER['JWT_SECRET'] ?? getenv('JWT_SECRET');
+        // No built-in fallback: a secret that ships in the source lets anyone forge tokens.
+        if (!is_string($secret) || strlen($secret) < 32) {
+            Logger::error('JWT_SECRET is missing or shorter than 32 characters');
+            Response::error('Server misconfigured', 500);
         }
         return $secret;
     }

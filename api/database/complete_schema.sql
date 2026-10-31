@@ -306,9 +306,9 @@ FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM rewards_config);
 
 -- Seed default System Administrator User
--- Default password: 'Bisu@9556'
+-- No usable password is seeded. After installing, set one via "Forgot password" (POST /api/auth/forgot-password).
 INSERT INTO users (id, uuid, full_name, email, phone, password_hash, role, is_active, email_verified)
-SELECT 1, '550e8400-e29b-41d4-a716-446655440000', 'System Administrator', 'biswajitkhamari2@gmail.com', '9999999999', '$2y$12$yYF3P4OmyKFe6Yrd47e1IuRQ3kN7iHrZyD.ZHtwh.Z6uLstELtv4m', 'admin', 1, 1
+SELECT 1, '550e8400-e29b-41d4-a716-446655440000', 'System Administrator', 'biswajitkhamari2@gmail.com', '9999999999', '!disabled-set-via-password-reset', 'admin', 1, 1
 FROM dual
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE id = 1 OR email = 'biswajitkhamari2@gmail.com');
 

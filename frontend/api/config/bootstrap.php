@@ -44,7 +44,7 @@ set_error_handler(function (int $severity, string $message, string $file, int $l
 
 set_exception_handler(function (Throwable $e): void {
     Logger::error($e->getMessage(), ['trace' => $e->getTraceAsString()]);
-    Response::error($e->getMessage(), 500);
+    Response::error(APP_DEBUG ? $e->getMessage() : 'Internal server error', 500);
 });
 
 register_shutdown_function(function (): void {
@@ -54,6 +54,6 @@ register_shutdown_function(function (): void {
         while (ob_get_level() > 0) {
             ob_end_clean();
         }
-        Response::error($error['message'], 500);
+        Response::error(APP_DEBUG ? $error['message'] : 'Internal server error', 500);
     }
 });

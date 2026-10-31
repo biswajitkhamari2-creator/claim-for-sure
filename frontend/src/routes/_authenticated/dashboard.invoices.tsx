@@ -64,8 +64,9 @@ function InvoicesList() {
       name: "ClaimForSure",
       description: `Invoice ${inv.invoice_no}`,
       handler: async (resp: { razorpay_payment_id: string }) => {
-        const { error } = await supabase.rpc("mark_invoice_paid", { _invoice_id: inv.id, _razorpay_payment_id: resp.razorpay_payment_id });
-        if (error) toast.error("Paid but update failed. Contact support."); else { toast.success("Payment received. Thank you!"); load(); }
+        const { error } = await supabase.rpc("verify_invoice_payment", { _invoice_id: inv.id, _razorpay_payment_id: resp.razorpay_payment_id });
+        setPayingId(null);
+        if (error) toast.error(error.message || "Payment could not be verified. Contact support."); else { toast.success("Payment received. Thank you!"); load(); }
       },
       theme: { color: "#4f46e5" },
       modal: { ondismiss: () => setPayingId(null) },

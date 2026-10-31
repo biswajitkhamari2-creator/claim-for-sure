@@ -44,6 +44,15 @@ function setToken(t: string | null): void {
   else localStorage.removeItem(TOKEN_KEY);
 }
 
+async function downloadStorageFile(path: string): Promise<Blob> {
+  const headers = new Headers();
+  const t = getToken();
+  if (t) headers.set("Authorization", `Bearer ${t}`);
+  const response = await fetch(`${BASE}/api/storage/download?path=${encodeURIComponent(path)}`, { headers });
+  if (!response.ok) throw new Error(`Download failed (${response.status})`);
+  return response.blob();
+}
+
 async function request<T>(path: string, body: any, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   if (!(body instanceof FormData) && !headers.has("Content-Type")) {
@@ -387,21 +396,19 @@ export const supabase = {
 
         async download(path: string) {
           try {
-            const t = getToken();
-            const authHeader = t ? `&Authorization=Bearer ${t}` : "";
-            const response = await fetch(`${BASE}/api/storage/download?path=${encodeURIComponent(path)}${authHeader}`);
-            if (!response.ok) throw new Error(`Download failed (${response.status})`);
-            const blob = await response.blob();
-            return { data: blob, error: null };
+            return { data: await downloadStorageFile(path), error: null };
           } catch (e: any) {
             return { data: null, error: { message: e.message } };
           }
         },
 
+        // The PHP backend has no signed URLs. The file is fetched with the bearer
+        // token in a header (never in the URL) and handed back as a blob: URL.
         async createSignedUrl(path: string, expiresIn: number) {
           try {
-            const t = getToken();
-            const signedUrl = `${BASE}/api/storage/download?path=${encodeURIComponent(path)}&Authorization=Bearer ${t}`;
+            const blob = await downloadStorageFile(path);
+            const signedUrl = URL.createObjectURL(blob);
+            setTimeout(() => URL.revokeObjectURL(signedUrl), Math.max(expiresIn, 60) * 1000);
             return { data: { signedUrl }, error: null };
           } catch (e: any) {
             return { data: null, error: { message: e.message } };

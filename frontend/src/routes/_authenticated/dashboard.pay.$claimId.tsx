@@ -29,6 +29,7 @@ type PromoCode = {
 };
 
 const RAZORPAY_KEY_ID = import.meta.env.VITE_RAZORPAY_KEY_ID as string | undefined;
+const PAYMENTS_TEST_MODE = import.meta.env.VITE_PAYMENTS_TEST_MODE === "1";
 
 function loadRazorpay(): Promise<boolean> {
   return new Promise((resolve) => {
@@ -88,7 +89,27 @@ function PayClaim() {
     toast.success(`Coupon ${found.code} applied!`);
   }
 
+  async function confirmPayment(paymentId: string | null): Promise<boolean> {
+    const { error } = await supabase.rpc("verify_claim_payment", {
+      _claim_id: claimId,
+      _razorpay_payment_id: paymentId,
+      _promo_code: appliedCode?.code ?? null,
+    });
+    if (error) {
+      toast.error(error.message || "Payment could not be verified. Contact support.");
+      return false;
+    }
+    toast.success("Payment successful!");
+    navigate({ to: "/dashboard/agreement/$claimId", params: { claimId } });
+    return true;
+  }
+
   async function handlePay() {
+    if (totalPaise === 0) {
+      setPaying(true);
+      if (!(await confirmPayment(null))) setPaying(false);
+      return;
+    }
     if (!RAZORPAY_KEY_ID) {
       toast.error("Payment gateway not configured yet. Please contact support.");
       return;
@@ -100,10 +121,8 @@ function PayClaim() {
       setPaying(false);
       return;
     }
-    // NOTE: In production, create the order via a server function that calls
-    // Razorpay Orders API with RAZORPAY_KEY_SECRET. For now we open checkout
-    // in "amount-only" mode for the user to complete payment and we mark paid
-    // on the handler callback. Signature verification must be added server-side.
+    // Checkout runs in "amount-only" mode. The server re-checks the payment with
+    // Razorpay (status, amount, currency) before the claim is marked paid.
     const rzp = new (window as any).Razorpay({
       key: RAZORPAY_KEY_ID,
       amount: totalPaise,
@@ -111,25 +130,8 @@ function PayClaim() {
       name: "ClaimForSure",
       description: `Processing fee for claim ${claimId.slice(0, 8)}`,
       handler: async (response: { razorpay_payment_id: string }) => {
-        const { error } = await supabase
-          .from("claims")
-          .update({
-            payment_status: "paid",
-            payment_id: response.razorpay_payment_id,
-            payment_paid_at: new Date().toISOString(),
-            promo_code_applied: appliedCode?.code ?? null,
-            discount_paise: discountPaise,
-          })
-          .eq("id", claimId);
-        if (error) {
-          toast.error("Payment received but update failed. Contact support.");
-        } else {
-          if (appliedCode) {
-            await supabase.from("promo_codes" as any).update({ times_used: (appliedCode.times_used || 0) + 1 }).eq("id", appliedCode.id);
-          }
-          toast.success("Payment successful!");
-          navigate({ to: "/dashboard/agreement/$claimId", params: { claimId } });
-        }
+        const ok = await confirmPayment(response.razorpay_payment_id);
+        if (!ok) setPaying(false);
       },
       theme: { color: "#4f46e5" },
       modal: { ondismiss: () => setPaying(false) },
@@ -268,34 +270,21 @@ function PayClaim() {
             )}
           </Button>
 
-          <Button
-            type="button"
-            variant="outline"
-            className="mt-3 w-full border-dashed"
-            disabled={paying}
-            onClick={async () => {
-              setPaying(true);
-              const { error } = await supabase
-                .from("claims")
-                .update({
-                  payment_status: "paid",
-                  payment_id: `TEST-${Date.now()}`,
-                  payment_paid_at: new Date().toISOString(),
-                  promo_code_applied: appliedCode?.code ?? null,
-                  discount_paise: discountPaise,
-                })
-                .eq("id", claimId);
-              setPaying(false);
-              if (error) return toast.error(error.message);
-              if (appliedCode) {
-                await supabase.from("promo_codes" as any).update({ times_used: (appliedCode.times_used || 0) + 1 }).eq("id", appliedCode.id);
-              }
-              toast.success("Marked as paid (test mode)");
-              navigate({ to: "/dashboard/agreement/$claimId", params: { claimId } });
-            }}
-          >
-            Mark as paid (Test mode) — ₹{total}
-          </Button>
+          {PAYMENTS_TEST_MODE && (
+            <Button
+              type="button"
+              variant="outline"
+              className="mt-3 w-full border-dashed"
+              disabled={paying}
+              onClick={async () => {
+                setPaying(true);
+                // Only accepted when the server also has PAYMENTS_TEST_MODE=1.
+                if (!(await confirmPayment(`TEST-${Date.now()}`))) setPaying(false);
+              }}
+            >
+              Mark as paid (Test mode) — ₹{total}
+            </Button>
+          )}
 
           {!RAZORPAY_KEY_ID && (
             <p className="mt-3 text-center text-xs text-amber-600">

@@ -15,3 +15,5 @@ define('ALLOWED_MIME', [
     'application/zip' => 'zip',
 ]);
 define('JWT_TTL', 3600);
+// Set APP_DEBUG=1 only in local development: it returns raw error messages to clients.
+define('APP_DEBUG', ($_ENV['APP_DEBUG'] ?? getenv('APP_DEBUG')) === '1');
