@@ -17,7 +17,7 @@ final class AuthMiddleware
         if (!preg_match('/Bearer\s+(\S+)/i', $header, $m))
             Response::error('Missing authorization token', 401);
         $payload = Jwt::decode($m[1]);
-        if ($payload === null) Response::error('Invalid or expired token', 401);
+        if ($payload === null || empty($payload['sub']) || isset($payload['purpose'])) Response::error('Invalid or expired token', 401);
         return $payload;
     }
     public static function authorize(array $payload, array $roles): void

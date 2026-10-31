@@ -31,7 +31,7 @@ final class AuthService
         if ($v->fails()) Response::error('Validation failed', 422, $v->errors());
         $user = $this->users->findByEmail(strtolower(trim($in['email'])));
         $ok = $user && password_verify($in['password'], $user['password_hash']);
-        if (!$ok || (int)$user['is_active'] !== 1) {
+        if (!$ok || (int)$user['is_active'] !== 1 || $user['role'] === 'customer') {
             Logger::audit('user.login_failed', ['email' => $in['email'], 'ip' => Request::clientIp()]);
             Response::error('Invalid credentials', 401);
         }

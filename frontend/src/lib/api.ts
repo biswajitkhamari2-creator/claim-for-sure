@@ -37,7 +37,7 @@ const TOKEN_KEY = "cfs_token";
 export type AuthUser = {
   id: string | number;
   uuid?: string;
-  email: string;
+  email: string | null;
   full_name?: string | null;
   phone?: string | null;
   avatar_url?: string | null;
@@ -91,33 +91,43 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   return data as T;
 }
 
+type OtpSession = { token: string; user: AuthUser };
+
+function storeSession<T extends { data: any }>(r: T): T {
+  const token = r?.data?.token;
+  if (token) {
+    setToken(token);
+    localStorage.setItem("cfs_user", JSON.stringify(r.data.user));
+  }
+  return r;
+}
+
 export const api = {
   getToken,
   setToken,
   isLoggedIn,
 
   auth: {
-    /** POST /api/auth/register */
-    signup: (b: { email: string; password: string; full_name: string; phone: string }) =>
-      request<{ status: string; message: string; data: { token: string; user: AuthUser } }>(
-        "/api/auth/register",
-        { method: "POST", body: JSON.stringify(b) },
-      ),
-
-    /** POST /api/auth/login → stores token automatically */
-    login: (email: string, password: string) =>
-      request<{ status: string; message: string; data: { token: string; user: AuthUser } }>("/api/auth/login", {
+    /** POST /api/auth/otp/send — texts a 6-digit code to the mobile number */
+    sendOtp: (phone: string) =>
+      request<{ data: { sent: boolean; expires_in: number; resend_in: number; dev_otp?: string } }>("/api/auth/otp/send", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
-      }).then((r: any) => {
-        const token = r?.data?.token ?? r?.token;
-        const user = r?.data?.user ?? r?.user;
-        if (token) {
-          setToken(token);
-          localStorage.setItem("cfs_user", JSON.stringify(user));
-        }
-        return r;
+        body: JSON.stringify({ phone }),
       }),
+
+    /** POST /api/auth/otp/verify → signs in known numbers; new numbers get a signup_token */
+    verifyOtp: (phone: string, otp: string) =>
+      request<{ data: OtpSession | { new_user: true; signup_token: string } }>("/api/auth/otp/verify", {
+        method: "POST",
+        body: JSON.stringify({ phone, otp }),
+      }).then(storeSession),
+
+    /** POST /api/auth/otp/complete → creates the account for a verified new number */
+    completeOtpSignup: (b: { signup_token: string; full_name: string; accept_terms: boolean; accept_agreement: boolean }) =>
+      request<{ data: OtpSession }>("/api/auth/otp/complete", {
+        method: "POST",
+        body: JSON.stringify(b),
+      }).then(storeSession),
 
     /** POST /api/auth/logout */
     logout: async () => {

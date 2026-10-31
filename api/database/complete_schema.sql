@@ -7,15 +7,18 @@ CREATE TABLE IF NOT EXISTS users (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     uuid CHAR(36) NOT NULL UNIQUE,
     full_name VARCHAR(150) NOT NULL,
-    email VARCHAR(190) NOT NULL UNIQUE,
+    email VARCHAR(190) NULL UNIQUE,
     phone VARCHAR(15) NULL,
     password_hash VARCHAR(255) NOT NULL,
     role ENUM('admin','moderator','customer') NOT NULL DEFAULT 'customer',
     is_active TINYINT(1) NOT NULL DEFAULT 1,
     email_verified TINYINT(1) NOT NULL DEFAULT 0,
+    terms_accepted_at TIMESTAMP NULL DEFAULT NULL,
+    agreement_version VARCHAR(10) NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_email (email), 
+    INDEX idx_email (email),
+    INDEX idx_phone (phone),
     INDEX idx_role (role)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -44,9 +47,10 @@ CREATE TABLE IF NOT EXISTS sessions (
 CREATE TABLE IF NOT EXISTS otps (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     identifier VARCHAR(100) NOT NULL, -- Email or Phone
-    otp_code VARCHAR(10) NOT NULL,
+    otp_code VARCHAR(255) NOT NULL, -- password_hash() of the code
     expires_at TIMESTAMP NOT NULL,
     verified TINYINT(1) NOT NULL DEFAULT 0,
+    attempts INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_identifier (identifier)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

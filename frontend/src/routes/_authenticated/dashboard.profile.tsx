@@ -46,10 +46,9 @@ function ProfilePage() {
 
   async function save(e: React.FormEvent) {
     e.preventDefault();
-    if (phone && !/^\d{10}$/.test(phone)) return toast.error("Mobile must be exactly 10 digits");
     setSaving(true);
     try {
-      const res = await api.auth.updateProfile({ full_name: fullName, phone });
+      const res = await api.auth.updateProfile({ full_name: fullName });
       const raw = res?.data ?? res;
       const updated = (raw?.user ?? (raw?.email ? raw : null)) as AuthUser | null;
       if (updated) {
@@ -79,17 +78,20 @@ function ProfilePage() {
       <p className="mt-1 text-sm text-muted-foreground">View your account details.</p>
 
       <form onSubmit={save} className="mt-8 max-w-xl space-y-5 rounded-xl border border-border bg-card p-6">
-        <div>
-          <label className={lbl}>Email (read-only)</label>
-          <input className={ipt} value={user?.email ?? ""} disabled />
-        </div>
+        {user?.email && (
+          <div>
+            <label className={lbl}>Email (read-only)</label>
+            <input className={ipt} value={user.email} disabled />
+          </div>
+        )}
         <div>
           <label className={lbl}>Full name</label>
           <input className={ipt} value={fullName} onChange={(e) => setFullName(e.target.value)} />
         </div>
         <div>
-          <label className={lbl}>Mobile (10 digits)</label>
-          <input inputMode="numeric" maxLength={10} className={ipt} value={phone} onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))} />
+          <label className={lbl}>Mobile (login number)</label>
+          <input className={ipt} value={phone ? `+91 ${phone.replace(/^\+?91(?=\d{10}$)/, "")}` : ""} disabled />
+          <p className="mt-1 text-xs text-muted-foreground">You sign in with this number. To change it, please contact support.</p>
         </div>
         <div>
           <label className={lbl}>Role</label>

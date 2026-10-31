@@ -24,7 +24,8 @@ final class AuthController
         if (!$user) Response::error('User not found', 404);
         
         $fullName = isset($body['full_name']) ? trim((string)$body['full_name']) : $user['full_name'];
-        $phone    = isset($body['phone']) ? trim((string)$body['phone']) : $user['phone'];
+        // The phone number is a customer's login identity (OTP sign-in), so only staff may change theirs here.
+        $phone    = isset($body['phone']) && $user['role'] !== 'customer' ? trim((string)$body['phone']) : $user['phone'];
         
         $db = Database::getConnection();
         $stmt = $db->prepare('UPDATE users SET full_name = ?, phone = ?, updated_at = NOW() WHERE id = ?');
